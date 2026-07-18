@@ -10,5 +10,3 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# Templates arquivados (referência local, não vai para o repositório)
-FRONTOLD/

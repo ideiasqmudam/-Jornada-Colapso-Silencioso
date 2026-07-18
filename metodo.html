@@ -1733,8 +1733,9 @@ function comprar(plano){
   } catch (_) {}
 
   const _jaViuMetodo = !!sessionStorage.getItem('jcs_metodo_viewed');
-  if (!_jaViuMetodo) {
-    sessionStorage.setItem('jcs_metodo_viewed', '1');
+  const _voltandoDoCheckout = !!(document.referrer && /hotmart/i.test(document.referrer));
+  if (!_jaViuMetodo && !_voltandoDoCheckout) {
+    try { sessionStorage.setItem('jcs_metodo_viewed', '1'); } catch (_) {}
     trackLandPageView(true);
     const planosSection = document.getElementById('planos');
     if (planosSection && 'IntersectionObserver' in window) {

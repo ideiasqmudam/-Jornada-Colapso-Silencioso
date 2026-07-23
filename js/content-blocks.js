@@ -48,7 +48,7 @@ export const FINGERPRINT_GROUPS = [
     sub: 'Score: dimensões cognitivas baixas — mas identidade e abertura elevadas',
     cor: '#D84E40',
     desc: `Memória, foco e criatividade estão abaixo do potencial. Mas você não só sente que algo está diferente — você está pronto para fazer algo a respeito. Esse impulso é o recurso mais valioso que o mapeamento revelou.`,
-    pullquote: 'Você tem o que a maioria não tem: a certeza de que quer mudar.',
+    pullquote: 'Você já tem o que a maioria não tem, a certeza de que quer mudar.',
     o_que_vivo: [
       'Disposição genuína para mudar — algo que a maioria não tem',
       'Visão de futuro ainda presente e ativa',
@@ -368,7 +368,7 @@ export const FINGERPRINT_GROUPS = [
     sub: 'Score: acima da média em todas as dimensões',
     cor: '#46EDB4',
     desc: `Memória, foco, criatividade e consciência. Tudo preservado. Esse resultado não é comum. Você está aqui porque conhece a diferença entre uma mente que funciona e uma que opera no seu melhor.`,
-    pullquote: 'Mentes que funcionam bem são as que são cuidadas — não só as que sobrevivem.',
+    pullquote: 'Mentes que funcionam bem são as que são cuidadas, não só as que sobrevivem.',
     o_que_vivo: [
       'Memória forte e de acesso rápido quando importa',
       'Foco profundo genuinamente preservado',
@@ -410,7 +410,7 @@ export const CONHECIMENTO_POR_DIMENSAO = {
     label: 'Memória',
     pratica: {
       nome: 'Relembrar o dia',
-      como: 'Antes de dormir, reveja de cabeça três momentos do seu dia, na ordem em que aconteceram, sem foto e sem agenda. Comece pelo simples: o que comeu, com quem falou, o que viu.',
+      como: 'Antes de dormir, reveja de cabeça três momentos do seu dia, na ordem em que aconteceram, sem foto e sem agenda. Comece pelo simples, o que comeu, com quem falou, o que viu.',
       porque: 'Obrigar a mente a puxar a lembrança de volta, em vez de só reconhecer quando vê, é o que fortalece a memória. É o contrário de checar o celular para lembrar.'
     },
     ciencia: {
@@ -751,27 +751,27 @@ export const DEPOIMENTOS_POR_FAIXA = {
   ],
   potencial: [
     {
-      texto: 'Eu já funcionava bem. O que me surpreendeu foi perceber que o bem era só o piso, não o teto. Hoje penso com mais nitidez do que há dez anos.',
+      texto: 'Eu já me dava bem, não tinha queixa grande. A surpresa foi ver que dava pra ir bem além do que eu achava que era o meu limite. Hoje penso com mais clareza do que uns dez anos atrás.',
       nome: 'Renato C.', idade: '54 anos', cidade: 'Belo Horizonte, MG',
       resultado: 'descobri que tinha mais capacidade', iniciais: 'RC'
     },
     {
-      texto: 'Tive boas ideias a vida toda, mas só nos dias certos. O que mudou foi a regularidade. Deixou de ser uma questão de sorte.',
+      texto: 'Sempre tive boas ideias, mas só em dia bom, quando dava. O que mudou foi que virou coisa de todo dia, parei de depender de acordar inspirada pra pensar bem.',
       nome: 'Fernanda S.', idade: '52 anos', cidade: 'São Paulo, SP',
       resultado: 'criatividade virou constante', iniciais: 'FS'
     },
     {
-      texto: 'Precisava estar no meu melhor com regularidade, não só quando batia aquela inspiração. Em dois meses, a mente ganhou algo parecido com uma segunda marcha.',
+      texto: 'No que eu faço preciso render sempre, não dá pra ficar esperando bater inspiração. Em uns dois meses senti a cabeça engrenar mais rápido, como se tivesse uma marcha a mais quando precisa.',
       nome: 'Cláudia N.', idade: '53 anos', cidade: 'Campinas, SP',
       resultado: 'desempenho consistente', iniciais: 'ClN'
     },
     {
-      texto: 'Sempre me considerei criativo. O que as práticas trouxeram foi a criatividade no dia a dia, nas conversas comuns, não só nos momentos grandes.',
+      texto: 'Sempre me achei criativo. O que mudou é que agora aparece no dia a dia, numa conversa comum, não só naqueles momentos grandes de vez em quando.',
       nome: 'Jorge A.', idade: '57 anos', cidade: 'São Paulo, SP',
       resultado: 'criativo no dia a dia também', iniciais: 'JA'
     },
     {
-      texto: 'Achei que minha mente tava no limite por causa do estresse. Descobri que o estresse nunca é o limite, é o obstáculo. As práticas me ensinaram a trabalhar com a mente que eu tenho.',
+      texto: 'Achei que minha cabeça tava no limite por causa do estresse. Vi que o estresse atrapalha, mas não é o teto. As práticas me ensinaram a trabalhar com a mente que eu tenho, do jeito que ela tá.',
       nome: 'Beatriz M.', idade: '50 anos', cidade: 'Rio de Janeiro, RJ',
       resultado: 'clareza mesmo sob pressão', iniciais: 'BM'
     },
@@ -781,7 +781,7 @@ export const DEPOIMENTOS_POR_FAIXA = {
       resultado: 'entendo minha própria mente melhor', iniciais: 'SiR'
     },
     {
-      texto: 'Tava bem. Queria estar melhor. Não parece muito como motivação, mas essa distinção fez toda diferença quando os resultados começaram a aparecer.',
+      texto: 'Eu tava bem, mas queria estar melhor. Parece pouca coisa, mas essa diferença fez toda diferença quando os resultados começaram a aparecer.',
       nome: 'Mariana T.', idade: '51 anos', cidade: 'Florianópolis, SC',
       resultado: 'saí do bem pra muito bem', iniciais: 'MT'
     },
@@ -808,17 +808,17 @@ export const DEPOIMENTOS_POR_FAIXA = {
       resultado: 'manutenção em dia', iniciais: 'MV'
     },
     {
-      texto: 'Aprendi a medir o que importa. Velocidade de raciocínio, memória, fluência verbal. Depois das práticas, tudo subiu. É mensurável.',
+      texto: 'Gostei que dá pra medir. Rapidez pra raciocinar, memória, achar a palavra na hora. Depois das práticas tudo isso melhorou, dá pra sentir a diferença.',
       nome: 'Eduardo F.', idade: '59 anos', cidade: 'Brasília, DF',
       resultado: 'melhora visível em raciocínio', iniciais: 'EF'
     },
     {
-      texto: 'Sempre fui criativa, mas dependia do estado de espírito. O método me ensinou a acessar isso com mais regularidade. Virou ferramenta, não presente ocasional.',
+      texto: 'Sempre fui criativa, mas dependia do humor do dia. O método me ensinou a chegar nisso com mais frequência. Virou uma coisa que eu consigo puxar quando quero, não só quando dá.',
       nome: 'Sônia K.', idade: '63 anos', cidade: 'Curitiba, PR',
       resultado: 'criatividade sob controle', iniciais: 'SK'
     },
     {
-      texto: 'O mais estranho foi perceber o que eu não sabia que faltava. Não tinha nome pro que eu sentia. Depois das práticas, voltou. Era profundidade.',
+      texto: 'O mais estranho foi perceber o que tinha sumido sem eu notar. Nem sabia dizer o que era. Depois das práticas voltou, era aquela sensação de pensar com mais fundo nas coisas.',
       nome: 'Marcus L.', idade: '56 anos', cidade: 'Porto Alegre, RS',
       resultado: 'profundidade de volta', iniciais: 'ML'
     },

@@ -60,6 +60,12 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .btn-outline:hover{border-color:var(--mint-b);color:var(--mint)}
 .btn-full{width:100%}
 .btn-lg{padding:22px 48px;font-size:1.05rem}
+/* Botão de compra em relevo (vermelho) — planos 01 e 03, para não confundir com texto */
+.btn-buy{background:var(--mint);color:#F7F1E3;border:1px solid #6E1E14;font-weight:800;letter-spacing:.02em;box-shadow:0 4px 0 #5E1810,0 7px 14px rgba(142,42,30,.28)}
+.btn-buy::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .6s}
+.btn-buy:hover{background:#A6331F;transform:translateY(-1px);box-shadow:0 5px 0 #5E1810,0 9px 18px rgba(142,42,30,.34)}
+.btn-buy:hover::after{transform:translateX(100%)}
+.btn-buy:active{transform:translateY(3px);box-shadow:0 1px 0 #5E1810,0 2px 5px rgba(142,42,30,.28)}
 
 /* Hero */
 .hero{padding:clamp(72px,10vh,120px) 0 clamp(48px,6vh,80px);position:relative;z-index:1}
@@ -637,7 +643,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
     </h1>
 
     <p class="hero-sub reveal" data-d="2">
-      A <strong>Jornada Colapso Silencioso</strong> treina sua mente com os <strong>Shakes</strong>: exercícios curtos e direcionados que despertam primeiro a memória e, atrás dela, tudo o que adormeceu junto. Você volta a lembrar o nome na hora, a guardar o que lê e a confiar de novo na sua própria cabeça — mesmo que ache que "já passou da idade".
+      A <strong>Jornada Colapso Silencioso</strong> treina sua mente com os <strong>Shakes</strong>, exercícios curtos que despertam primeiro a memória e, depois dela, o foco e a atenção que adormeceram junto. Em poucas semanas você volta a lembrar o nome na hora e a guardar o que lê, mesmo achando que "já passou da idade".
     </p>
 
     <div class="hero-pills reveal" data-d="3">
@@ -775,7 +781,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
       <div class="trilha-step reveal">
         <div class="step-circle lit">01</div>
         <div class="step-body">
-          <div class="step-t">Detectar: identifique o que está silenciado</div>
+          <div class="step-t">Detectar o que está silenciado</div>
           <p class="step-s">Você já começou no seu mapeamento. Na Jornada, cada capítulo revela um sabotador, e os últimos te ensinam a identificar os mais específicos da sua própria rotina, inclusive os que ninguém percebe de fora.</p>
           <span class="step-tag">Personalizado</span>
         </div>
@@ -783,7 +789,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
       <div class="trilha-step reveal" data-d="1">
         <div class="step-circle">02</div>
         <div class="step-body">
-          <div class="step-t">Nomear: dar nome ao hábito que sabota</div>
+          <div class="step-t">Nomear o hábito que sabota</div>
           <p class="step-s">Um hábito sem nome é invisível. Quando você nomeia o sabotador na sua vida, ele perde o poder de agir sem ser percebido. A consciência já é o primeiro passo.</p>
           <span class="step-tag">Ciência comportamental</span>
         </div>
@@ -791,7 +797,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
       <div class="trilha-step reveal" data-d="2">
         <div class="step-circle">03</div>
         <div class="step-body">
-          <div class="step-t">Substituir: trocar pelo antídoto certo</div>
+          <div class="step-t">Substituir pelo antídoto certo</div>
           <p class="step-s">Para cada sabotador, a Jornada apresenta um hábito substituto prático, sem tecnologia, sem complicação. Não se trata de força de vontade. Trata-se de substituição inteligente.</p>
           <span class="step-tag">Sem força de vontade</span>
         </div>
@@ -799,7 +805,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
       <div class="trilha-step reveal" data-d="3">
         <div class="step-circle">04</div>
         <div class="step-body">
-          <div class="step-t">Treinar: Shakes e Desafios como estímulo diário</div>
+          <div class="step-t">Treinar com os Shakes e Desafios todo dia</div>
           <p class="step-s">Os Shakes de Lembrança e os Criativos acionam o Gatilho da Lembrança, o esforço de puxar a informação de volta em vez de recebê-la pronta. É esse esforço que reativa os músculos mentais parados. 15 minutos, um passo por vez.</p>
           <span class="step-tag">15 min por dia</span>
         </div>
@@ -807,7 +813,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
       <div class="trilha-step reveal" data-d="4">
         <div class="step-circle">05</div>
         <div class="step-body">
-          <div class="step-t">Transmitir: o legado que a Jornada torna possível</div>
+          <div class="step-t">Transmitir para quem você ama</div>
           <p class="step-s">Você terá o conhecimento para identificar esses padrões nos filhos, netos ou pessoas que ama, e ajudá-los a evitar o colapso antes que ele comece.</p>
           <span class="step-tag">Legado real</span>
         </div>
@@ -886,8 +892,8 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
           <ul class="pb-shake-pts">
             <li>Acorda o tipo de pensamento que gera ideias novas</li>
             <li>Tira você do hábito de buscar sempre a resposta pronta</li>
-            <li>Progressivos: de simples a complexos ao longo da Jornada</li>
-            <li>Ponto B: ter ideias onde n&#227;o espera, sem precisar &#8220;tentar&#8221;</li>
+            <li>Ficam mais difíceis aos poucos ao longo da Jornada</li>
+            <li>Você passa a ter ideias onde n&#227;o espera, sem precisar &#8220;tentar&#8221;</li>
           </ul>
         </div>
         <div class="pb-shake-card">
@@ -897,7 +903,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
             <li>Reativa a mem&#243;ria de fatos e de lembran&#231;as do dia a dia</li>
             <li>Reduz a depend&#234;ncia de lembretes e notas</li>
             <li>Trabalham mem&#243;ria de curto e longo prazo</li>
-            <li>Ponto B: lembrar nomes e palavras com naturalidade</li>
+            <li>Voc&#234; volta a lembrar nomes e palavras com naturalidade</li>
           </ul>
         </div>
       </div>
@@ -924,7 +930,7 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
         <span class="pb-eyebrow">O acelerador de h&#225;bito</span>
       </div>
       <h3 class="pb-title reveal" data-d="1">Desafio de 7 Dias</h3>
-      <p class="pb-desc reveal" data-d="2">A forma&#231;&#227;o de um novo h&#225;bito demora em m&#233;dia 66 dias. O Desafio de 7 Dias foi desenhado para encurtar esse caminho: 7 dias de foco total que consolidam o que a Jornada iniciou.</p>
+      <p class="pb-desc reveal" data-d="2">A forma&#231;&#227;o de um novo h&#225;bito demora em m&#233;dia 66 dias. O Desafio de 7 Dias foi desenhado para encurtar esse caminho, com 7 dias de foco total que consolidam o que a Jornada iniciou.</p>
       <div class="research-callout reveal" data-d="2" style="max-width:600px">
         <span class="research-quote">&#8220;Adultos entre 50&#8209;65 anos s&#227;o o grupo mais afetado pela fragmenta&#231;&#227;o digital, e os que mais se beneficiam de pr&#225;tica consistente.&#8221;</span>
         <span class="research-source">MIT AgeLab &#183; Cambridge Neuroscience</span>
@@ -1101,19 +1107,19 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
         <div class="plan-price"><sup>R$</sup>29<span style="font-size:1.3rem">,90</span></div>
         <div class="plan-note">pagamento &#250;nico &#183; acesso vital&#237;cio</div>
         <div class="plan-benefit-highlight"><span class="pbh-icon">&#10022;</span>Sua mente come&#231;a a responder diferente nas primeiras duas semanas</div>
-        <div class="plan-hours-badge">&#128336; 5h45 de treino da mente bem montado: o in&#237;cio da virada</div>
+        <div class="plan-hours-badge">&#128336; 5h45 de treino da mente bem montado para come&#231;ar a virada</div>
         <div class="plan-div"></div>
         <div class="plan-metric">Base de treino mental di&#225;rio</div>
         <ul class="plan-list">
           <li><span class="ck">✓</span> Metodologia completa do Colapso Silencioso</li>
-          <li><span class="ck">✓</span> 23 capítulos: 19 sabotadores revelados</li>
+          <li><span class="ck">✓</span> 23 capítulos que revelam 19 sabotadores</li>
           <li><span class="ck">✓</span> Desafios diários inclusos na metodologia</li>
-          <li><span class="ck">✓</span> Trilha: detectar → nomear → substituir</li>
+          <li><span class="ck">✓</span> Detectar → nomear → substituir, a trilha completa</li>
           <li><span class="ck">✓</span> Acesso pelo celular, sem app, sem prazo</li>
           <li><span class="ck">✓</span> Garantia de 7 dias</li>
         </ul>
         <div class="plan-cta-wrap">
-          <button class="btn btn-outline btn-full" onclick="comprar('despertar')">Começar com o Despertar</button>
+          <button class="btn btn-buy btn-full" onclick="comprar('despertar')">Começar com o Despertar →</button>
         </div>
       </div>
 
@@ -1125,13 +1131,13 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
         <div class="plan-from">De R$ 97,90</div>
         <div class="plan-price"><sup>R$</sup>45<span style="font-size:1.3rem">,90</span></div>
         <div class="plan-note">pagamento &#250;nico &#183; acesso vital&#237;cio</div>
-        <div class="plan-benefit-highlight plan-benefit-gold"><span class="pbh-icon">&#10022;</span>Criatividade e mem&#243;ria em recupera&#231;&#227;o simult&#226;nea: o ritmo que vira h&#225;bito</div>
-        <div class="plan-hours-badge plan-hours-gold">&#128336; 20 horas de treino: o suficiente para instalar um novo padr&#227;o mental</div>
+        <div class="plan-benefit-highlight plan-benefit-gold"><span class="pbh-icon">&#10022;</span>Criatividade e mem&#243;ria em recupera&#231;&#227;o simult&#226;nea, no ritmo que vira h&#225;bito</div>
+        <div class="plan-hours-badge plan-hours-gold">&#128336; 20 horas de treino, o suficiente para instalar um novo padr&#227;o mental</div>
         <div class="plan-div"></div>
         <div class="plan-metric">2&#215; mais est&#237;mulo de treino mental</div>
         <ul class="plan-list">
           <li><span class="ck">✓</span> <strong style="color:var(--cream)">Tudo do plano "O Despertar"</strong></li>
-          <li><span class="ck">✓</span> Desafio de 7 Dias: acelera a formação do hábito</li>
+          <li><span class="ck">✓</span> Desafio de 7 Dias que acelera a formação do hábito</li>
           <li><span class="ck">✓</span> 25 Shakes Criativos extras</li>
           <li><span class="ck">✓</span> 25 Shakes de Lembrança extras</li>
           <li><span class="ck">✓</span> 50+ dias de treino além da metodologia</li>
@@ -1163,19 +1169,19 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
         <div class="plan-price"><sup>R$</sup>59<span style="font-size:1.3rem">,90</span></div>
         <div class="plan-note">pagamento &#250;nico &#183; acesso vital&#237;cio</div>
         <div class="plan-benefit-highlight"><span class="pbh-icon">&#10022;</span>Repert&#243;rio completo para manter os ganhos e transmitir para quem voc&#234; ama</div>
-        <div class="plan-hours-badge">&#128336; 32h30 de treino da mente: mais que 4 fins de semana inteiros dedicados</div>
+        <div class="plan-hours-badge">&#128336; 32h30 de treino da mente, mais que 4 fins de semana inteiros dedicados</div>
         <div class="plan-div"></div>
         <div class="plan-metric">3&#215; mais repert&#243;rio de treino mental</div>
         <ul class="plan-list">
           <li><span class="ck">✓</span> <strong style="color:var(--cream)">Tudo do Domínio da Mente</strong></li>
-          <li><span class="ck">✓</span> +25 Shakes Criativos adicionais (total: 50)</li>
-          <li><span class="ck">✓</span> +25 Shakes de Lembrança adicionais (total: 50)</li>
+          <li><span class="ck">✓</span> +25 Shakes Criativos adicionais (50 no total)</li>
+          <li><span class="ck">✓</span> +25 Shakes de Lembrança adicionais (50 no total)</li>
           <li><span class="ck">✓</span> 100+ dias de treino ininterrupto</li>
           <li><span class="ck">✓</span> Repertório completo para transmitir à família</li>
           <li><span class="ck">✓</span> Garantia de 7 dias</li>
         </ul>
         <div class="plan-cta-wrap">
-          <button class="btn btn-outline btn-full" onclick="comprar('liberdade')">Quero a Liberdade Absoluta</button>
+          <button class="btn btn-buy btn-full" onclick="comprar('liberdade')">Quero a Liberdade Absoluta →</button>
         </div>
       </div>
     </div>
@@ -1218,13 +1224,13 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
       <div class="causa-body reveal" data-d="2">
         <p>O tempo não voa. <strong>A gente para de registrá-lo.</strong></p>
         <p>Um estudo da University College London descobriu que rotinas repetitivas e excesso de telas fazem o cérebro parar de criar marcos na memória. Anos inteiros passam sem deixar quase nada gravado com nitidez. <em>É o Colapso Silencioso operando, exatamente como o nome diz.</em></p>
-        <p>E tem mais: por saber que a tecnologia guarda tudo, a mente humana simplesmente <strong>parou de se esforçar para reter o que é importante.</strong> Estamos, coletivamente, terceirizando a própria memória para sistemas que lucram com a nossa atenção.</p>
+        <p>E tem mais. Por saber que a tecnologia guarda tudo, a mente humana simplesmente <strong>parou de se esforçar para reter o que é importante.</strong> Sem perceber, a gente foi entregando a própria memória para aparelhos que lucram com a nossa atenção.</p>
       </div>
       <div class="causa-pull reveal" data-d="3">
         O Colapso Silencioso nasceu como uma resposta a isso. Não é um manual de produtividade. É um movimento dedicado a recuperar memória, imaginação e criatividade — coisas que não são um dom, são o que nos torna autores da própria vida.
       </div>
       <div class="causa-body reveal" data-d="4">
-        <p>Porque quando você recupera esses pilares, <strong>não apenas melhora sua vida.</strong> Você se torna o exemplo que as pessoas ao seu redor precisam ver — e a prova viva de que a mente humana é mais resiliente do que o mundo digital quer que você acredite.</p>
+        <p>Porque quando você recupera esses pilares, <strong>não apenas melhora sua vida.</strong> Você se torna o exemplo que as pessoas ao seu redor precisam ver, e a prova viva de que a mente humana é mais forte do que o mundo digital quer que você acredite.</p>
         <p>Se essa conversa faz sentido para você, <em>a Jornada te espera.</em></p>
       </div>
     </div>
@@ -1264,19 +1270,19 @@ img,video,canvas,svg,iframe{max-width:100%;height:auto}
       <span id="faq-titulo">O que você ainda está pensando</span>
     </h2>
     <div class="faq-list">
-      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">"Não tenho 15 minutos por dia"<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">15 minutos é menos do que você passa rolando o feed. Consistência possível bate intensidade eventual — sempre.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">"Não tenho 15 minutos por dia"<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">15 minutos é menos do que você passa rolando o feed. Fazer todo dia um pouco funciona mais do que muito de vez em quando.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Tenho mais de 60 anos. Funciona para mim?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Especialmente para você. A mente aprende em qualquer idade, pesquisadores do MIT e de Cambridge mostraram que o cérebro adulto continua respondendo a estímulo até os 70 e 80 anos. O método foi desenhado para quem passou dos 50 e sente que algo ficou mais quieto. Você não está começando do zero, está reativando o que sempre esteve lá.</div></div></div>
-      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Já tentei antes e não funcionou. Por que seria diferente?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">A maioria do que existe promete muito e pede pouco. Este método pede 15 minutos por dia e promete o que acontece quando você faz. A diferença não está no método — está no comprometimento com a consistência.</div></div></div>
-      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Como acesso? Precisa de computador?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Não. Tudo pelo celular — nenhum app para instalar. Você recebe o link de acesso imediato após a compra. Funciona em qualquer dispositivo. Acesso vitalício.</div></div></div>
-      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Posso ensinar para minha família?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Essa é uma das razões mais poderosas para fazer a Jornada. Ao entender os sabotadores e as práticas, você adquire o conhecimento para identificar esses padrões nos filhos, cônjuge ou netos — e ajudá-los a evitar o colapso.</div></div></div>
-      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Não me considero uma pessoa criativa. O método é para mim?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Criatividade não é um traço de personalidade — é uma capacidade que se exercita. O Stanford Center on Longevity documentou que o declínio criativo em adultos não é biológico: é resultado de subestimulação. O engenheiro Carlos Eduardo, 55 anos, dizia que não era criativo. Depois de 3 semanas de Shakes Criativos, chegou a uma solução numa reunião difícil que ninguém mais tinha visto. Ele disse: "sei de onde veio." Você sabe de onde vai vir o seu.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Já tentei antes e não funcionou. Por que seria diferente?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">A maioria do que existe promete muito e pede pouco. Este método pede 15 minutos por dia e promete o que acontece quando você faz. A diferença não está no método, está em você manter a constância.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Como acesso? Precisa de computador?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Não. Tudo pelo celular, nenhum app para instalar. Você recebe o link de acesso imediato após a compra. Funciona em qualquer dispositivo. Acesso vitalício.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Posso ensinar para minha família?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Essa é uma das razões mais poderosas para fazer a Jornada. Ao entender os sabotadores e as práticas, você adquire o conhecimento para identificar esses padrões nos filhos, no cônjuge ou nos netos, e ajudá-los a evitar o colapso.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Não me considero uma pessoa criativa. O método é para mim?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Criatividade não é um traço de personalidade, é uma capacidade que se exercita. O Stanford Center on Longevity mostrou que o declínio criativo em adultos não é biológico, e sim resultado de falta de estímulo. Carlos Eduardo, engenheiro de 55 anos, sempre dizia que não era criativo. Depois de 3 semanas de Shakes Criativos, chegou numa reunião difícil com uma solução que ninguém mais tinha visto, e soube exatamente de onde ela tinha vindo. O seu vai vir do mesmo lugar.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Se o meu problema tem a ver com o tempo de celular, por que a solução é um método digital?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">O problema nunca foi o aparelho. O problema é o que você consome nele sem perceber e sem digerir. Vídeo curto atrás de vídeo curto, rolagem sem fim, nada disso deixa marca. Tente lembrar agora do primeiro vídeo que você viu hoje de manhã. Quase ninguém consegue. O método é o contrário disso, um conteúdo feito para ser digerido, que acorda de novo a memória, o foco e a criatividade. Siga a metodologia até o fim e você vai lembrar dos detalhes dela, porque ela foi feita para ficar na sua cabeça.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Isso não é a mesma coisa que já tem de graça no YouTube?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">A diferença está na ordem das coisas. Um vídeo aqui, outro ali, cada dia um assunto, e o seu cérebro não fixa o que passou. O método é uma sequência montada passo a passo, no ritmo certo, para treinar a sua memória todo dia. É isso que separa quem assiste de quem realmente melhora.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Isso é normal da idade ou é sinal de alguma coisa?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Esquecer de vez em quando é normal. O sinal para prestar atenção é quando isso começa a atrapalhar a sua rotina e se repete toda semana, que é justamente o padrão que o seu mapeamento procurou. Perceber cedo não é motivo de pânico, é o que te dá mais tempo de agir, enquanto ainda é questão de treino.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Preciso ser bom de tecnologia?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Não precisa. Se você consegue abrir uma mensagem no celular, você consegue seguir o método. Nada de aplicativo para instalar e nada complicado de aprender.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Quanto tempo leva por dia? Tem prazo para terminar?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">15 minutos por dia, no seu ritmo. Não tem prazo fixo para terminar e o acesso é vitalício. Quanto mais você pratica, mais longe a sua mente vai.</div></div></div>
       <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">É seguro comprar? O que acontece com os meus dados?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">O pagamento é processado pela Hotmart, a maior plataforma de produtos digitais do Brasil, e o reembolso dos 7 dias é garantido pela própria plataforma. Os seus dados são usados só para liberar o seu acesso, não são vendidos nem compartilhados com ninguém.</div></div></div>
-      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Qual plano escolher?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">O Domínio da Mente é o mais escolhido. Além da metodologia completa, o Desafio de 7 Dias acelera a formação do hábito e os 50 Shakes garantem mais de 50 dias de treino contínuo — o que separa quem experimentou de quem transformou.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Qual plano escolher?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">O Domínio da Mente é o mais escolhido. Além da metodologia completa, o Desafio de 7 Dias acelera a formação do hábito e os 50 Shakes garantem mais de 50 dias de treino contínuo, o que separa quem experimentou de quem transformou.</div></div></div>
     </div>
   </div>
 </section>
@@ -1465,18 +1471,17 @@ function comprar(plano){
 
 (function(){
   var PROOFS=[
-    {texto:'Passei 5 anos reclamando que a minha criatividade tinha sumido com a pandemia. A Jornada me mostrou que a pandemia não levou a criatividade — levou os rituais que ela precisava para aparecer. Quando entendi isso, parei de esperar ela voltar.',nome:'Lucas Tavares',meta:'52 anos &#183; publicitário &#183; São Paulo',chip:'Criatividade restaurada',iniciais:'LT'},
-    {texto:'Não diria que minha memória está perfeita. Diria que parei de ter vergonha de esquecer, porque aprendi o que estava causando o esquecimento — e o que fazer com isso.',nome:'Vera Campos',meta:'64 anos &#183; gestora de RH aposentada &#183; BH',chip:'Clareza sobre a causa',iniciais:'VC'},
-    {texto:'A Jornada não é motivacional. Não tem frases de efeito. É um método — seco, estruturado e honesto sobre o tempo que leva. Exatamente por isso funciona.',nome:'André Nakamura',meta:'59 anos &#183; professor universitário &#183; Curitiba',chip:'Método honesto',iniciais:'AN'},
-    {texto:'Comecei para mim. Terminei pensando nos meus filhos. No capítulo sobre transmissão de hábitos, percebi que eu era a prova viva de sabotadores que passava para eles sem perceber.',nome:'Beatriz Moura',meta:'54 anos &#183; empresária &#183; Goiânia',chip:'Impacto na família',iniciais:'BM'},
-    {texto:'Fui com expectativas baixas. No quinto desafio, minha amiga me ligou pra dizer que eu tinha ficado 10 minutos sem olhar o celular. Eu nem tinha percebido. Continuei porque quis.',nome:'Maria Regina Silveira',meta:'61 anos &#183; professora aposentada &#183; SP',chip:'Foco sem esforço',iniciais:'MR'},
-    {texto:'Trabalho com argumentação há 32 anos. Nos últimos 3, minhas ideias vinham pré-mastigadas. O desafio do capítulo 8 me pegou no vivo. Demorei. Foi constrangedor. Funcionou.',nome:'Roberto Fonseca',meta:'58 anos &#183; advogado &#183; Brasília',chip:'Pensamento próprio',iniciais:'RF'},
-    {texto:'Os Shakes Criativos antes de dar aula por 3 semanas. Minha coordenadora perguntou o que eu tinha feito de diferente — minhas aulas estavam mais vivas. Não mudei o conteúdo.',nome:'Patrícia Lorenzetti',meta:'57 anos &#183; pedagoga &#183; Caxias do Sul',chip:'Aulas mais vivas',iniciais:'PL'},
-    {texto:'Sou engenheiro. Não me considero criativo. Mas na semana seguinte, numa reunião difícil, me veio uma solução que ninguém mais tinha pensado. Sei de onde veio.',nome:'Carlos Eduardo Andrade',meta:'55 anos &#183; engenheiro civil &#183; Fortaleza',chip:'Solução inesperada',iniciais:'CA'},
-    {texto:'O desafio de 7 dias é brutalmente simples — e por isso é difícil. Não tem onde esconder. Ou você faz 15 minutos todo dia, ou admite que não quis. Admiti no dia 4. Recomeçei.',nome:'Fernanda Torres',meta:'56 anos &#183; arquiteta &#183; Campinas',chip:'Hábito consolidado',iniciais:'FT'},
-    {texto:'Fiz a Jornada completa. O Desafio de 7 Dias foi ideia da minha filha. Dois meses depois, ainda pratico. A filha não disse nada. Mas parou de me lembrar.',nome:'Marcelo Oliveira',meta:'63 anos &#183; médico cardiologista &#183; RJ',chip:'Prática que persiste',iniciais:'MO'},
-    {texto:'Os Shakes de Lembrança me pareceram simples demais. Depois de um mês, dei por mim lembrando o nome de todos os fornecedores sem precisar checar o caderno.',nome:'Rosa Meireles',meta:'60 anos &#183; comerciante &#183; Salvador',chip:'Memória reativada',iniciais:'RM'},
-    {texto:'Meu marido foi o primeiro a notar. "Você está respondendo às perguntas antes de me pedir para pesquisar." Ele não sabia que eu estava fazendo a Jornada. Essa foi minha prova.',nome:'Sônia Pereira',meta:'63 anos &#183; nutricionista &#183; Porto Alegre',chip:'Percebido pelos outros',iniciais:'SP'},
+    {texto:'Eu esquecia o nome das pessoas bem na hora de cumprimentar e passava vergonha. Não vou dizer que ficou tudo perfeito. Mas entendi de onde vinha isso e o que fazer, e hoje me pega bem menos.',nome:'Vera Campos',meta:'64 anos &#183; gestora aposentada &#183; BH',chip:'Nomes na hora',iniciais:'VC'},
+    {texto:'Fui com o pé bem atrás, achei que era mais promessa de internet. Fiz os 15 minutos por dia porque não custava tentar. Umas cinco semanas depois reparei que tava lembrando de recado sem anotar. Foi aí que acreditei.',nome:'Antônio Rezende',meta:'66 anos &#183; comerciante aposentado &#183; Fortaleza',chip:'Voltou a lembrar',iniciais:'AR'},
+    {texto:'Meu pai teve Alzheimer e eu vivia com medo de ir pelo mesmo caminho. O que me ajudou não foi promessa de cura, foi ter uma coisa concreta pra fazer todo dia. Tirou aquela sensação de esperar de braço cruzado.',nome:'Cláudio Santana',meta:'59 anos &#183; empresário &#183; Salvador',chip:'Saiu do medo parado',iniciais:'CS'},
+    {texto:'Eu lia uma página do jornal e minutos depois não sabia dizer o que tinha lido. Achei que era da idade e fui deixando. Depois de umas semanas comecei a segurar de novo o que leio. Hoje termino um livro sem perder o fio.',nome:'Geraldo Pinheiro',meta:'68 anos &#183; aposentado &#183; Vitória',chip:'Leitura que fica',iniciais:'GP'},
+    {texto:'Quem reparou primeiro foi meu marido. Ele disse que eu tinha parado de pedir pra ele lembrar as coisas por mim. Eu nem tinha me dado conta, mas era verdade, tava menos presa na agenda do celular.',nome:'Sônia Pereira',meta:'63 anos &#183; nutricionista &#183; Porto Alegre',chip:'Menos dependente',iniciais:'SP'},
+    {texto:'Travei numa reunião, o nome de um cliente que conheço há anos não veio. Foi vergonhoso. Comecei mais por causa disso do que por vontade. Levei umas três semanas pra ver, mas o branco na hora de falar foi ficando raro.',nome:'Roberto Fonseca',meta:'58 anos &#183; advogado &#183; Brasília',chip:'Sem mais branco',iniciais:'RF'},
+    {texto:'A parte que mais gostei é que não é aquela coisa de frase bonita e motivação. É prática mesmo, todo dia um pouco, e é honesto sobre o tempo que leva. Acho que funcionou comigo justamente por ser assim.',nome:'André Nakamura',meta:'59 anos &#183; professor aposentado &#183; Curitiba',chip:'Sem enrolação',iniciais:'AN'},
+    {texto:'Comecei achando que ia largar no meio, sou meio de desistir das coisas. O Desafio de 7 Dias me pegou porque é curto e simples. Faltei um dia, voltei e terminei. Faz dois meses e ainda faço de manhã.',nome:'Marcelo Oliveira',meta:'63 anos &#183; médico aposentado &#183; RJ',chip:'Virou hábito',iniciais:'MO'},
+    {texto:'Os Shakes de Lembrança me pareceram bobos no começo, achei simples demais pra fazer efeito. Um mês depois eu tava lembrando o nome dos fornecedores todos sem olhar o caderno. Não sei explicar direito, mas mudou.',nome:'Rosa Meireles',meta:'60 anos &#183; comerciante &#183; Salvador',chip:'Memória de nomes',iniciais:'RM'},
+    {texto:'Fiz mais pela minha filha que insistiu do que por mim. Ela vivia me lembrando de tudo e reclamando que eu repetia as mesmas histórias. Uns meses depois ela parou de reclamar. Pra mim isso valeu mais que elogio.',nome:'José Moreira',meta:'65 anos &#183; aposentado &#183; Porto Alegre',chip:'Família reparou',iniciais:'JM'},
+    {texto:'Tava com 61 anos achando que era tarde pra tentar qualquer coisa. Uma amiga me mandou o link e fiz sem fé nenhuma. O que me convenceu foi um dia perceber que tinha passado a tarde toda sem procurar as chaves ou os óculos.',nome:'Maria Regina Silveira',meta:'61 anos &#183; professora aposentada &#183; SP',chip:'Nunca é tarde',iniciais:'MR'},
   ];
   var track=document.getElementById('proof-track-1');
   if(!track)return;
@@ -1511,51 +1516,51 @@ function comprar(plano){
 (function(){
   var TRILHA=[
     {
-      texto:'No capítulo 14 eu parei. Lá estava o hábito que tinha destruído minha criatividade sem que eu percebesse — a multitarefa constante que eu chamava de produtividade. Quando mudei esse único hábito, voltei a terminar o que começava.',
-      nome:'Jorge Henrique Matos',meta:'60 anos &#183; arquiteto aposentado &#183; Recife',chip:'Hábito identificado',iniciais:'JH'
+      texto:'Passei a esquecer onde deixava tudo, chave, óculos, o que ia buscar na cozinha. Meu marido ria mas eu sabia que não tava normal. Aqui eu entendi que era hábito, não doença. Hoje quase não acontece mais.',
+      nome:'Conceição Rodrigues',meta:'67 anos &#183; dona de casa &#183; Santos',chip:'Menos esquecimento',iniciais:'CR'
     },
     {
-      texto:'Minha neta de 8 anos perguntou por que eu estava tão "diferente". Eu disse que estava treinando minha cabeça. Ela achou que eu estava ficando mais inteligente. Talvez esteja.',
-      nome:'Conceição Rodrigues',meta:'67 anos &#183; dona de casa &#183; Santos',chip:'Percebida pela família',iniciais:'CR'
+      texto:'Fui médico 35 anos e sempre achei que memória era sorte, uns nascem com boa e outros não. Fazendo os exercícios vi que não é bem assim. O que eu chamava de idade era falta de usar a cabeça.',
+      nome:'Arnaldo Pinheiro',meta:'68 anos &#183; clínico geral aposentado &#183; Florianópolis',chip:'Mudou o que pensava',iniciais:'AP'
     },
     {
-      texto:'Fui médico por 35 anos e sempre achei que memória era destino, não escolha. A Jornada me provou o contrário. O que eu achei que era declínio era só falta de uso da mente.',
-      nome:'Dr. Arnaldo Pinheiro',meta:'68 anos &#183; clínico geral aposentado &#183; Florianópolis',chip:'Crença desfeita',iniciais:'AP'
+      texto:'Minha neta me perguntou por que eu tava diferente. Falei que tava treinando a cabeça. Ela achou graça, disse que eu tava ficando mais esperta. Pode ser, porque tô acompanhando bem melhor as conversas dela.',
+      nome:'Dalva Nunes',meta:'64 anos &#183; aposentada &#183; Londrina',chip:'Presente com os netos',iniciais:'DN'
     },
     {
-      texto:'Eu chorei no desafio do dia 17. Não de tristeza. De alívio. Era a primeira vez em anos que eu tinha ficado 20 minutos pensando só, sem interrupção e sem sentir culpa.',
-      nome:'Simone Azevedo',meta:'55 anos &#183; gestora comercial &#183; Belo Horizonte',chip:'Momento de virada',iniciais:'SA'
+      texto:'Perdi meu pai pro Alzheimer e todo esquecimento meu virava pânico. Fiz pra parar de ficar só com medo. Ninguém me prometeu cura e eu nem queria isso, queria ter o que fazer. Isso me acalmou muito.',
+      nome:'Cláudio Barros',meta:'59 anos &#183; empresário &#183; Salvador',chip:'Medo que virou ação',iniciais:'CB'
     },
     {
-      texto:'Sou artista plástica. Perdi o fio do meu trabalho por quase dois anos. Não sabia mais de onde vinham as ideias. A Jornada não me deu as ideias de volta — ela me mostrou o que eu estava fazendo para bloqueá-las.',
-      nome:'Tereza Lima',meta:'53 anos &#183; artista plástica &#183; Rio de Janeiro',chip:'Desbloqueio criativo',iniciais:'TL'
+      texto:'Já tinha tentado suplemento, joguinho de memória no celular, meditação. Nada segurava. Esse foi o primeiro que me explicou por que eu esquecia, e aí fez sentido continuar. Não é mágica, é treino mesmo.',
+      nome:'Renato Silvério',meta:'56 anos &#183; consultor &#183; São Paulo',chip:'Entendeu o porquê',iniciais:'RS'
     },
     {
-      texto:'Tentei outros métodos, cursos, aplicativos. Esse foi o primeiro que entendeu que o problema não é falta de disciplina — é excesso de estimulação errada. Simples. Funciona.',
-      nome:'Renato Silvério',meta:'56 anos &#183; consultor empresarial &#183; São Paulo',chip:'Abordagem diferente',iniciais:'RS'
+      texto:'Eu perdia o fio no meio de uma conversa e ficava embolada. No trabalho isso me atrapalhava demais. Depois de um tempo apresentei uma proposta pra um cliente sem olhar anotação. Lembrei de número, nome, tudo. Fechei.',
+      nome:'Débora Mendonça',meta:'51 anos &#183; vendedora &#183; Campinas',chip:'Memória no trabalho',iniciais:'DM'
     },
     {
-      texto:'No dia 23 da Jornada, apresentei uma proposta num cliente difícil sem nenhuma anotação na mão. Lembrei de tudo. Números, nomes, contexto. Fechei o contrato.',
-      nome:'Débora Mendonça',meta:'51 anos &#183; executiva de vendas &#183; Campinas',chip:'Memória em ação',iniciais:'DM'
+      texto:'Mostrei pro meu marido e ele começou também. Hoje a gente conversa mais, um lembra de uma coisa e completa a história do outro. Faz tempo que a gente não tava tão presente assim em casa.',
+      nome:'Eliane Cardoso',meta:'62 anos &#183; professora &#183; Porto Alegre',chip:'Mudou o casal',iniciais:'EC'
     },
     {
-      texto:'Meu marido perguntou o que eu estava fazendo. Mostrei a Jornada. Ele começou na semana seguinte. Hoje somos os dois mais presentes do que há 10 anos. Não esperava isso.',
-      nome:'Eliane Cardoso',meta:'62 anos &#183; professora &#183; Porto Alegre',chip:'Impacto no casal',iniciais:'EC'
+      texto:'Quando me aposentei minha cabeça parou junto, foi o que senti. Não de cansaço, de falta de assunto. Os exercícios me deram um destino todo dia. Voltei a ter vontade de aprender coisa nova.',
+      nome:'Osvaldo Matos',meta:'65 anos &#183; aposentado &#183; Campinas',chip:'Cabeça ativa de novo',iniciais:'OM'
     },
     {
-      texto:'Tenho TDAH. Nunca consegui terminar nada. Fiz a Jornada em 31 dias porque precisei repetir alguns desafios. Mas terminei. Pela primeira vez em anos, terminei algo.',
-      nome:'Gustavo Nogueira',meta:'44 anos &#183; programador freelancer &#183; Manaus',chip:'Completou pela primeira vez',iniciais:'GN'
+      texto:'Eu evitava ligar pros amigos porque esquecia o nome dos filhos deles, das esposas, e ficava sem graça. Foi voltando aos poucos. Semana passada liguei pro meu compadre e lembrei do nome da família toda.',
+      nome:'Lauro Bianchi',meta:'61 anos &#183; aposentado &#183; Uberlândia',chip:'Nomes de volta',iniciais:'LB'
     },
     {
-      texto:'Trabalho com pessoas há 30 anos. Nunca me senti tão presente numa conversa quanto depois da Jornada. É diferente ouvir quando você não está pensando no celular que está no bolso.',
-      nome:'Adriana Fonseca',meta:'57 anos &#183; psicóloga &#183; Brasília',chip:'Presença real',iniciais:'AF'
+      texto:'Tenho dificuldade de terminar as coisas, sempre tive. Precisei repetir alguns exercícios e levei mais tempo que o combinado. Mas terminei. Fazia anos que eu não terminava nada do começo ao fim.',
+      nome:'Gustavo Nogueira',meta:'54 anos &#183; autônomo &#183; Manaus',chip:'Terminei até o fim',iniciais:'GN'
     },
     {
-      texto:'Perdi meu pai para o Alzheimer. O medo de seguir o mesmo caminho me paralisava. A Jornada não tirou o medo — mas me deu algo concreto para fazer. Isso foi o suficiente.',
-      nome:'Cláudio Santana',meta:'59 anos &#183; empresário &#183; Salvador',chip:'Do medo à ação',iniciais:'CS'
+      texto:'Trabalhei a vida toda ouvindo gente, sou psicóloga. Depois dos exercícios reparei que tava ouvindo melhor, sem ficar pensando no celular no bolso. Parece pouco, mas mudou minhas conversas com paciente e em casa.',
+      nome:'Adriana Fonseca',meta:'57 anos &#183; psicóloga &#183; Brasília',chip:'Mais presente',iniciais:'AF'
     },
     {
-      texto:'Estava com 73 anos e achando que era tarde. Minha filha me mandou a Jornada. Fiz os 23 desafios em 28 dias. Ainda pratico os Shakes toda manhã. Não é tarde. Nunca é.',
+      texto:'Tinha 73 anos e achava que já era tarde demais. Minha filha me mandou e eu fiz mais pra agradar ela. Fui fazendo devagar, no meu ritmo. Ainda faço toda manhã. Nunca é tarde mesmo, é o que eu digo agora.',
       nome:'Nilza Ferreira',meta:'73 anos &#183; aposentada &#183; Curitiba',chip:'Nunca é tarde',iniciais:'NF'
     },
   ];

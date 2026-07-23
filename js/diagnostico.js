@@ -510,7 +510,7 @@ function renderCustoEmocional(respostas, secaoAncora) {
   if (!chave || !secaoAncora) return;
 
   const texto = chave === 'D'
-    ? 'Você disse que ainda não pesa. Guarde isto: é exatamente agora, antes de pesar, que reverter é mais rápido e mais fácil. Quem espera pesar começa em desvantagem.'
+    ? 'Você disse que ainda não pesa. Guarde uma coisa. É exatamente agora, antes de pesar, que reverter é mais rápido e mais fácil. Quem espera pesar começa em desvantagem.'
     : `E o preço não é só esquecer. Você mesmo disse que o que mais pesa é ${CUSTO_EMOCIONAL[chave]}. É isso que fica em jogo enquanto esses hábitos seguem no comando da sua mente.`;
 
   let el = document.getElementById('custo-emocional');
@@ -573,7 +573,7 @@ function renderPlanoInicial(perfil, nome) {
         <div class="plano-card-dim">${sanitize(c.label)} · ${sanitize(String(dims[dim]))}%</div>
         <div class="plano-card-nome">${sanitize(c.pratica.nome)}</div>
         <p class="plano-card-como">${sanitize(c.pratica.como)}</p>
-        <p class="plano-card-porque"><strong>Por quê:</strong> ${sanitize(c.pratica.porque)}</p>
+        <p class="plano-card-porque"><strong>Por que funciona.</strong> ${sanitize(c.pratica.porque)}</p>
         <div class="plano-card-ciencia">${sanitize(c.ciencia.dado)}<span class="plano-card-fonte">${sanitize(c.ciencia.fonte)}</span></div>
       </div>`;
   }).join('');

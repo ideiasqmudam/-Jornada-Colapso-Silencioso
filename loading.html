@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analisando — Jornada Colapso Silencioso</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23F4EFE1'/><circle cx='16' cy='16' r='9' fill='none' stroke='%238E2A1E' stroke-width='2.5'/><circle cx='16' cy='16' r='3' fill='%238E2A1E'/></svg>">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://connect.facebook.net https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https:; connect-src 'self' https://amqfcznqyyrgzlhzqohu.supabase.co https://cdn.jsdelivr.net https://www.facebook.com https://*.clarity.ms; img-src 'self' data: https://www.facebook.com https://e.clarity.ms;">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/loading.css">
+  <link rel="stylesheet" href="css/theme-vintage.css">
+
+  <style>body { background: #F4EFE1; }</style>
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","xol07a8vmz");
+</script>
+</head>
+<body class="theme-vintage paper-stains">
+
+<div class="page-overlay" id="page-overlay"></div>
+
+<div class="loading-page">
+
+  <div class="loading-content" role="status" aria-live="polite">
+
+
+    <canvas id="loading-canvas" width="260" height="140" aria-hidden="true"></canvas>
+
+
+    <div class="loading-steps" aria-label="Progresso da análise">
+      <div class="loading-step" id="step-0">
+        <div class="loading-step-dot" aria-hidden="true"></div>
+        <div class="loading-step-text">Lendo o que você respondeu...</div>
+      </div>
+      <div class="loading-step" id="step-1">
+        <div class="loading-step-dot" aria-hidden="true"></div>
+        <div class="loading-step-text">Encontrando o seu padrão...</div>
+      </div>
+      <div class="loading-step" id="step-2">
+        <div class="loading-step-dot" aria-hidden="true"></div>
+        <div class="loading-step-text">Montando o seu retrato...</div>
+      </div>
+      <div class="loading-step" id="step-3">
+        <div class="loading-step-dot" aria-hidden="true"></div>
+        <div class="loading-step-text">Quase lá. Isso é sobre você.</div>
+      </div>
+      <div class="loading-step" id="step-4">
+        <div class="loading-step-dot" aria-hidden="true"></div>
+        <div class="loading-step-text">Pronto. Vem ver.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script type="module">
+  import { navigateTo, initPageTransition, getSessionId } from './js/utils.js';
+  import { claritySetPage, claritySetSession } from './js/clarity-init.js';
+
+  initPageTransition();
+  claritySetPage('loading-vintage');
+  claritySetSession(getSessionId());
+
+
+  // "Redação analisando": rede de pontos em tinta dourada sobre papel
+  (function startNeuralAmber() {
+    const canvas = document.getElementById('loading-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    const pts = Array.from({ length: 32 }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+    }));
+
+    let running = true;
+    function frame() {
+      if (!running) return;
+      ctx.clearRect(0, 0, W, H);
+
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+      });
+
+      pts.forEach((a, i) => {
+        pts.slice(i + 1).forEach(b => {
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 90) {
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = `rgba(126,86,0,${(1 - d / 90) * 0.5})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        });
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(126,86,0,0.65)';
+        ctx.fill();
+      });
+
+      requestAnimationFrame(frame);
+    }
+    frame();
+
+    window._stopLoadCanvas = () => { running = false; };
+  })();
+
+
+  const steps = document.querySelectorAll('.loading-step');
+  steps.forEach((step, i) => {
+    setTimeout(() => {
+      step.classList.add('active');
+      if (i === steps.length - 1) {
+        setTimeout(() => {
+          if (window._stopLoadCanvas) window._stopLoadCanvas();
+          navigateTo(/old\.html$/i.test(location.pathname) ? 'diagnosticoold.html' : 'diagnostico.html');
+        }, 900);
+      }
+    }, 600 + i * 900);
+  });
+</script>
+
+</body>
+</html>

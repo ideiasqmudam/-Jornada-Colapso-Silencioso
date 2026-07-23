@@ -1,0 +1,64 @@
+/* ============================================================
+   THEME VINTAGE — overrides específicos do METODO (pgv)
+   Carregado POR ÚLTIMO, somente no metodoold.html.
+   Complementa css/theme-vintage.css (tokens, btn-gold carimbo, faq).
+   Os tokens do <style> inline do metodo já estão na paleta papel;
+   aqui ficam só ajustes de legibilidade 55+ e salvaguardas.
+   ============================================================ */
+
+/* ---------- Salvaguarda: FX do tema escuro nunca renderizam ---------- */
+.theme-vintage .aurora-blob,
+.theme-vintage #bgCanvas { display: none !important; }
+
+/* ---------- Estrelas legíveis sobre papel (dourado escurecido) ---------- */
+.theme-vintage .tcar-stars,
+.theme-vintage .car-stars,
+.theme-vintage .proof-stars { color: #8A651E; }
+
+/* ---------- Nav de jornal ---------- */
+.theme-vintage .sticky-nav { box-shadow: 0 1px 0 rgba(36, 32, 27, 0.08); }
+.theme-vintage .nav-brand { color: #4A4034; }
+
+/* ---------- Legibilidade 55+: textos densos sobem um degrau ---------- */
+.theme-vintage .pain-t   { font-size: 1.05rem; }
+.theme-vintage .pain-s,
+.theme-vintage .sab-desc,
+.theme-vintage .tcar-q,
+.theme-vintage .car-q,
+.theme-vintage .proof-texto,
+.theme-vintage .plan-list li,
+.theme-vintage .shake-pts li,
+.theme-vintage .pb-shake-pts li { font-size: 0.9375rem; }
+
+.theme-vintage .step-s,
+.theme-vintage .purpose-s,
+.theme-vintage .pilar-s,
+.theme-vintage .shake-p,
+.theme-vintage .ob-s,
+.theme-vintage .faq-a-in { font-size: 1rem; }
+
+.theme-vintage .causa-body,
+.theme-vintage .gtext-s,
+.theme-vintage .final-s,
+.theme-vintage .sab-cta-desc { font-size: 1.0625rem; }
+
+.theme-vintage .plan-note,
+.theme-vintage .proof-meta,
+.theme-vintage .tcar-info,
+.theme-vintage .car-info,
+.theme-vintage .stat-l { font-size: 0.8125rem; }
+
+/* ---------- Cartões com sombra dura de impresso (sem glow) ---------- */
+.theme-vintage .plan-card,
+.theme-vintage .orderbump,
+.theme-vintage .gbox { border-radius: 6px; }
+
+/* ---------- FAQ aberto precisa de folga com fonte maior ---------- */
+.theme-vintage .faq-item.open .faq-a { max-height: 1400px; }
+
+/* ---------- Movimento reduzido: conteúdo sempre visível, marquee para
+   (o livro flutuante fica — decisão do usuário, é o charme da seção) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .theme-vintage .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .theme-vintage .proof-track { animation: none !important; }
+}

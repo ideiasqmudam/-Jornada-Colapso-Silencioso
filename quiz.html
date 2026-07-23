@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapeamento — Jornada Colapso Silencioso</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23F4EFE1'/><circle cx='16' cy='16' r='9' fill='none' stroke='%238E2A1E' stroke-width='2.5'/><circle cx='16' cy='16' r='3' fill='%238E2A1E'/></svg>">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://connect.facebook.net https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https:; connect-src 'self' https://amqfcznqyyrgzlhzqohu.supabase.co https://cdn.jsdelivr.net https://www.facebook.com https://*.clarity.ms; img-src 'self' data: https://www.facebook.com https://e.clarity.ms;">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <link rel="stylesheet" href="css/theme-vintage.css">
+
+  <style>body { background: #F4EFE1; }</style>
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","xol07a8vmz");
+</script>
+</head>
+<body class="theme-vintage paper-stains">
+
+<div class="page-overlay" id="page-overlay"></div>
+<div class="quiz-page">
+
+
+  <div class="progress-bar-wrap" aria-hidden="true">
+    <div class="progress-bar-fill" id="progress-fill"></div>
+  </div>
+
+
+  <nav class="quiz-nav">
+    <span class="quiz-nav-logo">Jornada Colapso Silencioso</span>
+    <span class="quiz-counter">
+      <span class="current" id="quiz-current">1</span>
+      <span> de 15</span>
+    </span>
+  </nav>
+
+
+  <main class="quiz-main">
+    <div class="quiz-card" id="quiz-card" role="form" aria-live="polite">
+
+
+      <div class="quiz-eyebrow" id="quiz-eyebrow">Pergunta 01</div>
+
+
+      <h2 class="quiz-question-text" id="quiz-question"></h2>
+      <p class="quiz-question-sub" id="quiz-sub" style="display:none;"></p>
+
+
+      <div class="quiz-options" id="quiz-options" role="radiogroup" aria-label="Opções de resposta">
+      </div>
+
+
+      <div class="quiz-next-wrap">
+        <button class="btn-next btn-cta" id="btn-next" aria-label="Próxima pergunta">
+          <span>Próxima</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<script type="module">
+  import { initQuiz } from './js/quiz-engine.js';
+  import { captureUTMs, initPageTransition, getSessionId } from './js/utils.js';
+  import { claritySetPage, claritySetSession } from './js/clarity-init.js';
+
+  captureUTMs();
+  initPageTransition();
+  claritySetPage('quiz-vintage');
+  claritySetSession(getSessionId());
+  initQuiz();
+</script>
+
+</body>
+</html>

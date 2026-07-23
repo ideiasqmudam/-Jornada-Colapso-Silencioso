@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jornada Colapso Silencioso — O Método</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23F4EFE1'/><circle cx='16' cy='16' r='9' fill='none' stroke='%238E2A1E' stroke-width='2.5'/><circle cx='16' cy='16' r='3' fill='%238E2A1E'/></svg>">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://connect.facebook.net https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https:; connect-src 'self' https://amqfcznqyyrgzlhzqohu.supabase.co https://cdn.jsdelivr.net https://www.facebook.com https://*.clarity.ms; img-src 'self' data: https://www.facebook.com https://e.clarity.ms;">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4EFE1;--bg-s:#EAE0CB;--bg-c:#FBF7EC;
+  --mint:#8E2A1E;--mint-d:rgba(142,42,30,.07);--mint-b:rgba(142,42,30,.30);--mint-g:rgba(142,42,30,.08);
+  --gold:#A97B24;--gold-l:#8A651E;--gold-d:rgba(169,123,36,.12);
+  --cream:#24201B;--cream-d:#4A4034;--cream-m:#665A49;
+  --b-soft:rgba(36,32,27,.14);--b-med:rgba(36,32,27,.30);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-b:'Lora',Georgia,serif;
+  --font-m:'Archivo Narrow','Arial Narrow',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%}
+body{background:var(--bg);color:var(--cream);font-family:var(--font-b);font-size:18px;line-height:1.8;overflow-x:hidden;max-width:100%;-webkit-font-smoothing:antialiased}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+
+
+/* Aurora removida — papel não tem blobs de luz (e blur fixo pesa no mobile antigo) */
+
+/* Layout */
+.container{width:100%;max-width:900px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+.container--narrow{max-width:720px}
+.section{padding:clamp(64px,10vh,112px) 0;position:relative}
+.eyebrow{font-family:var(--font-m);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--mint)}
+.rule-gold{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.2}
+.rule-mint{height:1px;background:linear-gradient(90deg,transparent,var(--mint),transparent);opacity:.12}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.on{opacity:1;transform:translateY(0)}
+.reveal[data-d="1"]{transition-delay:.08s}.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}.reveal[data-d="4"]{transition-delay:.32s}
+
+/* Nav */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(251,247,236,.97);border-bottom:1px solid var(--b-med);padding:14px clamp(20px,5vw,48px);display:flex;justify-content:space-between;align-items:center}
+.nav-brand{font-family:var(--font-m);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-m)}
+.nav-cta{background:var(--mint);color:#FBF7EC;font-family:var(--font-b);font-size:.8rem;font-weight:600;padding:10px 22px;border:none;cursor:pointer;transition:background .2s;border-radius:2px}
+.nav-cta:hover{background:#6F1E14}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:20px 40px;border:none;border-radius:2px;font-family:var(--font-b);font-size:1rem;font-weight:600;letter-spacing:.03em;cursor:pointer;transition:all .3s var(--ease);position:relative;overflow:hidden;text-decoration:none}
+.btn-gold{background:var(--gold);color:var(--bg)}
+.btn-gold::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:transform .6s}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px)}
+.btn-gold:hover::after{transform:translateX(100%)}
+.btn-outline{background:transparent;color:var(--cream);border:1px solid var(--b-med)}
+.btn-outline:hover{border-color:var(--mint-b);color:var(--mint)}
+.btn-full{width:100%}
+.btn-lg{padding:22px 48px;font-size:1.05rem}
+
+/* Hero */
+.hero{padding:clamp(72px,10vh,120px) 0 clamp(48px,6vh,80px);position:relative;z-index:1}
+.hero-for{font-family:var(--font-m);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:clamp(20px,3vh,32px);display:flex;align-items:center;gap:10px}
+.hero-for::before{content:'';width:24px;height:1px;background:var(--mint)}
+.hero-hl{font-family:var(--font-d);font-size:clamp(2.4rem,5vw,4.2rem);font-weight:900;line-height:1.08;letter-spacing:-.02em;color:var(--cream);margin-bottom:clamp(28px,4vh,44px)}
+.hero-hl em{font-style:italic;color:var(--mint)}
+.hero-sub{font-size:clamp(1rem,2vw,1.15rem);color:var(--cream-d);max-width:580px;line-height:1.8;margin-bottom:clamp(24px,4vh,40px)}
+.hero-sub strong{color:var(--cream)}
+.hero-pills{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:clamp(20px,3vh,32px)}
+.pill{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--mint-d);border:1px solid var(--mint-b);border-radius:8px;font-family:var(--font-b);font-size:.80rem;color:var(--cream-d);justify-content:flex-start}
+@media(max-width:500px){.hero-pills{grid-template-columns:1fr}}
+.hero-cta-group{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:28px}
+/* Herói centralizado (título, subheadline, pills e CTAs) */
+.hero .container{text-align:center}
+.hero-for{justify-content:center}
+.hero-sub{margin-left:auto;margin-right:auto}
+.hero-pills{max-width:520px;margin-left:auto;margin-right:auto}
+.hero-cta-group{justify-content:center}
+.trust-bar{justify-content:center}
+.trust-bar{display:flex;align-items:center;flex-wrap:wrap;gap:20px}
+.trust-item{display:flex;align-items:center;gap:7px;font-family:var(--font-m);font-size:.65rem;letter-spacing:.08em;color:var(--cream-m)}
+.trust-dot{width:4px;height:4px;border-radius:50%;background:var(--mint)}
+
+/* Rotating benefits */
+.rotating-section{background:var(--bg-s);border-top:1px solid var(--b-soft);border-bottom:1px solid var(--b-soft);padding:clamp(48px,7vh,80px) 0;text-align:center}
+.rotating-label{font-family:var(--font-m);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-m);margin-bottom:32px}
+.benefit-display{min-height:clamp(110px,20vw,130px);height:auto;position:relative;overflow:visible}
+.benefit-item{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);transition:opacity .5s var(--ease),transform .5s var(--ease);padding:0 12px}
+.benefit-item.active{opacity:1;transform:translateY(0)}
+.benefit-item.exit{opacity:0;transform:translateY(-20px)}
+.benefit-hl{font-family:var(--font-d);font-size:clamp(1.4rem,3.5vw,2.6rem);font-weight:700;color:var(--cream);margin-bottom:6px}
+.benefit-hl strong{color:var(--mint)}
+.benefit-sub{font-size:.85rem;color:var(--cream-m);font-family:var(--font-m);letter-spacing:.05em}
+.bdots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+.bdot{width:5px;height:5px;border-radius:50%;background:var(--b-med);cursor:pointer;transition:background .3s}
+.bdot.active{background:var(--mint)}
+
+/* Pain section */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b-soft);border:1px solid var(--b-soft);border-radius:8px;overflow:hidden;margin-top:40px}
+.pain-card{background:var(--bg-c);padding:clamp(18px,3vw,26px);display:flex;align-items:flex-start;gap:16px;transition:background .3s}
+.pain-card:hover{background:rgba(142,42,30,.03)}
+.pain-icon-box{width:40px;height:40px;border-radius:6px;background:var(--mint-d);border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pain-t{font-size:.95rem;font-weight:500;color:var(--cream);margin-bottom:4px;line-height:1.4}
+.pain-s{font-size:.85rem;color:var(--cream-m);line-height:1.6}
+.profile-tag{margin-bottom:28px;padding:14px 20px;background:var(--mint-d);border:1px solid var(--mint-b);border-radius:6px;font-size:.9rem;color:var(--cream-d)}
+.profile-tag strong{color:var(--mint)}
+
+/* Purpose section */
+.purpose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.purpose-card{background:var(--bg-c);border:1px solid var(--b-soft);border-radius:8px;padding:28px 24px;transition:border-color .3s,transform .3s var(--ease)}
+.purpose-card:hover{border-color:var(--mint-b);transform:translateY(-4px)}
+.purpose-icon{width:44px;height:44px;border-radius:8px;background:var(--mint-d);border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.purpose-t{font-family:var(--font-d);font-size:1.1rem;font-weight:700;color:var(--cream);margin-bottom:10px}
+.purpose-s{font-size:.9rem;color:var(--cream-d);line-height:1.75}
+.purpose-card.featured{border-color:rgba(169,123,36,.3)}
+.purpose-card.featured .purpose-icon{background:var(--gold-d);border-color:rgba(169,123,36,.35)}
+
+/* Sabotadores */
+.sab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
+.sab-card{background:var(--bg-c);border:1px solid var(--b-soft);border-radius:8px;padding:26px 22px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s var(--ease)}
+.sab-card:hover{border-color:var(--mint-b);transform:translateY(-3px)}
+.sab-num{font-family:var(--font-d);font-size:2.5rem;font-weight:900;color:rgba(36,32,27,.10);line-height:1;margin-bottom:10px}
+.sab-name{font-family:var(--font-d);font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:8px}
+.sab-desc{font-size:.875rem;color:var(--cream-m);line-height:1.65}
+.sab-cta-box{margin-top:28px;padding:28px 32px;background:linear-gradient(135deg,rgba(142,42,30,.06),rgba(169,123,36,.06));border:1px solid rgba(142,42,30,.25);border-radius:8px;text-align:center}
+.sab-cta-num{font-family:var(--font-d);font-size:clamp(3rem,8vw,5rem);font-weight:900;color:var(--mint);line-height:1;margin-bottom:4px}
+.sab-cta-label{font-family:var(--font-m);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-m);margin-bottom:16px}
+.sab-cta-desc{font-size:.95rem;color:var(--cream-d);max-width:520px;margin:0 auto 20px;line-height:1.75}
+
+/* Trilha */
+.trilha{margin-top:48px;position:relative}
+
+/* Linha de fundo (dim) */
+.trilha-line{
+  position:absolute;left:27px;top:28px;bottom:28px;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(142,42,30,.15) 10%,rgba(142,42,30,.15) 90%,transparent);
+  z-index:0;pointer-events:none;
+}
+
+/* Linha de progresso — cresce com o scroll */
+.trilha-line-progress{
+  position:absolute;left:26px;top:0;
+  width:3px;height:0;
+  background:var(--mint);
+  border-radius:2px;
+  box-shadow:none;
+  z-index:0;   /* ABAIXO dos steps (z-index:1) */
+  pointer-events:none;
+  will-change:height;
+}
+
+/* Steps ficam ACIMA da linha */
+.trilha-step{
+  display:flex;gap:24px;margin-bottom:28px;
+  position:relative;align-items:flex-start;
+  z-index:1;   /* garante que o step cobre a linha */
+}
+.trilha-step:last-child{margin-bottom:0}
+
+/* Círculo base — fundo sempre opaco para cobrir a linha */
+.step-circle{
+  width:56px;height:56px;border-radius:50%;
+  border:1px solid rgba(36,32,27,.25);
+  background:var(--bg-c);  /* opaco — cobre completamente a linha por baixo */
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-family:var(--font-m);font-size:.65rem;letter-spacing:.05em;color:var(--cream-m);
+  position:relative;
+  transition:border-color .4s var(--ease),color .3s,box-shadow .4s var(--ease);
+}
+
+/* Estado "aceso" — inset shadow simula tint sem tornar background transparente */
+.step-circle.lit{
+  border-color:var(--mint);
+  color:var(--mint);
+  box-shadow:
+    inset 0 0 0 100px rgba(142,42,30,.08),   /* tinta oxblood interior (fundo ainda opaco) */
+    0 0 0 3px rgba(142,42,30,.14);           /* anel de carimbo */
+}
+
+/* Pulso único ao ativar */
+.step-circle.trail-pulse{animation:trailCirclePulse .55s var(--ease) forwards}
+@keyframes trailCirclePulse{
+  0%  {box-shadow:0 0 0 0 rgba(142,42,30,.45)}
+  65% {box-shadow:0 0 0 16px rgba(142,42,30,0)}
+  100%{box-shadow:0 0 0 3px rgba(142,42,30,.14)}
+}
+.step-body{flex:1;padding-top:12px}
+.step-t{font-family:var(--font-d);font-size:1.15rem;font-weight:700;color:var(--cream);margin-bottom:6px}
+.step-s{font-size:.9rem;color:var(--cream-d);line-height:1.75}
+.step-tag{display:inline-block;font-family:var(--font-m);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:100px;background:var(--gold-d);border:1px solid rgba(169,123,36,.28);color:var(--gold-l);margin-top:8px}
+
+/* Pilares */
+.pilar{background:var(--bg-c);border:1px solid var(--b-soft);border-radius:12px;overflow:hidden;margin-bottom:20px;transition:border-color .3s}
+.pilar:hover{border-color:var(--mint-b)}
+.pilar-header{padding:clamp(22px,3vw,32px);display:flex;gap:18px;align-items:flex-start}
+.pilar-icon-wrap{width:50px;height:50px;border-radius:8px;background:var(--mint-d);border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pilar-label{font-family:var(--font-m);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mint);margin-bottom:6px}
+.pilar-t{font-family:var(--font-d);font-size:1.25rem;font-weight:700;color:var(--cream);margin-bottom:8px}
+.pilar-s{font-size:.9rem;color:var(--cream-d);line-height:1.75}
+.pilar-divider{height:1px;background:var(--b-soft)}
+
+/* Testimonial auto-carousel */
+.tcarousel{padding:clamp(18px,2.5vw,26px);overflow:hidden;position:relative}
+.tcar-label{font-family:var(--font-m);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-m);margin-bottom:14px}
+.tcar-track{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;scroll-behavior:smooth}
+.tcar-track::-webkit-scrollbar{display:none}
+.tcar-card{flex:0 0 min(300px,78vw);background:var(--bg-s);border:1px solid var(--b-soft);border-radius:8px;padding:16px 18px;scroll-snap-align:start}
+.tcar-stars{color:var(--gold);font-size:.8rem;letter-spacing:2px;margin-bottom:10px}
+.tcar-q{font-size:.875rem;color:var(--cream-d);line-height:1.75;margin-bottom:12px;font-style:italic;position:relative;padding-left:16px}
+.tcar-q::before{content:'"';font-family:var(--font-d);font-size:1.6rem;color:var(--mint);position:absolute;left:0;top:-4px;line-height:1}
+.tcar-author{display:flex;align-items:center;gap:10px}
+.tcar-av{width:34px;height:34px;border-radius:50%;background:var(--mint-d);border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:.8rem;font-weight:700;color:var(--mint);flex-shrink:0}
+.tcar-name{font-size:.8rem;font-weight:500;color:var(--cream)}
+.tcar-info{font-size:.75rem;color:var(--cream-m)}
+.tcar-controls{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.tcar-dots{display:flex;gap:6px}
+.tcar-dot{width:5px;height:5px;border-radius:50%;background:var(--b-med);cursor:pointer;transition:background .2s}
+.tcar-dot.active{background:var(--mint)}
+.tcar-nav{display:flex;gap:6px}
+.tcar-btn{width:28px;height:28px;border-radius:50%;border:1px solid var(--mint-b);background:var(--mint-d);color:var(--mint);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.tcar-btn:hover{background:rgba(142,42,30,.16)}
+
+/* Shakes split */
+.shake-split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b-soft);border:1px solid var(--b-soft);border-radius:10px;overflow:hidden;margin-top:40px}
+.shake-col{background:var(--bg-c);padding:clamp(24px,3.5vw,36px)}
+.shake-badge{display:inline-block;font-family:var(--font-m);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:16px;border:1px solid}
+.shake-c{background:var(--mint-d);color:var(--mint);border-color:var(--mint-b)}
+.shake-l{background:rgba(61,90,153,.08);color:#3D5A99;border-color:rgba(61,90,153,.3)}
+.shake-t{font-family:var(--font-d);font-size:1.15rem;font-weight:700;color:var(--cream);margin-bottom:12px}
+.shake-p{font-size:.9rem;color:var(--cream-d);line-height:1.8;margin-bottom:20px}
+.shake-pts{list-style:none}
+.shake-pts li{font-size:.875rem;color:var(--cream-d);padding:5px 0;padding-left:14px;position:relative;border-bottom:1px solid var(--b-soft)}
+.shake-pts li:last-child{border-bottom:none}
+.shake-pts li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--mint);position:absolute;left:0;top:12px}
+
+/* Stats */
+.stat-row{display:flex;flex-wrap:wrap;gap:1px;background:var(--b-soft);border:1px solid var(--b-soft);border-radius:8px;overflow:hidden}
+.stat-item{background:var(--bg-c);flex:1;min-width:100px;padding:22px 18px;text-align:center}
+.stat-n{font-family:var(--font-d);font-size:2rem;font-weight:900;color:var(--mint);display:block;line-height:1;margin-bottom:4px}
+.stat-l{font-size:.8rem;color:var(--cream-m)}
+
+/* Plans */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.plan-card{background:var(--bg-c);border:1px solid var(--b-soft);border-radius:10px;padding:clamp(22px,2.5vw,32px);display:flex;flex-direction:column;position:relative;overflow:hidden;transition:transform .3s var(--ease),border-color .3s}
+.plan-card:hover{transform:translateY(-4px)}
+.plan-card.featured{border-color:var(--mint);box-shadow:4px 4px 0 rgba(36,32,27,.10)}
+.plan-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--mint)}
+.plan-badge{position:absolute;top:14px;right:14px;font-family:var(--font-m);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:100px;background:var(--mint-d);color:var(--mint);border:1px solid var(--mint-b)}
+.plan-label{font-family:var(--font-m);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:6px}
+.plan-name{font-family:var(--font-d);font-size:1.25rem;font-weight:900;color:var(--cream);margin-bottom:3px}
+.plan-name em{font-style:normal;color:var(--mint)}
+.plan-from{font-size:.8rem;color:var(--cream-m);text-decoration:line-through;margin-bottom:2px}
+.plan-price{font-family:var(--font-d);font-size:2.8rem;font-weight:900;color:var(--cream);line-height:1;margin-bottom:3px}
+.plan-price sup{font-size:1.1rem;vertical-align:super}
+.plan-note{font-size:.75rem;color:var(--cream-m);margin-bottom:20px}
+.plan-div{height:1px;background:var(--b-soft);margin:0 0 16px}
+.plan-metric{font-family:var(--font-m);font-size:.65rem;letter-spacing:.08em;color:var(--mint);padding:7px 12px;background:var(--mint-d);border-radius:4px;text-align:center;margin:0 0 16px}
+.plan-list{list-style:none;flex:1}
+.plan-list li{display:flex;align-items:flex-start;gap:8px;font-size:.875rem;color:var(--cream-d);padding:5px 0;border-bottom:1px solid var(--b-soft);line-height:1.5}
+.plan-list li:last-child{border-bottom:none}
+.plan-list .ck{color:var(--mint);flex-shrink:0;margin-top:2px;font-size:.8rem}
+.plan-cta-wrap{margin-top:auto;padding-top:18px}
+
+/* Order bump */
+.orderbump{margin-top:28px;background:var(--bg-c);border:1px solid var(--gold);border-radius:10px;padding:clamp(18px,2.5vw,28px);position:relative;overflow:hidden}
+.orderbump::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold)}
+.ob-badge{display:inline-block;font-family:var(--font-m);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;background:var(--gold-d);border:1px solid rgba(169,123,36,.28);color:var(--gold-l);margin-bottom:14px}
+.ob-layout{display:flex;align-items:center;gap:clamp(16px,3vw,32px);flex-wrap:wrap}
+.ob-info{flex:1;min-width:180px}
+.ob-t{font-family:var(--font-d);font-size:1.1rem;font-weight:700;color:var(--cream);margin-bottom:5px}
+.ob-s{font-size:.875rem;color:var(--cream-d);line-height:1.7;margin-bottom:10px}
+.ob-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ob-tag{font-family:var(--font-m);font-size:.6rem;padding:2px 9px;border-radius:100px;background:var(--gold-d);border:1px solid rgba(169,123,36,.28);color:var(--gold-l)}
+.ob-price{text-align:center;flex-shrink:0}
+.ob-from{font-size:.8rem;color:var(--cream-m);text-decoration:line-through;margin-bottom:1px}
+.ob-val{font-family:var(--font-d);font-size:2.2rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:3px}
+.ob-period{font-size:.75rem;color:var(--cream-m);margin-bottom:10px}
+
+/* Causa */
+.causa-inner{max-width:660px;margin:0 auto;text-align:center}
+.causa-pre{font-family:var(--font-m);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);margin-bottom:24px;display:flex;justify-content:center;align-items:center;gap:12px}
+.causa-pre::before,.causa-pre::after{content:'';width:28px;height:1px;background:var(--mint);opacity:.4}
+.causa-t{font-family:var(--font-d);font-size:clamp(1.5rem,4vw,2.4rem);font-weight:700;color:var(--cream);line-height:1.3;margin-bottom:28px}
+.causa-body{font-size:1rem;color:var(--cream-d);line-height:1.9;text-align:center}
+.causa-body p+p{margin-top:14px}
+.causa-body strong{color:var(--cream);font-weight:500}
+.causa-body em{color:var(--mint);font-style:normal}
+.causa-pull{border-left:2px solid var(--mint);padding:18px 22px;margin:24px 0;font-family:var(--font-d);font-style:italic;font-size:1.1rem;color:var(--cream);line-height:1.65;background:var(--mint-d);border-radius:0 6px 6px 0;text-align:center}
+
+/* Guarantee */
+.gbox{display:grid;grid-template-columns:160px 1fr;gap:clamp(24px,4vw,44px);align-items:center;background:var(--bg-c);border:1px solid var(--mint-b);border-radius:12px;padding:clamp(28px,4vw,44px)}
+.gseal{width:130px;height:130px;border-radius:50%;border:1px solid var(--mint);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;position:relative;box-shadow:none;margin:0 auto}
+.gseal::before{content:'';position:absolute;inset:-5px;border-radius:50%;border:1px solid rgba(142,42,30,.3)}
+.gseal-n{font-family:var(--font-d);font-size:2.8rem;font-weight:900;color:var(--mint);line-height:1}
+.gseal-l{font-family:var(--font-m);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--cream-m)}
+.gtext-t{font-family:var(--font-d);font-size:1.5rem;font-weight:700;color:var(--cream);margin-bottom:12px}
+.gtext-s{font-size:.95rem;color:var(--cream-d);line-height:1.85}
+
+/* FAQ */
+.faq-list{margin-top:36px;display:flex;flex-direction:column;gap:7px}
+.faq-item{background:var(--bg-c);border:1px solid var(--b-soft);border-radius:8px;overflow:hidden;transition:border-color .3s}
+.faq-item.open{border-color:var(--mint-b)}
+.faq-q{width:100%;background:none;border:none;color:var(--cream);font-family:var(--font-b);font-size:1rem;text-align:left;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;line-height:1.5;transition:color .2s}
+.faq-q:hover{color:var(--mint)}
+.faq-icon{width:24px;height:24px;border-radius:50%;border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;color:var(--mint);font-size:1rem;flex-shrink:0;transition:transform .3s var(--ease),background .3s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--mint-d)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.faq-a-in{padding:0 22px 18px;font-size:.9rem;color:var(--cream-m);line-height:1.85}
+.faq-item.open .faq-a{max-height:280px}
+
+/* Final CTA */
+.final-cta{text-align:center;padding:clamp(80px,12vh,140px) 0;position:relative}
+.final-t{font-family:var(--font-d);font-size:clamp(1.8rem,5vw,3.4rem);font-weight:900;line-height:1.15;color:var(--cream);margin-bottom:18px}
+.final-t em{font-style:italic;color:var(--mint)}
+.final-s{font-size:.95rem;color:var(--cream-m);max-width:480px;margin:0 auto 36px}
+
+/* Sticky CTA */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;background:rgba(244,239,225,.97);border-top:1px solid var(--b-med);box-shadow:0 -2px 10px rgba(36,32,27,.10);padding:14px 20px;z-index:200;transform:translateY(100%);transition:transform .4s var(--ease)}
+.sticky-cta.show{transform:translateY(0)}
+.sticky-cta .btn{width:100%;padding:18px;font-size:.95rem;border-radius:3px}
+.sticky-hint{text-align:center;font-family:var(--font-m);font-size:.62rem;letter-spacing:.08em;color:var(--cream-m);margin-top:7px}
+
+/* Responsive */
+
+/* Novo Carrossel */
+.carousel-wrapper{position:relative;overflow:hidden;border-radius:0 0 10px 10px}
+.carousel-track{display:flex;gap:0;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;scroll-behavior:smooth}
+.carousel-track::-webkit-scrollbar{display:none}
+.carousel-card{flex:0 0 100%;scroll-snap-align:start;padding:24px 28px;background:var(--bg-s);transition:opacity .4s ease,transform .4s cubic-bezier(.22,1,.36,1)}
+.carousel-card.exit{opacity:0;transform:translateX(-24px)}
+.carousel-controls{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-top:1px solid var(--b-soft)}
+.carousel-dots{display:flex;gap:6px}
+.carousel-dot{width:5px;height:5px;border-radius:50%;background:var(--b-med);cursor:pointer;transition:background .2s,transform .2s}
+.carousel-dot.active{background:var(--mint);transform:scale(1.3)}
+.carousel-nav{display:flex;gap:6px}
+.carousel-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--mint-b);background:var(--mint-d);color:var(--mint);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}
+.carousel-btn:hover{background:rgba(142,42,30,.16);transform:scale(1.05)}
+.car-section-label{font-family:var(--font-m);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-m);padding:14px 28px 8px}
+.car-stars{color:var(--gold);font-size:.8rem;letter-spacing:2px;margin-bottom:10px}
+.car-q{font-size:.875rem;color:var(--cream-d);line-height:1.75;margin-bottom:12px;font-style:italic;position:relative;padding-left:16px}
+.car-q::before{content:'“';font-family:var(--font-d);font-size:1.6rem;color:var(--mint);position:absolute;left:0;top:-4px;line-height:1}
+.car-author{display:flex;align-items:center;gap:10px}
+.car-av{width:34px;height:34px;border-radius:50%;background:var(--mint-d);border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:.8rem;font-weight:700;color:var(--mint);flex-shrink:0}
+.car-name{font-size:.8rem;font-weight:500;color:var(--cream)}
+.car-info{font-size:.75rem;color:var(--cream-m)}
+
+/* Depoimentos editoriais globais */
+.editorial-proofs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b-soft);border:1px solid var(--b-soft);border-radius:10px;overflow:hidden;margin-top:40px}
+.ep-card{background:var(--bg-c);padding:clamp(28px,3.5vw,40px);transition:background .3s}
+.ep-card:hover{background:rgba(142,42,30,.03)}
+.ep-quote{font-family:var(--font-d);font-style:italic;font-size:clamp(.95rem,1.8vw,1.05rem);color:var(--cream-d);line-height:1.85;margin-bottom:20px;position:relative}
+.ep-quote::before{content:'“';font-size:2.5rem;color:var(--mint);opacity:.6;display:block;line-height:.8;margin-bottom:12px}
+.ep-author{font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;color:var(--cream-m)}
+@media(max-width:680px){.editorial-proofs{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;transition:none!important}.proof-track{animation:none!important}}
+
+
+@media(max-width:768px){
+  .plans-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+  .purpose-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}
+  .sab-grid{grid-template-columns:1fr}
+  .shake-split{grid-template-columns:1fr}
+  .gbox{grid-template-columns:1fr;text-align:center}
+  .pain-grid{grid-template-columns:1fr}
+  .hero-cta-group{flex-direction:column;align-items:center}
+  .hero-cta-group .btn{width:100%}
+  body{padding-bottom:80px}
+}
+
+/* ── Hero desktop: single column, wider ── */
+@media(min-width:769px){
+  .hero .container.container--narrow{max-width:860px}
+  .hero-hl{font-size:clamp(2.8rem,4.5vw,4.2rem)}
+  .hero-sub{font-size:1.15rem;max-width:680px}
+  .hero-pills{grid-template-columns:repeat(3,1fr);max-width:680px}
+  .hero-cta-group{flex-direction:row;align-items:center}
+  .hero-cta-group .btn{width:auto}
+  .trust-bar{max-width:680px}
+}
+
+
+/* ── Marquee 3D Infinito ── */
+.proof-marquee-section{padding:clamp(48px,7vh,80px) 0;background:var(--bg-s);overflow:hidden;position:relative;z-index:1}
+.marquee-scene{perspective:1200px;padding:8px 0}
+.marquee-row{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.6) 6%,black 15%,black 85%,rgba(0,0,0,.6) 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.6) 6%,black 15%,black 85%,rgba(0,0,0,.6) 94%,transparent 100%)}
+.proof-track{display:flex;gap:16px;width:max-content;animation:proofMarquee 44s linear infinite;will-change:transform}
+@keyframes proofMarquee{from{transform:translateX(0)}to{transform:translateX(-33.333%)}}
+.proof-card{width:320px;flex-shrink:0;background:var(--bg-c);border:1px solid var(--b-soft);border-radius:10px;padding:20px 22px;display:flex;flex-direction:column;gap:14px;box-shadow:3px 3px 0 rgba(36,32,27,.08);transition:border-color .3s,box-shadow .3s}
+.proof-card:hover{border-color:var(--mint-b);box-shadow:4px 4px 0 rgba(36,32,27,.12)}
+.proof-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.proof-stars{color:var(--gold);font-size:.85rem;letter-spacing:1px;flex-shrink:0}
+.proof-chip{font-family:var(--font-m);font-size:.62rem;letter-spacing:.07em;color:var(--mint);background:var(--mint-d);border:1px solid var(--mint-b);border-radius:100px;padding:3px 10px;white-space:nowrap}
+.proof-texto{font-family:var(--font-d);font-style:italic;font-size:.9rem;color:var(--cream-d);line-height:1.65;flex:1;quotes:none}
+.proof-autor{display:flex;align-items:center;gap:12px;padding-top:12px;border-top:1px solid var(--b-soft);margin-top:auto}
+.proof-avatar{width:38px;height:38px;border-radius:50%;background:var(--gold-d);border:1px solid rgba(169,123,36,.28);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:.75rem;font-weight:700;color:var(--gold-l);flex-shrink:0}
+.proof-info{display:flex;flex-direction:column;gap:2px}
+.proof-nome{font-size:.875rem;font-weight:600;color:var(--cream)}
+.proof-meta{font-size:.75rem;color:var(--cream-m)}
+@media(max-width:640px){.proof-card{width:260px;padding:16px 18px}.proof-track{animation-duration:30s}}
+
+
+/* ── Upgrade: btn-gold fill-from-left ── */
+.btn-gold::before{content:'';position:absolute;inset:0;background:var(--gold-l);transform:translateX(-101%);transition:transform .38s cubic-bezier(.22,1,.36,1);z-index:0;pointer-events:none}
+.btn-gold:hover::before{transform:translateX(0)}
+.btn-gold>span,.btn-gold svg{position:relative;z-index:1}
+/* Shimmer mint btn-outline */
+.btn-outline{overflow:hidden}
+.btn-outline::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(142,42,30,.06) 50%,transparent 100%);transform:translateX(-101%);transition:transform .5s;pointer-events:none;z-index:0}
+.btn-outline:hover::before{transform:translateX(0)}
+/* Pulse click */
+@keyframes btnClickPulse{0%,100%{transform:scale(1) translateY(-2px)}50%{transform:scale(.97) translateY(-2px)}}
+.btn-gold:active{animation:btnClickPulse .18s ease}
+
+
+
+
+/* ── Urgência ── */
+.urgencia-banner{display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(142,42,30,.06);border:1px solid var(--mint-b);border-radius:6px;font-family:var(--font-m);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);margin-bottom:28px;justify-content:center}
+.urgencia-dot{width:7px;height:7px;border-radius:50%;background:var(--mint);flex-shrink:0;animation:urgenciaPulse 2s ease-in-out infinite}
+@keyframes urgenciaPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(142,42,30,.35)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(142,42,30,0)}}
+
+
+/* Trust bar com avatares */
+.trust-bar{display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--mint-d);border:1px solid var(--mint-b);border-radius:8px;flex-wrap:wrap}
+.trust-avatars{display:flex}
+.trust-av{width:28px;height:28px;border-radius:50%;background:var(--bg-c);border:2px solid rgba(142,42,30,.4);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:.5rem;font-weight:700;color:var(--mint);margin-left:-8px;flex-shrink:0}
+.trust-av:first-child{margin-left:0}
+.trust-count{font-weight:600;color:var(--mint)}
+.trust-text-bar{font-size:.8rem;color:var(--cream-d);font-family:var(--font-b)}
+
+
+/* Research callouts inline */
+.research-callout{background:var(--mint-d);border-left:3px solid var(--mint);border-radius:0 6px 6px 0;padding:14px 18px;margin:18px 0;position:relative}
+.research-quote{display:block;font-family:var(--font-d);font-style:italic;font-size:.9rem;color:var(--cream-d);line-height:1.7;margin-bottom:8px}
+.research-source{font-family:var(--font-m);font-size:.58rem;letter-spacing:.08em;color:var(--mint);text-transform:uppercase}
+
+
+/* Pilares: Blocos independentes (sem tabs) */
+.pilares-section{position:relative;overflow:hidden}
+.pilar-bloco{padding:clamp(56px,8vh,88px) 0;border-top:1px solid var(--b-soft);position:relative;z-index:1}
+.pilar-bloco:first-of-type{border-top:none;margin-top:clamp(36px,5vh,52px)}
+/* Container de cada bloco — max-width centrado */
+.pilar-bloco>.container{max-width:720px}
+.pb-meta-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.pb-num{font-family:var(--font-m);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mint);opacity:.5}
+.pb-icon-wrap{width:34px;height:34px;border-radius:8px;background:var(--mint-d);border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pb-eyebrow{font-family:var(--font-m);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mint)}
+.pb-title{font-family:var(--font-d);font-size:clamp(2rem,4.5vw,3rem);font-weight:900;color:var(--cream);line-height:1.1;margin-bottom:14px;letter-spacing:-.02em}
+.pb-desc{font-size:1rem;color:var(--cream-d);line-height:1.85;margin-bottom:20px}
+/* Stats: sempre em linha horizontal */
+.pb-stats{display:flex;flex-wrap:wrap;gap:clamp(28px,6vw,64px);margin-top:22px;padding-top:20px;border-top:1px solid var(--b-soft);justify-content:center}
+.pb-stats>div{display:flex;flex-direction:column;gap:3px}
+.pb-stat-n{font-family:var(--font-d);font-size:2.2rem;font-weight:900;color:var(--mint);line-height:1}
+.pb-stat-l{font-family:var(--font-m);font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-m)}
+
+/* Shake types split (pilar 02) */
+.pb-shake-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px;margin-bottom:4px}
+@media(max-width:600px){.pb-shake-grid{grid-template-columns:1fr}}
+.pb-shake-card{background:var(--bg-c);border:1px solid var(--b-soft);border-radius:10px;padding:clamp(18px,2.5vw,26px);min-width:0}
+.pb-shake-badge{display:inline-block;font-family:var(--font-m);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 11px;border-radius:100px;margin-bottom:12px;border:1px solid}
+.pb-shake-c{background:var(--mint-d);color:var(--mint);border-color:var(--mint-b)}
+.pb-shake-l{background:rgba(61,90,153,.08);color:#3D5A99;border-color:rgba(61,90,153,.3)}
+.pb-shake-title{font-family:var(--font-d);font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:8px}
+.pb-shake-pts{list-style:none;margin-top:10px}
+.pb-shake-pts li{font-size:.84rem;color:var(--cream-d);padding:5px 0 5px 14px;position:relative;border-bottom:1px solid var(--b-soft)}
+.pb-shake-pts li:last-child{border-bottom:none}
+.pb-shake-pts li::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--mint);position:absolute;left:0;top:12px}
+
+/* Provas por pilar */
+.pb-proof-section{margin-top:clamp(40px,6vh,60px);padding-top:clamp(28px,4vh,40px);border-top:1px solid var(--b-soft)}
+.pb-proof-label{font-family:var(--font-m);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-m);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.pb-proof-label::before{content:'';width:18px;height:1px;background:var(--mint);opacity:.5}
+.pb-proof-track{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pb-proof-track.two-col{grid-template-columns:repeat(2,1fr)}
+.pb-proof-track .proof-card{width:auto;min-width:0;flex-shrink:1}
+@media(max-width:768px){
+  .pb-proof-track,.pb-proof-track.two-col{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:4px;padding-right:20px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .pb-proof-track::-webkit-scrollbar,.pb-proof-track.two-col::-webkit-scrollbar{display:none}
+  .pb-proof-track .proof-card{flex:0 0 min(300px,82vw);scroll-snap-align:start;width:auto}
+}
+.pb-proof-dots{display:none;justify-content:center;gap:7px;margin-top:14px}
+@media(max-width:768px){.pb-proof-dots{display:flex}}
+.pb-dot{width:5px;height:5px;border-radius:50%;background:var(--b-med);cursor:pointer;transition:background .25s,transform .25s}
+.pb-dot.active{background:var(--mint);transform:scale(1.4)}
+
+
+/* Plan benefit highlights + hours */
+.plan-benefit-highlight{background:var(--mint-d);border:1px solid var(--mint-b);border-radius:6px;padding:10px 14px;font-size:.82rem;color:var(--cream-d);line-height:1.5;margin-bottom:8px;display:flex;gap:8px;align-items:flex-start}
+.pbh-icon{color:var(--mint);flex-shrink:0}
+.plan-benefit-gold{background:var(--gold-d);border-color:rgba(169,123,36,.3);color:var(--cream)}
+.plan-benefit-gold .pbh-icon{color:var(--gold-l)}
+.plan-hours-badge{font-family:var(--font-m);font-size:.6rem;letter-spacing:.08em;color:var(--cream-m);padding:6px 10px;border-radius:4px;background:rgba(142,42,30,.06);border:1px solid var(--mint-b);text-align:center;margin-bottom:14px}
+.plan-hours-gold{color:var(--gold-l);border-color:rgba(169,123,36,.28);background:var(--gold-d)}
+.plan-card.featured{transform:scale(1.025);z-index:1}
+.plan-card.featured:hover{transform:scale(1.025) translateY(-4px)}
+
+/* ── Showcase grande (abaixo do marquee) ── */
+.showcase-section{background:var(--bg);padding:clamp(80px,12vh,128px) 0;position:relative;overflow:hidden;z-index:1;text-align:center}
+.showcase-section::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:1000px;height:600px;background:radial-gradient(ellipse,rgba(142,42,30,.05) 0%,transparent 60%);pointer-events:none}
+.sc-ew{font-family:var(--font-m);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);opacity:.65;margin-bottom:18px;display:flex;align-items:center;justify-content:center;gap:14px}
+.sc-ew::before,.sc-ew::after{content:'';display:block;width:36px;height:1px;background:var(--mint);opacity:.4}
+.sc-hl{font-family:var(--font-d);font-size:clamp(2rem,5vw,3.6rem);font-weight:900;color:var(--cream);line-height:1.1;letter-spacing:-.02em;margin-bottom:clamp(48px,8vh,80px)}
+.sc-hl em{font-style:italic;color:var(--mint)}
+.sc-stage{display:inline-flex;flex-direction:column;align-items:center;position:relative;perspective:900px}
+.sc-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0}
+.sc-ring{position:absolute;border-radius:50%;border:1px solid rgba(142,42,30,.12);top:50%;left:50%;transform:translate(-50%,-50%);animation:sc-ring 3.8s ease-out infinite}
+.sc-ring:nth-child(1){width:300px;height:300px;animation-delay:0s}
+.sc-ring:nth-child(2){width:440px;height:440px;animation-delay:1s}
+.sc-ring:nth-child(3){width:580px;height:580px;animation-delay:2s}
+@keyframes sc-ring{0%{opacity:.55;transform:translate(-50%,-50%) scale(.82)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.12)}}
+.sc-book{width:340px;height:456px;position:relative;z-index:2;transform:rotateY(-22deg) rotateX(6deg);transform-style:preserve-3d;animation:sc-float 5s ease-in-out infinite;filter:drop-shadow(0 40px 56px rgba(36,32,27,.38))}
+@keyframes sc-float{0%,100%{transform:rotateY(-22deg) rotateX(6deg) translateY(0)}50%{transform:rotateY(-22deg) rotateX(6deg) translateY(-14px)}}
+.sc-face{position:absolute;inset:0;border-radius:4px 16px 16px 4px;background:linear-gradient(145deg,#4A1B12 0%,#6B2418 35%,#84301F 58%,#4A1B12 100%);border:1px solid rgba(244,239,225,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 28px;text-align:center;overflow:hidden}
+.sc-face::before{content:'';position:absolute;top:-100%;left:-30%;width:55%;height:300%;background:linear-gradient(105deg,transparent 40%,rgba(244,239,225,.10) 50%,transparent 60%);animation:sc-sheen 5s ease-in-out infinite}
+@keyframes sc-sheen{0%,100%{transform:translateX(-60%)}50%{transform:translateX(220%)}}
+.sc-face::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#C8963C,transparent);opacity:.6}
+.sc-spine{position:absolute;top:0;left:-28px;width:28px;height:100%;background:linear-gradient(90deg,#2E100A,#3A150D,#4A1B12);border-radius:4px 0 0 4px;transform:rotateY(90deg);transform-origin:right;border:1px solid rgba(244,239,225,.15)}
+.sc-spine-txt{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap;font-family:var(--font-m);font-size:.42rem;letter-spacing:.1em;color:rgba(244,239,225,.55);text-transform:uppercase}
+.sc-pre{font-family:var(--font-m);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#E8C687;opacity:.9;margin-bottom:18px}
+.sc-title{font-family:var(--font-d);font-size:2.2rem;font-weight:900;color:#F4EFE1;line-height:1.08;margin-bottom:14px}
+.sc-line{width:36px;height:1px;background:#C8963C;margin:0 auto 14px;opacity:.8}
+.sc-sub-cover{font-size:.68rem;color:rgba(244,239,225,.78);line-height:1.6;margin-bottom:20px}
+.sc-badge-cover{background:rgba(244,239,225,.12);border:1px solid rgba(244,239,225,.3);border-radius:4px;padding:6px 16px;font-family:var(--font-m);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#E8C687}
+.sc-floor{width:260px;height:14px;background:radial-gradient(ellipse,rgba(36,32,27,.30) 0%,transparent 70%);border-radius:50%;filter:blur(7px);margin-top:22px;z-index:1;animation:sc-sh 5s ease-in-out infinite}
+@keyframes sc-sh{0%,100%{transform:scaleX(1);opacity:.7}50%{transform:scaleX(.75);opacity:.3}}
+.sc-perks{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:680px;margin:clamp(40px,6vh,60px) auto 0;text-align:left}
+@media(max-width:600px){.sc-perks{grid-template-columns:1fr}}
+@media(max-width:600px){.sc-book{width:240px;height:322px}.sc-title{font-size:1.65rem}.sc-floor{width:190px}.sc-ring:nth-child(1){width:220px;height:220px}.sc-ring:nth-child(2){width:320px;height:320px}.sc-ring:nth-child(3){width:420px;height:420px}}
+
+/* ── Pedestal do produto (dentro do hero) ── */
+.pedestal-grid{display:grid;grid-template-columns:168px 1fr;gap:28px;align-items:center;margin:28px 0 8px}
+.ped-book-wrap{display:flex;flex-direction:column;align-items:center;position:relative}
+.ped-book-wrap::before{content:'';position:absolute;inset:-28%;background:radial-gradient(ellipse at 50% 38%,rgba(142,42,30,.06) 0%,transparent 55%);pointer-events:none}
+.ped-book{width:155px;height:210px;position:relative;z-index:1;transform:rotateY(-12deg) rotateX(4deg);transform-style:preserve-3d;animation:ped-float 4s ease-in-out infinite;filter:drop-shadow(0 22px 36px rgba(36,32,27,.35))}
+@keyframes ped-float{0%,100%{transform:rotateY(-12deg) rotateX(4deg) translateY(0)}50%{transform:rotateY(-12deg) rotateX(4deg) translateY(-10px)}}
+.ped-face{position:absolute;inset:0;border-radius:3px 10px 10px 3px;background:linear-gradient(140deg,#4A1B12 0%,#6B2418 55%,#4A1B12 100%);border:1px solid rgba(244,239,225,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 18px;text-align:center}
+.ped-spine{position:absolute;top:0;left:-15px;width:15px;height:100%;background:linear-gradient(90deg,#2E100A,#4A1B12);border-radius:3px 0 0 3px;transform:rotateY(90deg);transform-origin:right;border:1px solid rgba(244,239,225,.15)}
+.ped-pre{font-family:var(--font-m);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:#E8C687;opacity:.9;margin-bottom:12px}
+.ped-title{font-family:var(--font-d);font-size:1.3rem;font-weight:900;color:#F4EFE1;line-height:1.12;margin-bottom:8px}
+.ped-line{width:28px;height:1px;background:#C8963C;margin:0 auto 10px;opacity:.8}
+.ped-sub{font-size:.58rem;color:rgba(244,239,225,.78);line-height:1.5;margin-bottom:14px}
+.ped-badge{background:rgba(244,239,225,.12);border:1px solid rgba(244,239,225,.3);border-radius:3px;padding:4px 10px;font-family:var(--font-m);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:#E8C687}
+.ped-shadow{width:118px;height:7px;background:radial-gradient(ellipse,rgba(36,32,27,.30) 0%,transparent 70%);border-radius:50%;filter:blur(5px);margin-top:12px;z-index:1;position:relative;animation:ped-sh 4s ease-in-out infinite}
+@keyframes ped-sh{0%,100%{transform:scaleX(1);opacity:.8}50%{transform:scaleX(.8);opacity:.4}}
+.ped-tag{margin-top:14px;background:var(--bg-c);border:1px solid var(--b-med);border-radius:100px;padding:5px 14px;font-family:var(--font-m);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mint);position:relative;z-index:1}
+.perk-list{display:flex;flex-direction:column;gap:8px}
+.perk-card{display:flex;align-items:flex-start;gap:12px;background:var(--bg-c);border:1px solid var(--b-soft);border-left:3px solid rgba(142,42,30,.35);border-radius:0 8px 8px 0;padding:12px 15px;transition:border-left-color .3s,background .3s,transform .3s var(--ease)}
+.perk-card:hover{border-left-color:var(--mint);background:var(--mint-g);transform:translateX(4px)}
+.perk-icon{width:28px;height:28px;border-radius:6px;background:var(--mint-d);border:1px solid var(--mint-b);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--mint);margin-top:1px;transition:background .3s}
+.perk-card:hover .perk-icon{background:rgba(142,42,30,.15)}
+.perk-title{font-family:var(--font-d);font-size:.85rem;font-weight:700;color:var(--cream);margin-bottom:2px;line-height:1.25}
+.perk-sub{font-size:.75rem;color:var(--cream-m);line-height:1.5}
+@media(max-width:768px){.pedestal-grid{display:none}.perk-card:hover{transform:none}}
+
+/* ── Overflow global fix ── */
+img,video,canvas,svg,iframe{max-width:100%;height:auto}
+.hero-hl,.hero-sub,.benefit-hl,.sab-cta-num,.final-t,.causa-t,h1,h2,h3{overflow-wrap:break-word;word-break:break-word}
+/* Evita que filhos de grid/flex estufem além do container */
+.pain-card,.sab-card,.purpose-card,.plan-card,.shake-col,.ep-card,.ob-info{min-width:0;overflow-wrap:break-word}
+.tcar-track,.carousel-track{min-width:0}
+.stat-item{min-width:0}
+
+/* ── Telas muito pequenas (< 400px) ── */
+@media(max-width:400px){
+  body{font-size:16px}
+  .container{padding:0 16px}
+  .hero-hl{font-size:2rem;letter-spacing:-.01em}
+  .hero-sub{font-size:.95rem}
+  .benefit-hl{font-size:1.3rem}
+  .benefit-display{min-height:200px}
+  .btn-lg{padding:18px 24px;font-size:.95rem;width:100%}
+  .btn-outline{width:100%;justify-content:center}
+  .hero-cta-group{flex-direction:column}
+  .sticky-nav{padding:12px 16px}
+  .nav-brand{font-size:.55rem;letter-spacing:.1em}
+  .sab-cta-num{font-size:clamp(2.8rem,15vw,5rem)}
+  .plans-grid{max-width:100%}
+  .gbox{padding:20px 16px}
+  .gseal{width:100px;height:100px}
+  .gseal-n{font-size:2.2rem}
+  .orderbump .ob-layout{flex-direction:column}
+  .ob-price{width:100%;text-align:left}
+  .proof-card{width:240px;padding:14px 16px}
+  .pilar-tab{padding:12px 14px}
+  .pilar-tab-icon{width:32px;height:32px}
+}
+
+/* ── Benefit display: ajuste altura por breakpoint ── */
+@media(max-width:480px){.benefit-display{min-height:180px}}
+@media(max-width:360px){.benefit-display{min-height:220px}}
+
+/* ── Seções que podem vazar lateralmente ── */
+.rotating-section,.proof-marquee-section,.section{overflow-x:hidden}
+.trust-bar{max-width:100%;box-sizing:border-box}
+.hero-pills{max-width:100%}
+
+</style>
+<link rel="stylesheet" href="css/theme-vintage.css">
+<link rel="stylesheet" href="css/theme-vintage-pgv.css">
+
+
+<script>
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window,document,"clarity","script","xol07a8vmz");
+</script>
+</head>
+<body class="theme-vintage paper-stains">
+
+
+
+
+
+
+
+
+<nav class="sticky-nav">
+  <span class="nav-brand">Jornada Colapso Silencioso</span>
+  
+</nav>
+
+
+<section class="hero">
+  <div class="container container--narrow">
+
+    <div class="hero-for reveal" id="hero-for">Com base no seu mapeamento</div>
+
+    <h1 class="hero-hl reveal" data-d="1">
+      Em 15 minutos por dia, sua memória<br>volta a responder na hora.
+      <em>E o foco, a atenção e a criatividade<br>voltam junto com ela.</em>
+    </h1>
+
+    <p class="hero-sub reveal" data-d="2">
+      A <strong>Jornada Colapso Silencioso</strong> treina sua mente com os <strong>Shakes</strong>: exercícios curtos e direcionados que despertam primeiro a memória e, atrás dela, tudo o que adormeceu junto. Você volta a lembrar o nome na hora, a guardar o que lê e a confiar de novo na sua própria cabeça — mesmo que ache que "já passou da idade".
+    </p>
+
+    <div class="hero-pills reveal" data-d="3">
+      <div class="pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Método baseado em pesquisas científicas</div>
+      <div class="pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>Funciona no celular, sem app</div>
+      <div class="pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.96-4.03A2.5 2.5 0 0 1 9.5 2"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.96-4.03A2.5 2.5 0 0 0 14.5 2"/></svg>Sem remédios ou suplementos</div>
+      <div class="pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>Notar nas primeiras semanas</div>
+      <div class="pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 7 17l-5-5"/><path d="m22 10-7.5 7.5L13 16"/></svg>Acesso vitalício após a compra</div>
+      <div class="pill"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Garantia incondicional de 7 dias</div>
+    </div>
+
+    <div class="hero-cta-group reveal" data-d="4">
+      <button class="btn btn-gold btn-lg" onclick="scrollToPlan()">Quero despertar minha mente →</button>
+      <button class="btn btn-outline" onclick="document.getElementById('como').scrollIntoView({behavior:'smooth'})">Ver como funciona</button>
+    </div>
+
+    <div class="trust-bar reveal" data-d="4" style="transition-delay:.4s">
+      <div class="trust-avatars">
+        <div class="trust-av">MR</div>
+        <div class="trust-av">RF</div>
+        <div class="trust-av">CA</div>
+        <div class="trust-av">+</div>
+      </div>
+      <div class="trust-text-bar">
+        <span class="trust-count">576+ pessoas</span> j&#225; treinam a mente com um m&#233;todo fundamentado em neuroci&#234;ncia
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="rotating-section">
+  <div class="container">
+    <div class="rotating-label">O que a Jornada desperta em você</div>
+    <div class="benefit-display" id="bDisp">
+      <div class="benefit-item active">
+        <div class="benefit-hl">Pense profundamente <strong>sem esforço</strong></div>
+        <div class="benefit-sub">Como você fazia antes de tudo se tornar urgente</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-hl">Tenha <strong>ideias</strong> onde não espera</div>
+        <div class="benefit-sub">No banho, no trânsito, em conversas. Quando menos procura.</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-hl">Lembre o que importa <strong>na hora certa</strong></div>
+        <div class="benefit-sub">Nomes, palavras, compromissos. Sem constrangimento.</div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-hl">Seja o <strong>exemplo</strong> que sua família precisa ver</div>
+        <div class="benefit-sub">Quem constrói dentro transmite para quem vem depois</div>
+      </div>
+    </div>
+    <div class="bdots" id="bDots">
+      <div class="bdot active"></div><div class="bdot"></div><div class="bdot"></div><div class="bdot"></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background:var(--bg-s);z-index:1;position:relative">
+  <div class="container">
+    <div class="eyebrow reveal">A lógica por trás do método</div>
+    <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:12px;text-align:center">
+      Por que a memória não apagou sozinha
+    </h2>
+    <div class="purpose-grid">
+      <div class="purpose-card reveal" data-d="1">
+        <div class="purpose-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <div class="purpose-t">A memória é a porta</div>
+        <p class="purpose-s">O esquecimento é o que você sente primeiro. O nome que some, o recado que não fica. É por ele que tudo aparece, mas ele é o sintoma, não a causa.</p>
+      </div>
+      <div class="purpose-card reveal featured" data-d="2">
+        <div class="purpose-icon" style="background:var(--gold-d);border-color:rgba(169,123,36,.35)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-l)" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="purpose-t" style="color:var(--gold-l)">O foco é o porquê</div>
+        <p class="purpose-s">Boa parte do que você esquece nunca chegou a ser gravado. A atenção estava dividida na hora, e o que a mente não registra ela não tem como lembrar depois.</p>
+      </div>
+      <div class="purpose-card reveal" data-d="3">
+        <div class="purpose-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="1.5"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>
+        </div>
+        <div class="purpose-t">A criatividade adormeceu junto</div>
+        <p class="purpose-s">Lembrar, imaginar e criar usam a mesma rede. Quando a rotina desliga uma parte, as outras entram em economia sem pedir licença.</p>
+      </div>
+    </div>
+    <p class="reveal" data-d="4" style="font-size:1.05rem;color:var(--cream-d);max-width:620px;margin:32px auto 0;text-align:center;line-height:1.8">
+      É por isso que treinar a memória isolada não resolve. E é por isso que o caminho contrário também vale. <strong style="color:var(--cream)">Quando uma dessas funções acorda, ela puxa as outras de volta.</strong>
+    </p>
+  </div>
+</section>
+
+
+
+<section class="section" id="como" style="background:var(--bg);z-index:1;position:relative">
+  <div class="container">
+    <div class="eyebrow reveal">O que a Jornada revela</div>
+    <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:12px;text-align:center">
+      O diagnóstico mostrou o padrão.<br>A Jornada revela <em style="color:var(--mint)">o que está por trás dele.</em>
+    </h2>
+    <p class="reveal" data-d="2" style="font-size:1rem;color:var(--cream-d);max-width:560px;margin:0 auto 32px;text-align:center">
+      No seu mapeamento você viu os hábitos que estão apagando a sua memória. Esses são os visíveis. Os que causam mais estrago são os que ninguém percebe sozinho.
+    </p>
+
+
+    <div class="sab-cta-box reveal" style="margin-top:32px">
+      <div class="sab-cta-num">+19</div>
+      <div class="sab-cta-label">Hábitos ocultos revelados um a um</div>
+      <p class="sab-cta-desc">Na Jornada, cada hábito oculto é tratado como um <strong style="color:var(--cream)">sabotador</strong>. Um capítulo que dá nome a ele, mostra onde ele age na sua rotina e entrega o antídoto prático para substituí-lo. São mais 19 além dos que você já viu no seu diagnóstico, e são eles os responsáveis por 80% do apagamento.</p>
+      <button class="btn btn-gold" onclick="scrollToPlan()">
+        Descobrir os 19 sabotadores ocultos →
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<div class="rule-gold"></div>
+
+
+<section class="section" style="background:var(--bg-s);z-index:1;position:relative">
+  <div class="container container--narrow">
+    <div class="eyebrow reveal">Do ponto A ao B</div>
+    <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:12px;text-align:center">
+      Como a Jornada acorda<br>o que ficou dormindo
+    </h2>
+    <p class="reveal" data-d="2" style="font-size:1rem;color:var(--cream-d);max-width:520px;margin-left:auto;margin-right:auto;text-align:center">
+      Não é magia. É um processo estruturado que respeita a biologia do seu cérebro.
+    </p>
+    <div class="trilha">
+      <div class="trilha-line"></div>
+      <div class="trilha-step reveal">
+        <div class="step-circle lit">01</div>
+        <div class="step-body">
+          <div class="step-t">Detectar: identifique o que está silenciado</div>
+          <p class="step-s">Você já começou no seu mapeamento. Na Jornada, cada capítulo revela um sabotador, e os últimos te ensinam a identificar os mais específicos da sua própria rotina, inclusive os que ninguém percebe de fora.</p>
+          <span class="step-tag">Personalizado</span>
+        </div>
+      </div>
+      <div class="trilha-step reveal" data-d="1">
+        <div class="step-circle">02</div>
+        <div class="step-body">
+          <div class="step-t">Nomear: dar nome ao hábito que sabota</div>
+          <p class="step-s">Um hábito sem nome é invisível. Quando você nomeia o sabotador na sua vida, ele perde o poder de agir sem ser percebido. A consciência já é o primeiro passo.</p>
+          <span class="step-tag">Ciência comportamental</span>
+        </div>
+      </div>
+      <div class="trilha-step reveal" data-d="2">
+        <div class="step-circle">03</div>
+        <div class="step-body">
+          <div class="step-t">Substituir: trocar pelo antídoto certo</div>
+          <p class="step-s">Para cada sabotador, a Jornada apresenta um hábito substituto prático, sem tecnologia, sem complicação. Não se trata de força de vontade. Trata-se de substituição inteligente.</p>
+          <span class="step-tag">Sem força de vontade</span>
+        </div>
+      </div>
+      <div class="trilha-step reveal" data-d="3">
+        <div class="step-circle">04</div>
+        <div class="step-body">
+          <div class="step-t">Treinar: Shakes e Desafios como estímulo diário</div>
+          <p class="step-s">Os Shakes de Lembrança e os Criativos acionam o Gatilho da Lembrança, o esforço de puxar a informação de volta em vez de recebê-la pronta. É esse esforço que reativa os músculos mentais parados. 15 minutos, um passo por vez.</p>
+          <span class="step-tag">15 min por dia</span>
+        </div>
+      </div>
+      <div class="trilha-step reveal" data-d="4">
+        <div class="step-circle">05</div>
+        <div class="step-body">
+          <div class="step-t">Transmitir: o legado que a Jornada torna possível</div>
+          <p class="step-s">Você terá o conhecimento para identificar esses padrões nos filhos, netos ou pessoas que ama, e ajudá-los a evitar o colapso antes que ele comece.</p>
+          <span class="step-tag">Legado real</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="proof-marquee-section" style="padding-top:clamp(48px,7vh,80px);padding-bottom:clamp(48px,7vh,80px)">
+  <div class="container" style="margin-bottom:28px">
+    <div class="eyebrow reveal">Quem percorreu essa trilha</div>
+    <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:0">O que mudou depois de completar a Jornada</h2>
+  </div>
+  <div class="marquee-scene" aria-hidden="true">
+    <div class="marquee-row">
+      <div class="proof-track" id="proof-track-trilha"></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section pilares-section" style="background:var(--bg);z-index:1;position:relative;overflow:hidden;padding-bottom:0">
+  
+  <div class="container" style="position:relative;z-index:1">
+    <div class="eyebrow reveal">O que voc&#234; vai praticar</div>
+    <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:8px">
+      Os Pilares da sua nova mente
+    </h2>
+    <p class="reveal" data-d="2" style="font-size:1rem;color:var(--cream-d);max-width:560px">
+      Tr&#234;s instrumentos distintos. Uma &#250;nica meta: reconectar o que foi sendo silenciado.
+    </p>
+  </div>
+
+  
+  <div class="pilar-bloco pilar-01" style="background:var(--bg)">
+    <div class="container" style="position:relative;z-index:1">
+      <div class="pb-meta-row reveal">
+        <span class="pb-num">01</span>
+        <div class="pb-icon-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="1.5"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <span class="pb-eyebrow">N&#250;cleo da metodologia</span>
+      </div>
+      <h3 class="pb-title reveal" data-d="1">Desafios Di&#225;rios</h3>
+      <p class="pb-desc reveal" data-d="2">Um cap&#237;tulo por dia, um sabotador de cada vez. Cada miss&#227;o mostra onde o h&#225;bito age na sua rotina e entrega o ant&#237;doto pr&#225;tico para substitu&#237;-lo. 15 minutos. Um passo por vez.</p>
+      <div class="research-callout reveal" data-d="2" style="max-width:600px">
+        <span class="research-quote">&#8220;8 a 12 semanas de exerc&#237;cio mental direcionado produzem revers&#227;o mensur&#225;vel em adultos de 45&#8209;65 anos.&#8221;</span>
+        <span class="research-source">Harvard Medical School &#8212; Neurology Journal, 2021</span>
+      </div>
+      <div class="pb-stats reveal" data-d="3">
+        <div><span class="pb-stat-n">23</span><span class="pb-stat-l">desafios</span></div>
+        <div><span class="pb-stat-n">15min</span><span class="pb-stat-l">por sess&#227;o</span></div>
+        <div><span class="pb-stat-n">5h45</span><span class="pb-stat-l">de treino total</span></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="pilar-bloco pilar-02" style="background:var(--bg-s)">
+    <div class="container" style="position:relative;z-index:1">
+      <div class="pb-meta-row reveal">
+        <span class="pb-num">02</span>
+        <div class="pb-icon-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="1.5"><path d="m13 2-2 2.5h3L12 7"/><path d="M12 22v-3"/><path d="M12 7c2.8 0 5 2.2 5 5s-2.2 5-5 5-5-2.2-5-5"/></svg>
+        </div>
+        <span class="pb-eyebrow">Potencializadores di&#225;rios</span>
+      </div>
+      <h3 class="pb-title reveal" data-d="1">Shakes Mentais</h3>
+      <p class="pb-desc reveal" data-d="2">O treino di&#225;rio do Gatilho da Lembran&#231;a. Os Shakes de Lembran&#231;a acordam a mem&#243;ria, e os Criativos acordam a rede que dorme junto com ela. Dois tipos, uma meta.</p>
+      
+      <div class="pb-shake-grid reveal" data-d="2">
+        <div class="pb-shake-card">
+          <span class="pb-shake-badge pb-shake-c">Shakes Criativos</span>
+          <div class="pb-shake-title">Treino do pensamento original</div>
+          <ul class="pb-shake-pts">
+            <li>Acorda o tipo de pensamento que gera ideias novas</li>
+            <li>Tira você do hábito de buscar sempre a resposta pronta</li>
+            <li>Progressivos: de simples a complexos ao longo da Jornada</li>
+            <li>Ponto B: ter ideias onde n&#227;o espera, sem precisar &#8220;tentar&#8221;</li>
+          </ul>
+        </div>
+        <div class="pb-shake-card">
+          <span class="pb-shake-badge pb-shake-l">Shakes de Lembran&#231;a</span>
+          <div class="pb-shake-title">Treino da mem&#243;ria ativa</div>
+          <ul class="pb-shake-pts">
+            <li>Reativa a mem&#243;ria de fatos e de lembran&#231;as do dia a dia</li>
+            <li>Reduz a depend&#234;ncia de lembretes e notas</li>
+            <li>Trabalham mem&#243;ria de curto e longo prazo</li>
+            <li>Ponto B: lembrar nomes e palavras com naturalidade</li>
+          </ul>
+        </div>
+      </div>
+      <div class="research-callout reveal" data-d="3" style="max-width:600px;margin-top:20px">
+        <span class="research-quote">&#8220;A mente sem desafio enfraquece mais r&#225;pido do que a mente que envelhece continuando a ser usada.&#8221;</span>
+        <span class="research-source">Stanford Center on Longevity</span>
+      </div>
+      <div class="pb-stats reveal" data-d="3">
+        <div><span class="pb-stat-n">50</span><span class="pb-stat-l">shakes (Dom&#237;nio)</span></div>
+        <div><span class="pb-stat-n">2</span><span class="pb-stat-l">tipos</span></div>
+        <div><span class="pb-stat-n">+14h</span><span class="pb-stat-l">treino extra</span></div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="pilar-bloco pilar-03" style="background:var(--bg)">
+    <div class="container" style="position:relative;z-index:1">
+      <div class="pb-meta-row reveal">
+        <span class="pb-num">03</span>
+        <div class="pb-icon-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="1.5"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+        </div>
+        <span class="pb-eyebrow">O acelerador de h&#225;bito</span>
+      </div>
+      <h3 class="pb-title reveal" data-d="1">Desafio de 7 Dias</h3>
+      <p class="pb-desc reveal" data-d="2">A forma&#231;&#227;o de um novo h&#225;bito demora em m&#233;dia 66 dias. O Desafio de 7 Dias foi desenhado para encurtar esse caminho: 7 dias de foco total que consolidam o que a Jornada iniciou.</p>
+      <div class="research-callout reveal" data-d="2" style="max-width:600px">
+        <span class="research-quote">&#8220;Adultos entre 50&#8209;65 anos s&#227;o o grupo mais afetado pela fragmenta&#231;&#227;o digital, e os que mais se beneficiam de pr&#225;tica consistente.&#8221;</span>
+        <span class="research-source">MIT AgeLab &#183; Cambridge Neuroscience</span>
+      </div>
+      <div class="pb-stats reveal" data-d="3">
+        <div><span class="pb-stat-n">7</span><span class="pb-stat-l">dias seguidos</span></div>
+        <div><span class="pb-stat-n">15min</span><span class="pb-stat-l">por dia</span></div>
+        <div><span class="pb-stat-n">1h45</span><span class="pb-stat-l">de imers&#227;o</span></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<section class="proof-marquee-section" style="padding-bottom:clamp(40px,6vh,64px)">
+  <div class="container" style="margin-bottom:28px">
+    <div class="eyebrow reveal">O que as pessoas disseram</div>
+    <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:0">O que as pessoas disseram depois de completar</h2>
+  </div>
+  <div class="marquee-scene" aria-hidden="true">
+    <div class="marquee-row">
+      <div class="proof-track" id="proof-track-1"></div>
+    </div>
+  </div>
+  
+  <div class="container" style="margin-top:40px">
+    <div class="stat-row reveal">
+      <div class="stat-item">
+        <span class="stat-n" data-target="23">0</span>
+        <span class="stat-l">Desafios guiados</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-n" data-target="15">0</span>
+        <span class="stat-l">Minutos por dia</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-n">∞</span>
+        <span class="stat-l">Acesso vitalício</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-n">7d</span>
+        <span class="stat-l">Garantia total</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="showcase-section">
+  <div class="container">
+
+    <div class="sc-ew reveal">A jornada que desperta o que ficou dormindo</div>
+    <h2 class="sc-hl reveal" data-d="1">
+      23 desafios que sua mente<br><em>estava esperando</em>
+    </h2>
+
+    <div class="sc-stage reveal" data-d="2">
+      
+      <div class="sc-rings">
+        <div class="sc-ring"></div>
+        <div class="sc-ring"></div>
+        <div class="sc-ring"></div>
+      </div>
+
+      
+      <div class="sc-book">
+        <div class="sc-face">
+          <div class="sc-pre">Jornada Digital</div>
+          <div class="sc-title">Colapso<br>Silencioso</div>
+          <div class="sc-line"></div>
+          <div class="sc-sub-cover">Como despertar o que foi<br>sendo silenciado</div>
+          <div class="sc-badge-cover">23 desafios · 15 min/dia</div>
+        </div>
+        <div class="sc-spine">
+          <div class="sc-spine-txt">Colapso Silencioso</div>
+        </div>
+      </div>
+
+      
+      <div class="sc-floor"></div>
+    </div>
+
+    
+    <div class="sc-perks reveal" data-d="3">
+
+      <div class="perk-card">
+        <div class="perk-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.96-4.03A2.5 2.5 0 0 1 9.5 2"/>
+            <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.96-4.03A2.5 2.5 0 0 0 14.5 2"/>
+          </svg>
+        </div>
+        <div><div class="perk-title">O branco vai embora. De vez.</div><div class="perk-sub">Aquele vazio aterrorizante no meio de uma frase, em frente às pessoas.</div></div>
+      </div>
+
+      <div class="perk-card">
+        <div class="perk-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/>
+          </svg>
+        </div>
+        <div><div class="perk-title">Lembrar o nome na hora certa</div><div class="perk-sub">Sem gaguejar, sem desviar o olhar, sem pescar no ar.</div></div>
+      </div>
+
+      <div class="perk-card">
+        <div class="perk-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <div><div class="perk-title">A ideia vem antes de se perder</div><div class="perk-sub">Aquele raio de criatividade que antigamente surgia e ficava.</div></div>
+      </div>
+
+      <div class="perk-card">
+        <div class="perk-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="2" y1="2" x2="22" y2="22"/>
+          </svg>
+        </div>
+        <div><div class="perk-title">Parar de ser escravo do celular</div><div class="perk-sub">Sem lembrete para tudo. Sua memória de volta.</div></div>
+      </div>
+
+      <div class="perk-card">
+        <div class="perk-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div><div class="perk-title">Não ter mais medo de que seja o início</div><div class="perk-sub">O medo silencioso que você guarda só para você.</div></div>
+      </div>
+
+      <div class="perk-card">
+        <div class="perk-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/>
+            <line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/>
+          </svg>
+        </div>
+        <div><div class="perk-title">Ser de novo a pessoa que resolve</div><div class="perk-sub">Não a que esquece. A que pensa rápido e conecta o que os outros perdem.</div></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<div class="rule-gold"></div>
+
+
+<section class="section" id="planos" style="background:var(--bg-s);z-index:1;position:relative">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:44px">
+      <div class="eyebrow reveal" style="justify-content:center" id="planos-eyebrow">Escolha o seu nível</div>
+      <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.8rem,4.5vw,3rem);font-weight:700;color:var(--cream);line-height:1.2;margin-bottom:12px;text-align:center">
+        Três planos. Um destino.
+      </h2>
+      <p class="reveal" data-d="2" style="font-size:1rem;color:var(--cream-d);max-width:480px;margin:0 auto">
+        Quanto mais você pratica, mais rápido consolida. Escolha o ritmo certo para você.
+      </p>
+    </div>
+
+    <div class="urgencia-banner reveal">
+      <div class="urgencia-dot"></div>
+      Pre&#231;o de lan&#231;amento: mantido para os primeiros praticantes
+    </div>
+    <div class="plans-grid">
+      
+      <div class="plan-card reveal">
+        <div class="plan-label">Plano 01</div>
+        <div class="plan-name">O <em>Despertar</em></div>
+        <div class="plan-from">De R$ 49,90</div>
+        <div class="plan-price"><sup>R$</sup>29<span style="font-size:1.3rem">,90</span></div>
+        <div class="plan-note">pagamento &#250;nico &#183; acesso vital&#237;cio</div>
+        <div class="plan-benefit-highlight"><span class="pbh-icon">&#10022;</span>Sua mente come&#231;a a responder diferente nas primeiras duas semanas</div>
+        <div class="plan-hours-badge">&#128336; 5h45 de treino da mente bem montado: o in&#237;cio da virada</div>
+        <div class="plan-div"></div>
+        <div class="plan-metric">Base de treino mental di&#225;rio</div>
+        <ul class="plan-list">
+          <li><span class="ck">✓</span> Metodologia completa do Colapso Silencioso</li>
+          <li><span class="ck">✓</span> 23 capítulos: 19 sabotadores revelados</li>
+          <li><span class="ck">✓</span> Desafios diários inclusos na metodologia</li>
+          <li><span class="ck">✓</span> Trilha: detectar → nomear → substituir</li>
+          <li><span class="ck">✓</span> Acesso pelo celular, sem app, sem prazo</li>
+          <li><span class="ck">✓</span> Garantia de 7 dias</li>
+        </ul>
+        <div class="plan-cta-wrap">
+          <button class="btn btn-outline btn-full" onclick="comprar('despertar')">Começar com o Despertar</button>
+        </div>
+      </div>
+
+      
+      <div class="plan-card featured reveal" data-d="1">
+        <div class="plan-badge">Mais escolhido</div>
+        <div class="plan-label">Plano 02</div>
+        <div class="plan-name">Domínio <em>da Mente</em></div>
+        <div class="plan-from">De R$ 97,90</div>
+        <div class="plan-price"><sup>R$</sup>45<span style="font-size:1.3rem">,90</span></div>
+        <div class="plan-note">pagamento &#250;nico &#183; acesso vital&#237;cio</div>
+        <div class="plan-benefit-highlight plan-benefit-gold"><span class="pbh-icon">&#10022;</span>Criatividade e mem&#243;ria em recupera&#231;&#227;o simult&#226;nea: o ritmo que vira h&#225;bito</div>
+        <div class="plan-hours-badge plan-hours-gold">&#128336; 20 horas de treino: o suficiente para instalar um novo padr&#227;o mental</div>
+        <div class="plan-div"></div>
+        <div class="plan-metric">2&#215; mais est&#237;mulo de treino mental</div>
+        <ul class="plan-list">
+          <li><span class="ck">✓</span> <strong style="color:var(--cream)">Tudo do plano "O Despertar"</strong></li>
+          <li><span class="ck">✓</span> Desafio de 7 Dias: acelera a formação do hábito</li>
+          <li><span class="ck">✓</span> 25 Shakes Criativos extras</li>
+          <li><span class="ck">✓</span> 25 Shakes de Lembrança extras</li>
+          <li><span class="ck">✓</span> 50+ dias de treino além da metodologia</li>
+          <li><span class="ck">✓</span> Garantia de 7 dias</li>
+        </ul>
+        <div class="plan-cta-wrap">
+          <button class="btn btn-gold btn-full" onclick="comprar('dominio')">Quero o Domínio da Mente →</button>
+          <p style="text-align:center;font-family:var(--font-m);font-size:.62rem;color:var(--cream-m);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap">
+            <span style="display:inline-flex;align-items:center;gap:3px">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Compra segura
+            </span>
+            <span>·</span>
+            <span>Acesso imediato</span>
+            <span>·</span>
+            <span style="display:inline-flex;align-items:center;gap:3px;opacity:.85">
+              <svg width="9" height="11" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M9 1C9 1 4 7 4 12.5C4 16 6.3 19 9 19C11.7 19 14 16 14 12.5C14 10 12.2 7.8 11 5.5C11 5.5 10 9 7.5 9C7.5 6.2 8 3.5 9 1Z" fill="#FF5A28"/></svg>
+              <span style="color:#FF5A28;font-weight:600;letter-spacing:.04em">hotmart</span>
+            </span>
+          </p>
+        </div>
+      </div>
+
+      
+      <div class="plan-card reveal" data-d="2">
+        <div class="plan-label">Plano 03</div>
+        <div class="plan-name">Liberdade <em>Absoluta</em></div>
+        <div class="plan-from">De R$ 147,90</div>
+        <div class="plan-price"><sup>R$</sup>59<span style="font-size:1.3rem">,90</span></div>
+        <div class="plan-note">pagamento &#250;nico &#183; acesso vital&#237;cio</div>
+        <div class="plan-benefit-highlight"><span class="pbh-icon">&#10022;</span>Repert&#243;rio completo para manter os ganhos e transmitir para quem voc&#234; ama</div>
+        <div class="plan-hours-badge">&#128336; 32h30 de treino da mente: mais que 4 fins de semana inteiros dedicados</div>
+        <div class="plan-div"></div>
+        <div class="plan-metric">3&#215; mais repert&#243;rio de treino mental</div>
+        <ul class="plan-list">
+          <li><span class="ck">✓</span> <strong style="color:var(--cream)">Tudo do Domínio da Mente</strong></li>
+          <li><span class="ck">✓</span> +25 Shakes Criativos adicionais (total: 50)</li>
+          <li><span class="ck">✓</span> +25 Shakes de Lembrança adicionais (total: 50)</li>
+          <li><span class="ck">✓</span> 100+ dias de treino ininterrupto</li>
+          <li><span class="ck">✓</span> Repertório completo para transmitir à família</li>
+          <li><span class="ck">✓</span> Garantia de 7 dias</li>
+        </ul>
+        <div class="plan-cta-wrap">
+          <button class="btn btn-outline btn-full" onclick="comprar('liberdade')">Quero a Liberdade Absoluta</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="orderbump reveal">
+      <div class="ob-badge">Coleção extra — disponível apenas aqui</div>
+      <div class="ob-layout">
+        <div class="ob-info">
+          <div class="ob-t">Coleção Master — 150 Shakes</div>
+          <p class="ob-s">75 Shakes de Lembrança + 75 Shakes Criativos. Mais de 5 meses de treino contínuo sem repetir.</p>
+          <div class="ob-tags">
+            <span class="ob-tag">75 Shakes de Lembrança</span>
+            <span class="ob-tag">75 Shakes Criativos</span>
+            <span class="ob-tag">5+ meses de treino</span>
+          </div>
+        </div>
+        <div class="ob-price">
+          <div class="ob-from">R$ 34,90</div>
+          <div class="ob-val">R$25,90</div>
+          <div class="ob-period">pagamento único</div>
+          <button class="btn btn-gold" style="padding:12px 24px;font-size:.85rem" onclick="comprar('master')">Adicionar →</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <div style="text-align:center;margin-top:24px;padding:18px 20px;background:var(--bg-c);border:1px solid var(--b-soft);border-radius:8px" class="reveal">
+      <p style="font-size:.9rem;color:var(--cream-m)">Uma sessão com neuropsicólogo custa entre <strong style="color:var(--cream)">R$250 e R$400</strong>. O método completo começa em <strong style="color:var(--mint)">R$29,90</strong>.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background:var(--bg-s);border-top:1px solid var(--b-soft);z-index:1;position:relative">
+  <div class="container">
+    <div class="causa-inner">
+      <div class="causa-pre reveal" id="causa-eyebrow">O movimento</div>
+      <h2 class="causa-t reveal" data-d="1">O que é a Causa da<br>Jornada Colapso Silencioso?</h2>
+      <div class="causa-body reveal" data-d="2">
+        <p>O tempo não voa. <strong>A gente para de registrá-lo.</strong></p>
+        <p>Um estudo da University College London descobriu que rotinas repetitivas e excesso de telas fazem o cérebro parar de criar marcos na memória. Anos inteiros passam sem deixar quase nada gravado com nitidez. <em>É o Colapso Silencioso operando, exatamente como o nome diz.</em></p>
+        <p>E tem mais: por saber que a tecnologia guarda tudo, a mente humana simplesmente <strong>parou de se esforçar para reter o que é importante.</strong> Estamos, coletivamente, terceirizando a própria memória para sistemas que lucram com a nossa atenção.</p>
+      </div>
+      <div class="causa-pull reveal" data-d="3">
+        O Colapso Silencioso nasceu como uma resposta a isso. Não é um manual de produtividade. É um movimento dedicado a recuperar memória, imaginação e criatividade — coisas que não são um dom, são o que nos torna autores da própria vida.
+      </div>
+      <div class="causa-body reveal" data-d="4">
+        <p>Porque quando você recupera esses pilares, <strong>não apenas melhora sua vida.</strong> Você se torna o exemplo que as pessoas ao seu redor precisam ver — e a prova viva de que a mente humana é mais resiliente do que o mundo digital quer que você acredite.</p>
+        <p>Se essa conversa faz sentido para você, <em>a Jornada te espera.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule-mint"></div>
+
+
+<section class="section" style="background:var(--bg);z-index:1;position:relative">
+  <div class="container container--narrow">
+    <div class="gbox reveal">
+      <div>
+        <div class="gseal">
+          <div class="gseal-n">7</div>
+          <div class="gseal-l">dias de<br>garantia</div>
+        </div>
+      </div>
+      <div>
+        <div class="gtext-t">Se em 7 dias você não sentir diferença, devolvemos cada centavo.</div>
+        <p class="gtext-s">Vale por qualquer motivo, até um simples não gostei. Você pede o reembolso nos primeiros 7 dias e recebe 100% de volta, sem burocracia, sem perguntas e sem constrangimento. Não queremos seu dinheiro se o método não despertar nada em você.</p>
+        <div style="display:inline-flex;align-items:center;gap:5px;margin-top:14px;padding:6px 12px;border-radius:6px;background:rgba(255,90,40,.07);border:1px solid rgba(255,90,40,.18)">
+          <svg width="9" height="11" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 1C9 1 4 7 4 12.5C4 16 6.3 19 9 19C11.7 19 14 16 14 12.5C14 10 12.2 7.8 11 5.5C11 5.5 10 9 7.5 9C7.5 6.2 8 3.5 9 1Z" fill="#FF5A28"/></svg>
+          <span style="font-family:var(--font-m);font-size:.58rem;letter-spacing:.06em;color:rgba(36,32,27,.65)">Reembolso garantido pela plataforma</span>
+          <span style="font-family:var(--font-m);font-size:.6rem;font-weight:600;letter-spacing:.04em;color:#FF5A28">hotmart</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" style="background:var(--bg-s);z-index:1;position:relative">
+  <div class="container container--narrow">
+    <div class="eyebrow reveal">Dúvidas frequentes</div>
+    <h2 class="reveal" data-d="1" style="font-family:var(--font-d);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:var(--cream);margin-bottom:0">
+      <span id="faq-titulo">O que você ainda está pensando</span>
+    </h2>
+    <div class="faq-list">
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">"Não tenho 15 minutos por dia"<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">15 minutos é menos do que você passa rolando o feed. Consistência possível bate intensidade eventual — sempre.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Tenho mais de 60 anos. Funciona para mim?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Especialmente para você. A mente aprende em qualquer idade, pesquisadores do MIT e de Cambridge mostraram que o cérebro adulto continua respondendo a estímulo até os 70 e 80 anos. O método foi desenhado para quem passou dos 50 e sente que algo ficou mais quieto. Você não está começando do zero, está reativando o que sempre esteve lá.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Já tentei antes e não funcionou. Por que seria diferente?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">A maioria do que existe promete muito e pede pouco. Este método pede 15 minutos por dia e promete o que acontece quando você faz. A diferença não está no método — está no comprometimento com a consistência.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Como acesso? Precisa de computador?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Não. Tudo pelo celular — nenhum app para instalar. Você recebe o link de acesso imediato após a compra. Funciona em qualquer dispositivo. Acesso vitalício.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Posso ensinar para minha família?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Essa é uma das razões mais poderosas para fazer a Jornada. Ao entender os sabotadores e as práticas, você adquire o conhecimento para identificar esses padrões nos filhos, cônjuge ou netos — e ajudá-los a evitar o colapso.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Não me considero uma pessoa criativa. O método é para mim?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Criatividade não é um traço de personalidade — é uma capacidade que se exercita. O Stanford Center on Longevity documentou que o declínio criativo em adultos não é biológico: é resultado de subestimulação. O engenheiro Carlos Eduardo, 55 anos, dizia que não era criativo. Depois de 3 semanas de Shakes Criativos, chegou a uma solução numa reunião difícil que ninguém mais tinha visto. Ele disse: "sei de onde veio." Você sabe de onde vai vir o seu.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Se o meu problema tem a ver com o tempo de celular, por que a solução é um método digital?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">O problema nunca foi o aparelho. O problema é o que você consome nele sem perceber e sem digerir. Vídeo curto atrás de vídeo curto, rolagem sem fim, nada disso deixa marca. Tente lembrar agora do primeiro vídeo que você viu hoje de manhã. Quase ninguém consegue. O método é o contrário disso, um conteúdo feito para ser digerido, que acorda de novo a memória, o foco e a criatividade. Siga a metodologia até o fim e você vai lembrar dos detalhes dela, porque ela foi feita para ficar na sua cabeça.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Isso não é a mesma coisa que já tem de graça no YouTube?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">A diferença está na ordem das coisas. Um vídeo aqui, outro ali, cada dia um assunto, e o seu cérebro não fixa o que passou. O método é uma sequência montada passo a passo, no ritmo certo, para treinar a sua memória todo dia. É isso que separa quem assiste de quem realmente melhora.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Isso é normal da idade ou é sinal de alguma coisa?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Esquecer de vez em quando é normal. O sinal para prestar atenção é quando isso começa a atrapalhar a sua rotina e se repete toda semana, que é justamente o padrão que o seu mapeamento procurou. Perceber cedo não é motivo de pânico, é o que te dá mais tempo de agir, enquanto ainda é questão de treino.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Preciso ser bom de tecnologia?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">Não precisa. Se você consegue abrir uma mensagem no celular, você consegue seguir o método. Nada de aplicativo para instalar e nada complicado de aprender.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Quanto tempo leva por dia? Tem prazo para terminar?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">15 minutos por dia, no seu ritmo. Não tem prazo fixo para terminar e o acesso é vitalício. Quanto mais você pratica, mais longe a sua mente vai.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">É seguro comprar? O que acontece com os meus dados?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">O pagamento é processado pela Hotmart, a maior plataforma de produtos digitais do Brasil, e o reembolso dos 7 dias é garantido pela própria plataforma. Os seus dados são usados só para liberar o seu acesso, não são vendidos nem compartilhados com ninguém.</div></div></div>
+      <div class="faq-item reveal"><button class="faq-q" onclick="faq(this)">Qual plano escolher?<div class="faq-icon">+</div></button><div class="faq-a"><div class="faq-a-in">O Domínio da Mente é o mais escolhido. Além da metodologia completa, o Desafio de 7 Dias acelera a formação do hábito e os 50 Shakes garantem mais de 50 dias de treino contínuo — o que separa quem experimentou de quem transformou.</div></div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="final-cta" style="z-index:1;position:relative">
+  <div class="container container--narrow">
+    <div style="width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--mint),transparent);opacity:.4;margin:0 auto 36px" class="reveal"></div>
+    <h2 class="final-t reveal" data-d="1"><span id="final-titulo">Sua mente ainda tem</span><br>muito a <em>revelar.</em></h2>
+    <p class="final-s reveal" data-d="2">O despertar começa com uma decisão. O método está aqui. A jornada depende só de você.</p>
+    <div class="reveal" data-d="3" style="text-align:center">
+      <button class="btn btn-gold btn-lg" onclick="scrollToPlan()" style="min-width:300px">Quero despertar minha mente →</button>
+      <p style="margin-top:12px;font-family:var(--font-m);font-size:.62rem;letter-spacing:.1em;color:var(--cream-m);display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap">
+        <span>Garantia de 7 dias · Acesso imediato</span>
+        <span>·</span>
+        <span style="display:inline-flex;align-items:center;gap:3px">
+          <svg width="8" height="10" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 1C9 1 4 7 4 12.5C4 16 6.3 19 9 19C11.7 19 14 16 14 12.5C14 10 12.2 7.8 11 5.5C11 5.5 10 9 7.5 9C7.5 6.2 8 3.5 9 1Z" fill="#FF5A28"/></svg>
+          <span style="color:#FF5A28;font-weight:600">hotmart</span>
+        </span>
+      </p>
+      <div style="font-size:.75rem;color:var(--cream-m);margin-top:8px">Pagamento único · Acesso imediato e vitalício</div>
+    </div>
+    <div style="width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--mint),transparent);opacity:.4;margin:36px auto 0" class="reveal"></div>
+  </div>
+</section>
+
+
+<footer style="background:var(--bg);border-top:1px solid var(--b-soft);padding:24px 0;text-align:center;position:relative;z-index:1">
+  <div class="container">
+    <p style="font-family:var(--font-m);font-size:.62rem;letter-spacing:.08em;color:var(--cream-m)">
+      © 2025 Jornada Colapso Silencioso ·
+      <a href="#" style="color:var(--cream-m);text-decoration:none">Privacidade</a> ·
+      <a href="#" style="color:var(--cream-m);text-decoration:none">Termos</a>
+    </p>
+    <p style="font-size:.7rem;color:rgba(36,32,27,.5);margin-top:5px">Os resultados descritos são experiências individuais e podem variar. Este produto não é tratamento médico.</p>
+  </div>
+</footer>
+
+
+<div class="sticky-cta" id="stickyCTA">
+  <button class="btn btn-gold btn-full" onclick="scrollToPlan()">Quero despertar minha mente →</button>
+  <div class="sticky-hint">
+    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <span>Garantia 7 dias · Acesso imediato</span>
+    <span style="display:inline-flex;align-items:center;gap:2px;margin-left:4px">
+      <svg width="7" height="9" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 1C9 1 4 7 4 12.5C4 16 6.3 19 9 19C11.7 19 14 16 14 12.5C14 10 12.2 7.8 11 5.5C11 5.5 10 9 7.5 9C7.5 6.2 8 3.5 9 1Z" fill="#FF5A28"/></svg>
+      <span style="color:#FF5A28;font-weight:600;font-size:.6rem">hotmart</span>
+    </span>
+  </div>
+</div>
+
+<script>
+
+(function(){
+  try{
+    const lead=JSON.parse(sessionStorage.getItem('jcs_lead')||'{}');
+    const perfil=sessionStorage.getItem('jcs_perfil')||'';
+    if(lead.nome){
+      var primeiroNome=lead.nome.split(' ')[0];
+      var el=document.getElementById('hero-for');
+      if(el) el.textContent='Para '+primeiroNome+' — com base no seu mapeamento';
+      var personIds=[
+        {id:'planos-eyebrow',fn:function(n){return 'O caminho certo para você, '+n;}},
+        {id:'faq-titulo',    fn:function(n){return n+', o que você ainda está pensando';}},
+        {id:'final-titulo',  fn:function(n){return n+', sua mente ainda tem';}},
+        {id:'causa-eyebrow', fn:function(n){return 'Para '+n+' — o movimento';}},
+      ];
+      personIds.forEach(function(item){
+        var el2=document.getElementById(item.id);
+        if(el2) el2.textContent=item.fn(primeiroNome);
+      });
+    }
+    if(perfil){
+      const map={critico:'A Mente que Pede Silêncio',dormindo:'A Mente que Aprendeu a Se Economizar',potencial:'A Mente que Ainda Tem Chamas Acesas',afiada:'A Mente que Manteve o Fio'};
+      const tag=document.getElementById('profileTag');
+      const nm=document.getElementById('profileName');
+      if(tag&&nm&&map[perfil]){nm.textContent=map[perfil];tag.style.display='block';}
+    }
+  }catch(e){}
+})();
+
+
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');obs.unobserve(x.target);}});},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+
+const sc=document.getElementById('stickyCTA');
+window.addEventListener('scroll',()=>sc.classList.toggle('show',scrollY>500),{passive:true});
+
+
+function faq(btn){const it=btn.parentElement;const op=it.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!op)it.classList.add('open');}
+
+
+(function(){
+  const disp=document.getElementById('bDisp');
+  const items=document.querySelectorAll('#bDisp .benefit-item');
+  const dots=document.querySelectorAll('#bDots .bdot');
+  if(!disp||!items.length)return;
+
+  
+  function setHeight(){
+    items.forEach(el=>{el.style.position='relative';el.style.opacity='1';el.style.transform='none';el.style.pointerEvents='none';});
+    let max=0;
+    items.forEach(el=>{max=Math.max(max,el.offsetHeight);});
+    items.forEach(el=>{el.style.position='';el.style.opacity='';el.style.transform='';el.style.pointerEvents='';});
+    if(max>0)disp.style.minHeight=(max+16)+'px';
+  }
+  setHeight();
+  window.addEventListener('resize',setHeight,{passive:true});
+
+  let cur=0,t;
+  function show(i){
+    items[cur].classList.add('exit');dots[cur].classList.remove('active');
+    setTimeout(()=>{items[cur].classList.remove('active','exit');cur=i;items[cur].classList.add('active');dots[cur].classList.add('active');},420);
+  }
+  t=setInterval(()=>show((cur+1)%items.length),3400);
+  dots.forEach((d,i)=>d.addEventListener('click',()=>{clearInterval(t);show(i);t=setInterval(()=>show((cur+1)%items.length),3400);}));
+})();
+
+
+function initCarousel(trackId,dotsId,autoInterval){
+  autoInterval=autoInterval||4200;
+  var track=document.getElementById(trackId);
+  if(!track)return{next:function(){},prev:function(){},goTo:function(){}};
+  var dots=document.querySelectorAll('#'+dotsId+' .carousel-dot');
+  var cards=track.querySelectorAll('.carousel-card');
+  var current=0,timer;
+  function goTo(idx){
+    if(cards[current])cards[current].classList.add('exit');
+    setTimeout(function(){
+      if(cards[current])cards[current].classList.remove('exit');
+      current=(idx+cards.length)%cards.length;
+      track.scrollTo({left:track.offsetWidth*current,behavior:'smooth'});
+      dots.forEach(function(d,i){d.classList.toggle('active',i===current);});
+    },380);
+  }
+  function next(){goTo(current+1);}
+  function prev(){goTo(current-1);}
+  function startAuto(){timer=setInterval(next,autoInterval);}
+  function stopAuto(){clearInterval(timer);}
+  track.addEventListener('mouseenter',stopAuto);
+  track.addEventListener('mouseleave',startAuto);
+  track.addEventListener('touchstart',stopAuto,{passive:true});
+  track.addEventListener('touchend',function(){setTimeout(startAuto,autoInterval);},{passive:true});
+  startAuto();
+  return{next:next,prev:prev,goTo:goTo};
+}
+var car1=initCarousel('track-pilar1','dots-pilar1');
+var car2=initCarousel('track-pilar2','dots-pilar2');
+var car3=initCarousel('track-pilar3','dots-pilar3',5000);
+
+
+const cObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting&&x.target.dataset.target){const tg=parseInt(x.target.dataset.target);const s=Date.now();const tick=()=>{const p=Math.min((Date.now()-s)/1400,1);const v=Math.floor((1-Math.pow(1-p,3))*tg);x.target.textContent=v;if(p<1)requestAnimationFrame(tick);else x.target.textContent=tg;};requestAnimationFrame(tick);cObs.unobserve(x.target);}});},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
+
+
+
+
+
+function scrollToPlan(){document.getElementById('planos').scrollIntoView({behavior:'smooth'});}
+
+
+const CHECKOUT={
+  despertar:'https://pay.hotmart.com/D105243583E?checkoutMode=10',
+  dominio:  'https://pay.hotmart.com/A105348759V?checkoutMode=10',
+  liberdade:'https://pay.hotmart.com/K105348784N?checkoutMode=10',
+  master:   'https://pay.hotmart.com/V105343330T?checkoutMode=10'
+};
+const PRECOS={despertar:29.90,dominio:45.90,liberdade:59.90,master:25.90};
+function comprar(plano){
+  try{
+    if(window.__trackCheckout) window.__trackCheckout(plano, PRECOS[plano]);
+    try{ if(typeof clarity!=='undefined'){ clarity('set','checkout_plan',plano); clarity('set','checkout_intent','sim'); } }catch(_){}
+    var url=CHECKOUT[plano];if(!url)return;
+    var utms=JSON.parse(sessionStorage.getItem('jcs_utm')||'{}');
+    var lead=JSON.parse(sessionStorage.getItem('jcs_lead')||'{}');
+    var u=new URL(url);
+    for(var k in utms){if(utms[k])u.searchParams.set(k,utms[k]);}
+    if(lead.email)u.searchParams.set('checkoutEmail',lead.email);
+    u.searchParams.set('src','funil_colapso');
+    window.location.href=u.toString();
+  }catch(e){var u=CHECKOUT[plano];if(u)window.location.href=u;}
+}
+
+
+
+(function(){
+  var PROOFS=[
+    {texto:'Passei 5 anos reclamando que a minha criatividade tinha sumido com a pandemia. A Jornada me mostrou que a pandemia não levou a criatividade — levou os rituais que ela precisava para aparecer. Quando entendi isso, parei de esperar ela voltar.',nome:'Lucas Tavares',meta:'52 anos &#183; publicitário &#183; São Paulo',chip:'Criatividade restaurada',iniciais:'LT'},
+    {texto:'Não diria que minha memória está perfeita. Diria que parei de ter vergonha de esquecer, porque aprendi o que estava causando o esquecimento — e o que fazer com isso.',nome:'Vera Campos',meta:'64 anos &#183; gestora de RH aposentada &#183; BH',chip:'Clareza sobre a causa',iniciais:'VC'},
+    {texto:'A Jornada não é motivacional. Não tem frases de efeito. É um método — seco, estruturado e honesto sobre o tempo que leva. Exatamente por isso funciona.',nome:'André Nakamura',meta:'59 anos &#183; professor universitário &#183; Curitiba',chip:'Método honesto',iniciais:'AN'},
+    {texto:'Comecei para mim. Terminei pensando nos meus filhos. No capítulo sobre transmissão de hábitos, percebi que eu era a prova viva de sabotadores que passava para eles sem perceber.',nome:'Beatriz Moura',meta:'54 anos &#183; empresária &#183; Goiânia',chip:'Impacto na família',iniciais:'BM'},
+    {texto:'Fui com expectativas baixas. No quinto desafio, minha amiga me ligou pra dizer que eu tinha ficado 10 minutos sem olhar o celular. Eu nem tinha percebido. Continuei porque quis.',nome:'Maria Regina Silveira',meta:'61 anos &#183; professora aposentada &#183; SP',chip:'Foco sem esforço',iniciais:'MR'},
+    {texto:'Trabalho com argumentação há 32 anos. Nos últimos 3, minhas ideias vinham pré-mastigadas. O desafio do capítulo 8 me pegou no vivo. Demorei. Foi constrangedor. Funcionou.',nome:'Roberto Fonseca',meta:'58 anos &#183; advogado &#183; Brasília',chip:'Pensamento próprio',iniciais:'RF'},
+    {texto:'Os Shakes Criativos antes de dar aula por 3 semanas. Minha coordenadora perguntou o que eu tinha feito de diferente — minhas aulas estavam mais vivas. Não mudei o conteúdo.',nome:'Patrícia Lorenzetti',meta:'57 anos &#183; pedagoga &#183; Caxias do Sul',chip:'Aulas mais vivas',iniciais:'PL'},
+    {texto:'Sou engenheiro. Não me considero criativo. Mas na semana seguinte, numa reunião difícil, me veio uma solução que ninguém mais tinha pensado. Sei de onde veio.',nome:'Carlos Eduardo Andrade',meta:'55 anos &#183; engenheiro civil &#183; Fortaleza',chip:'Solução inesperada',iniciais:'CA'},
+    {texto:'O desafio de 7 dias é brutalmente simples — e por isso é difícil. Não tem onde esconder. Ou você faz 15 minutos todo dia, ou admite que não quis. Admiti no dia 4. Recomeçei.',nome:'Fernanda Torres',meta:'56 anos &#183; arquiteta &#183; Campinas',chip:'Hábito consolidado',iniciais:'FT'},
+    {texto:'Fiz a Jornada completa. O Desafio de 7 Dias foi ideia da minha filha. Dois meses depois, ainda pratico. A filha não disse nada. Mas parou de me lembrar.',nome:'Marcelo Oliveira',meta:'63 anos &#183; médico cardiologista &#183; RJ',chip:'Prática que persiste',iniciais:'MO'},
+    {texto:'Os Shakes de Lembrança me pareceram simples demais. Depois de um mês, dei por mim lembrando o nome de todos os fornecedores sem precisar checar o caderno.',nome:'Rosa Meireles',meta:'60 anos &#183; comerciante &#183; Salvador',chip:'Memória reativada',iniciais:'RM'},
+    {texto:'Meu marido foi o primeiro a notar. "Você está respondendo às perguntas antes de me pedir para pesquisar." Ele não sabia que eu estava fazendo a Jornada. Essa foi minha prova.',nome:'Sônia Pereira',meta:'63 anos &#183; nutricionista &#183; Porto Alegre',chip:'Percebido pelos outros',iniciais:'SP'},
+  ];
+  var track=document.getElementById('proof-track-1');
+  if(!track)return;
+  var cards=[].concat(PROOFS,PROOFS,PROOFS).map(function(t){
+    return '<div class="proof-card">'+
+      '<div class="proof-card-top">'+
+        '<div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>'+
+        '<div class="proof-chip">'+t.chip+'</div>'+
+      '</div>'+
+      '<p class="proof-texto">&#8220;'+t.texto+'&#8221;</p>'+
+      '<div class="proof-autor">'+
+        '<div class="proof-avatar">'+t.iniciais+'</div>'+
+        '<div class="proof-info">'+
+          '<span class="proof-nome">'+t.nome+'</span>'+
+          '<span class="proof-meta">'+t.meta+'</span>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  track.innerHTML=cards;
+  requestAnimationFrame(function(){
+    track.style.cssText+='animation:proofMarquee 44s linear infinite!important;';
+  });
+  var row=track.closest('.marquee-row');
+  if(row){
+    row.addEventListener('mouseenter',function(){track.style.animationPlayState='paused';});
+    row.addEventListener('mouseleave',function(){track.style.animationPlayState='running';});
+  }
+})();
+
+
+(function(){
+  var TRILHA=[
+    {
+      texto:'No capítulo 14 eu parei. Lá estava o hábito que tinha destruído minha criatividade sem que eu percebesse — a multitarefa constante que eu chamava de produtividade. Quando mudei esse único hábito, voltei a terminar o que começava.',
+      nome:'Jorge Henrique Matos',meta:'60 anos &#183; arquiteto aposentado &#183; Recife',chip:'Hábito identificado',iniciais:'JH'
+    },
+    {
+      texto:'Minha neta de 8 anos perguntou por que eu estava tão "diferente". Eu disse que estava treinando minha cabeça. Ela achou que eu estava ficando mais inteligente. Talvez esteja.',
+      nome:'Conceição Rodrigues',meta:'67 anos &#183; dona de casa &#183; Santos',chip:'Percebida pela família',iniciais:'CR'
+    },
+    {
+      texto:'Fui médico por 35 anos e sempre achei que memória era destino, não escolha. A Jornada me provou o contrário. O que eu achei que era declínio era só falta de uso da mente.',
+      nome:'Dr. Arnaldo Pinheiro',meta:'68 anos &#183; clínico geral aposentado &#183; Florianópolis',chip:'Crença desfeita',iniciais:'AP'
+    },
+    {
+      texto:'Eu chorei no desafio do dia 17. Não de tristeza. De alívio. Era a primeira vez em anos que eu tinha ficado 20 minutos pensando só, sem interrupção e sem sentir culpa.',
+      nome:'Simone Azevedo',meta:'55 anos &#183; gestora comercial &#183; Belo Horizonte',chip:'Momento de virada',iniciais:'SA'
+    },
+    {
+      texto:'Sou artista plástica. Perdi o fio do meu trabalho por quase dois anos. Não sabia mais de onde vinham as ideias. A Jornada não me deu as ideias de volta — ela me mostrou o que eu estava fazendo para bloqueá-las.',
+      nome:'Tereza Lima',meta:'53 anos &#183; artista plástica &#183; Rio de Janeiro',chip:'Desbloqueio criativo',iniciais:'TL'
+    },
+    {
+      texto:'Tentei outros métodos, cursos, aplicativos. Esse foi o primeiro que entendeu que o problema não é falta de disciplina — é excesso de estimulação errada. Simples. Funciona.',
+      nome:'Renato Silvério',meta:'56 anos &#183; consultor empresarial &#183; São Paulo',chip:'Abordagem diferente',iniciais:'RS'
+    },
+    {
+      texto:'No dia 23 da Jornada, apresentei uma proposta num cliente difícil sem nenhuma anotação na mão. Lembrei de tudo. Números, nomes, contexto. Fechei o contrato.',
+      nome:'Débora Mendonça',meta:'51 anos &#183; executiva de vendas &#183; Campinas',chip:'Memória em ação',iniciais:'DM'
+    },
+    {
+      texto:'Meu marido perguntou o que eu estava fazendo. Mostrei a Jornada. Ele começou na semana seguinte. Hoje somos os dois mais presentes do que há 10 anos. Não esperava isso.',
+      nome:'Eliane Cardoso',meta:'62 anos &#183; professora &#183; Porto Alegre',chip:'Impacto no casal',iniciais:'EC'
+    },
+    {
+      texto:'Tenho TDAH. Nunca consegui terminar nada. Fiz a Jornada em 31 dias porque precisei repetir alguns desafios. Mas terminei. Pela primeira vez em anos, terminei algo.',
+      nome:'Gustavo Nogueira',meta:'44 anos &#183; programador freelancer &#183; Manaus',chip:'Completou pela primeira vez',iniciais:'GN'
+    },
+    {
+      texto:'Trabalho com pessoas há 30 anos. Nunca me senti tão presente numa conversa quanto depois da Jornada. É diferente ouvir quando você não está pensando no celular que está no bolso.',
+      nome:'Adriana Fonseca',meta:'57 anos &#183; psicóloga &#183; Brasília',chip:'Presença real',iniciais:'AF'
+    },
+    {
+      texto:'Perdi meu pai para o Alzheimer. O medo de seguir o mesmo caminho me paralisava. A Jornada não tirou o medo — mas me deu algo concreto para fazer. Isso foi o suficiente.',
+      nome:'Cláudio Santana',meta:'59 anos &#183; empresário &#183; Salvador',chip:'Do medo à ação',iniciais:'CS'
+    },
+    {
+      texto:'Estava com 73 anos e achando que era tarde. Minha filha me mandou a Jornada. Fiz os 23 desafios em 28 dias. Ainda pratico os Shakes toda manhã. Não é tarde. Nunca é.',
+      nome:'Nilza Ferreira',meta:'73 anos &#183; aposentada &#183; Curitiba',chip:'Nunca é tarde',iniciais:'NF'
+    },
+  ];
+  var track=document.getElementById('proof-track-trilha');
+  if(!track)return;
+  var cards=[].concat(TRILHA,TRILHA,TRILHA).map(function(t){
+    return '<div class="proof-card">'+
+      '<div class="proof-card-top">'+
+        '<div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>'+
+        '<div class="proof-chip">'+t.chip+'</div>'+
+      '</div>'+
+      '<p class="proof-texto">&#8220;'+t.texto+'&#8221;</p>'+
+      '<div class="proof-autor">'+
+        '<div class="proof-avatar">'+t.iniciais+'</div>'+
+        '<div class="proof-info">'+
+          '<span class="proof-nome">'+t.nome+'</span>'+
+          '<span class="proof-meta">'+t.meta+'</span>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  track.innerHTML=cards;
+  requestAnimationFrame(function(){
+    track.style.cssText+='animation:proofMarquee 52s linear infinite!important;';
+  });
+  var row=track.closest('.marquee-row');
+  if(row){
+    row.addEventListener('mouseenter',function(){track.style.animationPlayState='paused';});
+    row.addEventListener('mouseleave',function(){track.style.animationPlayState='running';});
+  }
+})();
+
+
+
+
+
+
+
+(function(){
+  [['pbt-1','pbd-1'],['pbt-2','pbd-2'],['pbt-3','pbd-3']].forEach(function(pair){
+    var track = document.getElementById(pair[0]);
+    var dotsEl = document.getElementById(pair[1]);
+    if(!track||!dotsEl) return;
+    var dots = dotsEl.querySelectorAll('.pb-dot');
+    if(!dots.length) return;
+
+    function updateDots(){
+      var cards = track.children;
+      if(!cards.length) return;
+      var scrollLeft = track.scrollLeft;
+      var cardW = cards[0].offsetWidth + parseFloat(window.getComputedStyle(track).gap||'12');
+      var idx = Math.round(scrollLeft / cardW);
+      dots.forEach(function(d,i){ d.classList.toggle('active', i===idx); });
+    }
+
+    track.addEventListener('scroll', updateDots, {passive:true});
+    dots.forEach(function(d,i){
+      d.addEventListener('click', function(){
+        var cards = track.children;
+        if(!cards.length) return;
+        var cardW = cards[0].offsetWidth + parseFloat(window.getComputedStyle(track).gap||'12');
+        track.scrollTo({left: cardW * i, behavior:'smooth'});
+      });
+    });
+  });
+})();
+
+
+(function(){
+  var trilha = document.querySelector('.trilha');
+  if(!trilha) return;
+
+  
+  var progressLine = document.createElement('div');
+  progressLine.className = 'trilha-line-progress';
+  trilha.insertBefore(progressLine, trilha.firstChild);
+
+  var circles = Array.from(trilha.querySelectorAll('.step-circle'));
+
+  
+  var lineStart = 0, lineEnd = 0, lineTotal = 0;
+  var circleThresholds = []; 
+
+  function measureLayout(){
+    var cR  = trilha.getBoundingClientRect();
+    var fR  = circles[0].getBoundingClientRect();
+    var lR  = circles[circles.length-1].getBoundingClientRect();
+    lineStart = fR.top  - cR.top + fR.height  / 2;
+    lineEnd   = lR.top  - cR.top + lR.height  / 2;
+    lineTotal = Math.max(1, lineEnd - lineStart);
+    progressLine.style.top = lineStart + 'px';
+    circleThresholds = circles.map(function(c){
+      var r = c.getBoundingClientRect();
+      var y = r.top - cR.top + r.height / 2;
+      return (y - lineStart) / lineTotal; 
+    });
+  }
+  measureLayout();
+  window.addEventListener('resize', measureLayout, {passive:true});
+
+  
+  var lastProgress = -1;
+
+  function update(){
+    var wh       = window.innerHeight;
+    var trilhaTop = trilha.getBoundingClientRect().top; 
+
+    
+    var tStart = trilhaTop + lineStart - wh * 0.72;
+    var tEnd   = trilhaTop + lineEnd   - wh * 0.52;
+    var progress = Math.max(0, Math.min(1,
+      tStart >= 0 ? 0 : (-tStart) / (Math.abs(tEnd - tStart) || 1)
+    ));
+
+    
+    if(Math.abs(progress - lastProgress) < 0.001) return;
+    lastProgress = progress;
+
+    progressLine.style.height = Math.round(progress * lineTotal) + 'px';
+
+    
+    circleThresholds.forEach(function(cp, i){
+      var shouldLit = progress >= cp - 0.015;
+      var circle    = circles[i];
+      var isLit     = circle.classList.contains('lit');
+
+      if(shouldLit && !isLit){
+        circle.classList.add('lit');
+        
+        circle.classList.remove('trail-pulse');
+        void circle.offsetWidth;
+        circle.classList.add('trail-pulse');
+        circle.addEventListener('animationend', function(){
+          circle.classList.remove('trail-pulse');
+        }, {once:true});
+      } else if(!shouldLit && isLit){
+        circle.classList.remove('lit','trail-pulse');
+      }
+    });
+  }
+
+  
+  var rafId  = null;
+  var visible = false;
+
+  function loop(){
+    update();
+    if(visible) rafId = requestAnimationFrame(loop);
+    else rafId = null;
+  }
+
+  var section = trilha.closest('section') || trilha.parentElement;
+  if(window.IntersectionObserver){
+    new IntersectionObserver(function(entries){
+      visible = entries[0].isIntersecting;
+      if(visible && !rafId) rafId = requestAnimationFrame(loop);
+    }, {rootMargin:'120px 0px'}).observe(section);
+  } else {
+    visible = true;
+    rafId = requestAnimationFrame(loop);
+  }
+})();
+
+</script>
+<script type="module">
+  import { trackLandPageView, trackViewContentLand, trackInitiateCheckout } from './js/tracking.js';
+  import { captureUTMs, getSessionId } from './js/utils.js';
+  import { claritySetPage, claritySetSession, clarityIdentify } from './js/clarity-init.js';
+  captureUTMs();
+  claritySetPage('metodo-vintage');
+  claritySetSession(getSessionId());
+  try {
+    const _lead = JSON.parse(sessionStorage.getItem('jcs_lead') || '{}');
+    if (_lead.email) clarityIdentify(_lead.email);
+  } catch (_) {}
+
+  const _jaViuMetodo = !!sessionStorage.getItem('jcs_metodo_viewed');
+  if (!_jaViuMetodo) {
+    sessionStorage.setItem('jcs_metodo_viewed', '1');
+    trackLandPageView(true);
+    const planosSection = document.getElementById('planos');
+    if (planosSection && 'IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          trackViewContentLand();
+          obs.disconnect();
+        }
+      }, { threshold: 0.15 });
+      obs.observe(planosSection);
+    }
+  }
+
+  window.__trackCheckout = function(plano, valor){
+    try { trackInitiateCheckout(plano, valor); } catch(e) {}
+  };
+</script>
+</body>
+</html>

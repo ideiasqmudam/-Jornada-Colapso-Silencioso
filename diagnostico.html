@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Diagnóstico — Jornada Colapso Silencioso</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23F4EFE1'/><circle cx='16' cy='16' r='9' fill='none' stroke='%238E2A1E' stroke-width='2.5'/><circle cx='16' cy='16' r='3' fill='%238E2A1E'/></svg>">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://connect.facebook.net https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https:; connect-src 'self' https://amqfcznqyyrgzlhzqohu.supabase.co https://cdn.jsdelivr.net https://www.facebook.com https://*.clarity.ms; img-src 'self' data: https://www.facebook.com https://e.clarity.ms;">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/diagnostico.css">
+  <link rel="stylesheet" href="css/theme-vintage.css">
+
+  <style>body { background: #F4EFE1; }</style>
+
+  
+  <script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","xol07a8vmz");
+</script>
+
+<script>
+// Preview vintage: links internos do funil apontam pras variantes *old.
+// Inline e sem módulo de propósito: funciona mesmo com js/utils.js em cache.
+// Nas páginas com nome canônico (pós-promoção) o guard é falso e nada muda.
+(function(){
+  if(!/old\.html$/i.test(location.pathname)) return;
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(!href) return;
+    var mapped = href.replace(/^(index|quiz|loading|diagnostico|metodo)\.html/i, '$1old.html');
+    if(mapped !== href) a.setAttribute('href', mapped);
+  }, true);
+})();
+</script>
+</head>
+<body class="theme-vintage paper-stains">
+
+<div class="page-overlay" id="page-overlay"></div>
+
+
+<section id="gate-section" style="display:none;">
+  <div class="gate-page">
+    <div class="gate-card above-canvas">
+      <div class="eyebrow">Seu mapa mental ficou pronto</div>
+
+      <h1 class="gate-headline">
+        Me conta um pouco mais sobre você
+      </h1>
+
+      <p class="gate-sub">
+        Quanto mais eu souber do seu cenário, mais preciso e personalizado fica o seu diagnóstico.
+      </p>
+
+      <div class="gate-dims">
+        <span>Memória</span>
+        <span>Foco</span>
+        <span>Criatividade</span>
+        <span>Aprendizado</span>
+      </div>
+
+      <form id="gate-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="gate-name">Seu nome</label>
+          <input type="text" id="gate-name" name="nome" class="form-input"
+            placeholder="Como posso te chamar?" autocomplete="given-name" required>
+          <p class="form-micro">Para personalizar seu diagnóstico</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="gate-email">Seu e-mail</label>
+          <input type="email" id="gate-email" name="email" class="form-input"
+            placeholder="seu@email.com" autocomplete="email" required>
+          <p class="form-micro">Para salvar e acessar seu diagnóstico</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="gate-phone">Celular</label>
+          <input type="tel" id="gate-phone" name="celular" class="form-input"
+            placeholder="(11) 9 0000-0000" autocomplete="tel" required>
+          <p class="form-micro">Para acompanhar o seu progresso junto com você</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="gate-dificuldade">
+            Em uma linha, qual é sua maior dificuldade com sua mente hoje?
+          </label>
+          <textarea id="gate-dificuldade" name="maior_dificuldade" class="form-input"
+            placeholder="O que mais te incomoda na sua mente hoje?"
+            rows="2" style="resize:none;line-height:1.5;"></textarea>
+        </div>
+
+        <button type="submit" class="btn-gold btn-cta btn-full">
+          <span>Ver meu diagnóstico</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </button>
+      </form>
+
+      <p class="gate-privacy">
+        <span aria-hidden="true">🔒</span>
+        Seus dados são 100% protegidos e usados apenas para personalizar sua experiência.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+<div id="popup-gate" role="dialog" aria-modal="true" aria-labelledby="popup-gate-headline" style="display:none;">
+  <div class="popup-gate-backdrop"></div>
+  <div class="popup-gate-card">
+    <div class="popup-gate-eyebrow">Seu resultado está pronto</div>
+    <h2 class="popup-gate-headline" id="popup-gate-headline">
+      Falta um passo para ver o que está apagando a sua memória
+    </h2>
+    <p class="popup-gate-sub">
+      Veja a explicação de cada nota e os hábitos por trás delas. Gratuito, leva menos de um minuto.
+    </p>
+    <form id="popup-gate-form" novalidate>
+      <input type="text" id="hp-website" name="website"
+             style="display:none;position:absolute;left:-9999px;" tabindex="-1" autocomplete="off">
+      <div class="form-group">
+        <label class="form-label" for="popup-name">Seu nome</label>
+        <input type="text" id="popup-name" name="nome" class="form-input"
+               placeholder="Como posso te chamar?" autocomplete="given-name" required>
+        <p class="form-micro">Para personalizar seu diagnóstico</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="popup-email">Seu e-mail</label>
+        <input type="email" id="popup-email" name="email" class="form-input"
+               placeholder="seu@email.com" autocomplete="email" required>
+        <p class="form-micro">Para salvar e acessar seu diagnóstico</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="popup-phone">Celular</label>
+        <input type="tel" id="popup-phone" name="celular" class="form-input"
+               placeholder="(11) 9 0000-0000" autocomplete="tel" required>
+        <p class="form-micro">Para acompanhar o seu progresso junto com você</p>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="popup-dificuldade">
+          Em uma linha, qual é sua maior dificuldade com sua mente hoje?
+        </label>
+        <textarea id="popup-dificuldade" name="maior_dificuldade" class="form-input"
+          placeholder="O que mais te incomoda na sua mente hoje?"
+          rows="2" style="resize:none;line-height:1.5;"></textarea>
+      </div>
+      <button type="submit" class="btn-gold btn-cta btn-full" id="popup-gate-submit">
+        <span>Destravar meu diagnóstico, clique aqui</span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
+      </button>
+    </form>
+    <p class="popup-gate-privacy">
+      <span aria-hidden="true">🔒</span>
+      100% seguro. Nenhum dado é divulgado ou compartilhado. O primeiro passo para acordar a sua mente é esse.
+    </p>
+  </div>
+</div>
+
+
+
+<section id="diag-section" style="display:none;">
+<div class="diagnostico-page">
+
+  
+  <header class="diag-header">
+    <span class="diag-pub-name">Jornada Colapso Silencioso · Mapeamento Pessoal</span>
+    <span class="diag-date" id="diag-date"></span>
+  </header>
+
+  
+  <div class="perfil-hero">
+    <div class="above-canvas">
+      <div class="perfil-tag">Seu perfil</div>
+      <p id="perfil-saudacao" class="perfil-saudacao"></p>
+      <h2 class="perfil-nome" id="perfil-nome"></h2>
+      <p class="perfil-sub" id="perfil-sub"></p>
+      <p class="perfil-desc" id="perfil-desc"></p>
+      <p class="perfil-pullquote" id="perfil-pullquote"></p>
+    </div>
+  </div>
+
+  
+  <div class="score-framing" id="score-framing">
+    <p class="score-framing-text">As suas respostas revelaram um padrão claro. Os números abaixo são um retrato do momento, não um julgamento.</p>
+  </div>
+  <section class="score-section reveal">
+    <div class="diag-section-inner">
+      <div class="section-label">Mapa das suas dimensões</div>
+      <div class="score-hero">
+        <div class="score-number-wrap">
+          <span class="score-number" id="score-total">0</span>
+          <span class="score-of">de 100</span>
+        </div>
+        <div class="score-label">pontos no mapeamento geral</div>
+      </div>
+      <div class="score-bars-wrap">
+        <div class="score-dim">
+          <div class="score-dim-row">
+            <span class="score-dim-name">Memória ativa</span>
+            <span class="score-dim-val"><span id="val-m">0</span>%</span>
+          </div>
+          <div class="score-dim-track"><div class="score-dim-bar" id="bar-m"></div></div>
+          <p class="score-dim-label" id="label-m"></p>
+        </div>
+        <div class="score-dim">
+          <div class="score-dim-row">
+            <span class="score-dim-name">Criatividade</span>
+            <span class="score-dim-val"><span id="val-c">0</span>%</span>
+          </div>
+          <div class="score-dim-track"><div class="score-dim-bar" id="bar-c"></div></div>
+          <p class="score-dim-label" id="label-c"></p>
+        </div>
+        <div class="score-dim">
+          <div class="score-dim-row">
+            <span class="score-dim-name">Imaginação</span>
+            <span class="score-dim-val"><span id="val-i">0</span>%</span>
+          </div>
+          <div class="score-dim-track"><div class="score-dim-bar" id="bar-i"></div></div>
+          <p class="score-dim-label" id="label-i"></p>
+        </div>
+        <div class="score-dim">
+          <div class="score-dim-row">
+            <span class="score-dim-name">Foco profundo</span>
+            <span class="score-dim-val"><span id="val-f">0</span>%</span>
+          </div>
+          <div class="score-dim-track"><div class="score-dim-bar" id="bar-f"></div></div>
+          <p class="score-dim-label" id="label-f"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="conteudo-bloqueado">
+
+  
+  <section class="silenciadores-section reveal">
+    <div class="diag-section-inner">
+      <div class="section-label">O que foi silenciando sua mente</div>
+      <h3 class="diag-section-titulo" id="silenciadores-titulo">Os hábitos que estão apagando a sua memória</h3>
+      <div class="silenciadores-list" id="silenciadores-list"></div>
+      <p class="diag-gancho">Isso não acontece só com você, e a ciência explica direitinho o que você está sentindo.</p>
+    </div>
+  </section>
+
+  
+  <div class="cta-inline reveal">
+    <p class="cta-inline-frase">Isso tem nome. E tem saída.</p>
+    <a href="metodo.html" class="btn-gold btn-cta cta-inline-btn" data-origem="diag_silenciadores">
+      <span>Quero entender o que fazer</span>
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  
+  <section class="ciencia-section reveal">
+    <div class="diag-section-inner">
+      <div class="section-label">O que a ciência já mostrou</div>
+      <h3 class="diag-section-titulo">O seu esquecimento tem explicação, e tem saída.</h3>
+      <p class="diag-section-intro">
+        O que apareceu no seu mapeamento não é frescura nem falta de atenção. É um padrão que a ciência estuda e sabe reverter. E tem um detalhe que quase ninguém conta. A sua memória não trabalha sozinha, ela puxa junto o seu foco, a sua atenção e a sua criatividade. Quando uma adormece, as outras vão junto, e é por isso que o padrão que você viu apareceu em mais de uma parte da sua mente.
+      </p>
+      <div class="ciencia-grid" id="ciencia-grid"></div>
+      <p class="diag-gancho">Entendido o problema e a ciência por trás dele. Veja o que ainda está funcionando em você ↓</p>
+    </div>
+  </section>
+
+  
+  <section class="mapa-section reveal">
+    <div class="diag-section-inner">
+      <div class="section-label">O retrato da sua mente</div>
+      <h3 class="diag-section-titulo" id="mapa-titulo">O que ainda está firme, e o que já começou a adormecer</h3>
+      <div class="mapa-grid">
+        <div class="mapa-col vivo">
+          <h4>O que ainda está firme</h4>
+          <ul class="mapa-list" id="mapa-vivo"></ul>
+        </div>
+        <div class="mapa-col quieto">
+          <h4>O que já adormeceu</h4>
+          <ul class="mapa-list" id="mapa-quieto"></ul>
+        </div>
+      </div>
+      <p class="diag-gancho">O que adormeceu não sumiu, dá pra acordar. Veja o que pode acontecer nos próximos 12 meses.</p>
+    </div>
+  </section>
+
+  
+  <div class="cta-inline reveal">
+    <p class="cta-inline-frase">O que ficou quieto pode voltar. Existe um caminho.</p>
+    <a href="metodo.html" class="btn-gold btn-cta cta-inline-btn" data-origem="diag_mapa">
+      <span>Preciso entender o que fazer</span>
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  
+  <section class="horizonte-section reveal">
+    <div class="diag-section-inner">
+      <div class="section-label">Os dois caminhos à frente</div>
+      <h3 class="diag-section-titulo">O que os próximos 12 meses podem parecer</h3>
+      <p class="diag-section-intro">
+        Não dá pra ficar igual. O que apareceu no seu mapa tende a se aprofundar, ou a ser revertido. Estes são os dois caminhos.
+      </p>
+      <div class="horizonte-grid">
+        <div class="horizonte-card horizonte-sem">
+          <div class="horizonte-label">
+            <span class="horizonte-icone" aria-hidden="true">⚠</span>
+            <span id="horizonte-sem-titulo">Se nada mudar</span>
+          </div>
+          <p id="horizonte-sem"></p>
+        </div>
+        <div class="horizonte-card horizonte-com">
+          <div class="horizonte-label">
+            <span class="horizonte-icone" aria-hidden="true">✦</span>
+            <span id="horizonte-com-titulo">Com treino consistente</span>
+          </div>
+          <p id="horizonte-com"></p>
+        </div>
+      </div>
+      <p class="diag-gancho">Veja o que aconteceu com quem tinha exatamente o seu perfil ↓</p>
+    </div>
+  </section>
+
+  
+  <div class="cta-inline reveal">
+    <p class="cta-inline-frase">Existe um segundo caminho. E ele começa agora.</p>
+    <a href="metodo.html" class="btn-gold btn-cta cta-inline-btn" data-origem="diag_horizonte">
+      <span>Quero o segundo caminho</span>
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  
+  <section class="testemunho-section reveal">
+
+    
+    <div class="diag-section-inner" style="margin-bottom:var(--space-xl);">
+      <div class="section-label">Quem tinha o seu perfil</div>
+      <h3 class="diag-section-titulo">O que mudou para quem estava onde você está</h3>
+    </div>
+
+    
+    <div class="marquee-scene" aria-hidden="true">
+      <div class="marquee-row" id="marquee-row-1">
+        <div class="marquee-track" id="marquee-track-1"></div>
+      </div>
+    </div>
+
+  </section>
+
+  
+  <div class="cta-inline reveal">
+    <p class="cta-inline-frase">Quem estava onde você está hoje começou por aqui.</p>
+    <a href="metodo.html" class="btn-gold btn-cta cta-inline-btn" data-origem="diag_depoimentos">
+      <span>Quero o que eles tiveram</span>
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  
+  <section class="diag-cta-section reveal">
+    <div class="diag-section-inner">
+      <p class="diag-gancho" style="margin-bottom:var(--space-xl)">O único fator que diferenciou quem mudou de quem não mudou foi quando decidiu começar.</p>
+      <p class="diag-cta-text">
+        <strong>Isso pode ser treinado.</strong> E existe um caminho específico para o padrão que o seu mapeamento revelou.
+        23 desafios práticos. 15 minutos por dia. Nas primeiras semanas, você começa a notar.
+      </p>
+      <a href="metodo.html" class="btn-gold btn-cta" id="btn-ver-metodo">
+        <span>Ver o método para despertar o que ficou dormindo</span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  </div>
+
+</div>
+</section>
+
+
+<div class="diag-sticky-cta" id="diag-sticky-cta">
+  <a href="metodo.html" class="btn-gold btn-cta cta-inline-btn diag-sticky-btn" data-origem="diag_sticky">
+    <span id="diag-sticky-label">Quero acordar minha memória, clique aqui</span>
+    <span class="btn-arrow" aria-hidden="true">→</span>
+  </a>
+  <p class="diag-sticky-hint" id="diag-sticky-hint">Memória, foco e criatividade voltam juntas</p>
+</div>
+
+<script>
+// Botão fixo pós-lead (mobile): CTA e benefício alternam, no padrão do indexold.
+(function(){
+  var wrap = document.getElementById('diag-sticky-cta');
+  if (!wrap) return;
+  var mq = window.matchMedia('(max-width: 899px)');
+  var label = document.getElementById('diag-sticky-label');
+  var hint = document.getElementById('diag-sticky-hint');
+
+  var pares = [
+    ['Quero acordar minha memória, clique aqui', 'Memória, foco e criatividade voltam juntas'],
+    ['Veja o método que reverte isso, clique aqui', '15 minutos por dia, sem aplicativo, no seu ritmo'],
+    ['Comece ainda hoje, clique aqui', 'Garantia de 7 dias, você só continua se sentir diferença']
+  ];
+  var atual = 0;
+  setInterval(function(){
+    if (!wrap.classList.contains('show')) return;
+    atual = (atual + 1) % pares.length;
+    label.style.opacity = '0';
+    hint.style.opacity = '0';
+    setTimeout(function(){
+      label.textContent = pares[atual][0];
+      hint.textContent = pares[atual][1];
+      label.style.opacity = '1';
+      hint.style.opacity = '1';
+    }, 300);
+  }, 4500);
+
+  function leadOk(){
+    try { var l = JSON.parse(sessionStorage.getItem('jcs_lead') || '{}'); return !!l.email; }
+    catch (e) { return false; }
+  }
+  function update(){
+    wrap.classList.toggle('show', mq.matches && leadOk() && window.scrollY > 400);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  document.addEventListener('jcs:lead-captured', function(){ setTimeout(update, 300); });
+  update();
+})();
+</script>
+
+<script type="module">
+  import { initScrollReveal } from './js/animations.js';
+  import { initDiagnostico } from './js/diagnostico.js';
+  import { captureUTMs, initPageTransition, getSessionId } from './js/utils.js';
+  import { trackViewContent } from './js/tracking.js';
+  import { claritySetPage, claritySetSession, clarityIdentify } from './js/clarity-init.js';
+
+  captureUTMs();
+  initPageTransition();
+  claritySetPage('diagnostico-vintage');
+  claritySetSession(getSessionId());
+
+
+  document.addEventListener('jcs:lead-captured', (e) => {
+    try { if (e.detail?.email) clarityIdentify(e.detail.email); } catch (_) {}
+  });
+
+
+  document.getElementById('gate-form')?.addEventListener('submit', () => {
+    setTimeout(() => {
+      try {
+        const lead = JSON.parse(sessionStorage.getItem('jcs_lead') || '{}');
+        if (lead.email) clarityIdentify(lead.email);
+      } catch (_) {}
+    }, 300);
+  });
+
+
+  const observer = new MutationObserver(() => {
+    const diagSection = document.getElementById('diag-section');
+    if (diagSection && diagSection.style.display !== 'none') {
+      initScrollReveal();
+      trackViewContent();
+      observer.disconnect();
+    }
+  });
+  observer.observe(document.getElementById('diag-section'), { attributes: true });
+
+
+  initDiagnostico();
+</script>
+
+</body>
+</html>

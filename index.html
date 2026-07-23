@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico da Sua Memória · Jornada Colapso Silencioso</title>
+  <meta name="description" content="Um diagnóstico rápido que mostra as causas reais do seu esquecimento e o que ainda dá para despertar na sua mente.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23F4EFE1'/><circle cx='16' cy='16' r='9' fill='none' stroke='%238E2A1E' stroke-width='2.5'/><circle cx='16' cy='16' r='3' fill='%238E2A1E'/></svg>">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://connect.facebook.net https://*.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https:; connect-src 'self' https://amqfcznqyyrgzlhzqohu.supabase.co https://cdn.jsdelivr.net https://www.facebook.com https://*.clarity.ms; img-src 'self' data: https://www.facebook.com https://e.clarity.ms;">
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,600;1,400&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/entry.css">
+  <link rel="stylesheet" href="css/theme-vintage.css">
+
+  <style>
+    /* CSS crítico inline — papel antes de tudo */
+    body { background: #F4EFE1; }
+    .entry-headline { opacity: 1; }
+  </style>
+  <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+  <script>
+    // Rede de segurança p/ celulares antigos sem suporte a module:
+    // se em 3s nada foi revelado pelo observer, mostra tudo.
+    setTimeout(function () {
+      var hidden = document.querySelectorAll('.reveal:not(.visible)');
+      var anyVisible = document.querySelector('.reveal.visible');
+      if (!anyVisible) {
+        for (var i = 0; i < hidden.length; i++) hidden[i].classList.add('visible');
+      }
+    }, 3000);
+  </script>
+
+
+  <script>
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window,document,"clarity","script","xol07a8vmz");
+</script>
+
+<script>
+// Preview vintage: links internos do funil apontam pras variantes *old.
+// Inline e sem módulo de propósito: funciona mesmo com js/utils.js em cache.
+// Nas páginas com nome canônico (pós-promoção) o guard é falso e nada muda.
+(function(){
+  if(!/old\.html$/i.test(location.pathname)) return;
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(!href) return;
+    var mapped = href.replace(/^(index|quiz|loading|diagnostico|metodo)\.html/i, '$1old.html');
+    if(mapped !== href) a.setAttribute('href', mapped);
+  }, true);
+})();
+</script>
+</head>
+<body class="theme-vintage paper-stains">
+
+
+<div class="page-overlay" id="page-overlay"></div>
+
+
+<div class="entry-page">
+
+  <main class="entry-main">
+    <div class="entry-content above-canvas entry-hero-grid">
+
+
+      <div class="entry-hero-copy">
+
+
+        <div class="eyebrow reveal">Reportagem · Memória depois dos 45</div>
+
+
+        <h1 class="entry-headline" id="entry-headline">
+          <span class="line">O nome, a palavra, o que você ia fazer: sumir bem na hora</span>
+          <span class="line hl-mint">não é normal da idade</span>
+        </h1>
+
+
+        <p class="vn-byline reveal"><strong>Da Redação</strong> · <span id="vn-dateline">Edição de hoje</span></p>
+
+
+        <p class="entry-subheadline vn-lead reveal" data-delay="2">
+          Especialistas dão nome a isso: <strong>colapso silencioso</strong> — a mente vai desligando aos poucos o que você menos usa, e o esquecimento é só o primeiro aviso. Um mapeamento gratuito mostra em que estágio está o seu e o caminho para resolver.
+        </p>
+
+
+        <div class="entry-hero-media entry-hero-media--inline reveal" data-delay="2">
+          <img class="entry-hero-img"
+               src="img/hero-mente.jpg"
+               alt="Mulher pensativa com a mente cheia de interrogações e pensamentos se dissolvendo"
+               width="800" height="993" decoding="async">
+          <p class="vn-caption">A palavra que some bem na hora de falar, a queixa mais relatada por pessoas entre 45 e 65 anos.</p>
+        </div>
+
+
+        <ul class="entry-bullets reveal" data-delay="3">
+          <li>O que de verdade está por trás do seu esquecimento e a causa da angústia</li>
+          <li>Quais outras partes da sua mente adormeceram junto sem você perceber</li>
+          <li>Como começar a reverter esses problemas ainda hoje, antes que piore</li>
+        </ul>
+
+
+        <div class="entry-social-proof reveal" data-delay="3">
+          <span class="proof-count">576+</span>
+          <span class="proof-text">Pessoas já deixaram o esquecimento para trás</span>
+        </div>
+
+
+        <div class="entry-cta-wrap reveal" data-delay="4">
+          <a href="quiz.html" class="btn-gold btn-cta" id="btn-start" role="button">
+            <span>Descubra a causa dos seus esquecimentos clicando aqui</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+          <p class="entry-microcopy">
+            Gratuito<span>·</span>leva menos de 2 minutos<span>·</span>Resolva o esquecimento agora
+          </p>
+          <span class="vn-stamp" aria-hidden="true">Resultado na hora</span>
+        </div>
+
+      </div>
+
+
+      <div class="entry-hero-media entry-hero-media--desktop reveal" data-delay="2">
+        <img class="entry-hero-img"
+             src="img/hero-mente.jpg"
+             alt="Mulher pensativa com a mente cheia de interrogações e pensamentos se dissolvendo"
+             width="800" height="993"
+             decoding="async" fetchpriority="high">
+        <p class="vn-caption">A palavra que some bem na hora de falar, a queixa mais relatada por pessoas entre 45 e 65 anos.</p>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+
+
+
+<section class="idx-section" id="idx-recognize">
+  <div class="idx-inner">
+    <h2 class="idx-title reveal">O seu <em>esquecimento</em> já virou rotina, e você quase não percebe mais</h2>
+    <p class="idx-lead reveal" data-delay="1">Não é frescura e não é falta de atenção. São as mesmas cenas que milhares de pessoas descrevem todo dia, e quando viram rotina elas param de assustar. Veja quantas fazem parte da sua semana.</p>
+    <div class="idx-cards">
+      <div class="idx-card reveal"><span class="idx-card-num">01</span><span>O nome da pessoa some bem na hora de falar</span></div>
+      <div class="idx-card reveal" data-delay="1"><span class="idx-card-num">02</span><span>Você entra num cômodo e esquece o que ia fazer ali</span></div>
+      <div class="idx-card reveal" data-delay="2"><span class="idx-card-num">03</span><span>Relê a mesma linha várias vezes porque a cabeça viaja</span></div>
+      <div class="idx-card reveal"><span class="idx-card-num">04</span><span>Lê um texto ou uma notícia e não guarda quase nada</span></div>
+      <div class="idx-card reveal" data-delay="1"><span class="idx-card-num">05</span><span>Começa uma tarefa e se distrai antes de terminar</span></div>
+      <div class="idx-card reveal" data-delay="2"><span class="idx-card-num">06</span><span>Procura o celular ou a chave que largou faz um minuto</span></div>
+      <div class="idx-card reveal"><span class="idx-card-num">07</span><span>As ideias não vêm como antes, tudo parece mais travado</span></div>
+      <div class="idx-card reveal" data-delay="1"><span class="idx-card-num">08</span><span>Perde o fio no meio da frase e esquece o que ia dizer</span></div>
+    </div>
+    <a href="quiz.html" class="btn-gold btn-cta js-quiz-cta reveal" role="button">
+      <span>Descubra a causa do seu esquecimento, clique aqui</span>
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+
+<section class="idx-section idx-section--surface idx-proof">
+  <div class="idx-inner idx-inner--narrow">
+    <h2 class="idx-title reveal">Imagine acordar com a <em>mente afiada</em> de novo</h2>
+    <ul class="entry-bullets vn-benefits reveal" data-delay="1">
+      <li>Lembrar o nome na hora, sem aquele branco na frente dos outros</li>
+      <li>Ler alguma coisa e guardar de verdade o que leu</li>
+      <li>Contar uma história inteira sem perder o fio</li>
+      <li>Terminar o que começou sem a cabeça fugir no meio do caminho</li>
+      <li>Ter de novo aquelas ideias que apareciam sozinhas, sem a mente travada</li>
+      <li>Voltar a confiar na sua memória sem depender de anotação pra nada</li>
+    </ul>
+    <div class="idx-objs">
+      <div class="idx-obj reveal"><strong>Não é da idade.</strong> Na maioria das vezes é a sua mente no piloto automático, e piloto automático a gente desliga.</div>
+      <div class="idx-obj reveal" data-delay="1"><strong>Não precisa ser bom de tecnologia.</strong> É simples como abrir uma mensagem no celular.</div>
+      <div class="idx-obj reveal" data-delay="2"><strong>Não é passatempo.</strong> Palavra cruzada e joguinho distraem, mas não treinam o que ficou adormecido.</div>
+    </div>
+    <p class="idx-proof-head reveal">Cartas de leitores · a mesma queixa que a sua</p>
+  </div>
+  <div class="vn-letters" id="idx-proof-track"></div>
+  <div class="idx-inner idx-inner--narrow">
+    <a href="quiz.html" class="btn-gold btn-cta js-quiz-cta reveal" role="button">
+      <span>Faça seu teste agora, clique aqui</span>
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+
+<section class="idx-section">
+  <div class="idx-inner idx-inner--narrow">
+    <h2 class="idx-title reveal">Deixar como está tem um preço, e ele <em>cresce em silêncio</em></h2>
+    <div class="idx-urg-blocks">
+      <div class="idx-urg reveal">
+        <span class="idx-urg-tag">Começa pequeno</span>
+        <p>Aquele esquecimento leve do dia a dia costuma ser só o primeiro degrau. O Hospital Sírio Libanês aponta que boa parte dos casos mais sérios passou antes por esse estágio que ninguém levou a sério.</p>
+      </div>
+      <div class="idx-urg reveal" data-delay="1">
+        <span class="idx-urg-tag">Avança em silêncio</span>
+        <p>A mente no piloto automático vai desligando mais um pedaço a cada mês sem uso. Um estudo sueco com 20 mil adultos, de 2026, ligou o consumo passivo de tela a mais risco, e o estímulo mental a menos risco.</p>
+      </div>
+      <div class="idx-urg idx-urg--hope reveal" data-delay="2">
+        <span class="idx-urg-tag">Dá pra virar o jogo</span>
+        <p>A Comissão do Lancet estima que quase metade dos casos poderia ser evitada ou adiada com hábitos simples. A mente cria conexões novas em qualquer idade, e quanto antes você começa, mais rápido ela responde.</p>
+      </div>
+    </div>
+    <p class="idx-source reveal">Com base em estudo sueco de 2026 divulgado pela CNN Brasil, na Comissão do Lancet sobre demência de 2024, no Hospital Sírio Libanês e nas diretrizes da Organização Mundial da Saúde.</p>
+  </div>
+</section>
+
+
+<section class="idx-section idx-section--surface">
+  <div class="idx-inner idx-inner--narrow">
+    <div class="idx-stat reveal"><span class="idx-stat-num">576+</span><span class="idx-stat-text">pessoas já fizeram o diagnóstico</span></div>
+    <h2 class="idx-final-title reveal" data-delay="1">A sua memória não está perdida. Ela só <em>parou de ser usada</em>.</h2>
+    <p class="idx-lead reveal" data-delay="2">Descubra em menos de 2 minutos o que ainda dá pra acordar dentro de você.</p>
+    <a href="quiz.html" class="btn-gold btn-cta js-quiz-cta reveal" data-delay="2" role="button">
+      <span>Descubra a causa e a solução, clique aqui</span>
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+
+    <div class="idx-faq">
+      <p class="idx-faq-title reveal">Dúvidas que talvez você tenha</p>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Se o meu problema tem a ver com o tempo de celular e computador, por que a solução é um método digital?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">O problema nunca foi o aparelho. O problema é o que você consome nele sem perceber e sem digerir. Vídeo curto atrás de vídeo curto, rolagem sem fim. O seu cérebro não digere esse tipo de conteúdo, e é isso que vai adormecendo a sua memória, a sua criatividade, a sua imaginação e o seu foco. Repare numa coisa agora mesmo. Tente lembrar do primeiro vídeo curto que você viu hoje de manhã. Quase ninguém consegue, porque aquilo passou e não deixou marca nenhuma. O nosso método é o contrário disso. É um conteúdo feito para ser digerido, que acorda de novo esses pilares. Siga a metodologia até o fim e você vai lembrar dos detalhes dela, porque ela foi feita para ficar na sua cabeça.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Isso é normal da idade ou é sinal de alguma coisa?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">Esquecer de vez em quando é normal. O sinal para prestar atenção é quando isso começa a atrapalhar a sua rotina e se repete toda semana. Perceber cedo não é motivo de pânico, é o que te dá mais tempo pra cuidar. O diagnóstico serve justamente pra te mostrar de que lado a sua está.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Isso não é a mesma coisa que já tem de graça no YouTube?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">A diferença está na ordem das coisas. Um vídeo aqui, outro ali, cada dia um assunto, e o seu cérebro não fixa o que passou. O método é uma sequência montada passo a passo, no ritmo certo, pra treinar a sua memória todo dia. É isso que separa quem assiste de quem realmente melhora.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Tenho mais de 60 anos. Funciona pra mim?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">Funciona especialmente pra você. A mente aprende em qualquer idade, a ciência já mostrou que ela cria conexões novas mesmo mais tarde na vida. Na faixa dos 55 aos 75 os resultados costumam aparecer com força, porque é quando a vontade de mudar é de verdade.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Preciso ser bom de tecnologia?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">Não precisa. Se você consegue abrir uma mensagem no celular, você consegue seguir o método. Nada de aplicativo pra instalar e nada complicado de aprender.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Quanto tempo leva por dia?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">15 minutos por dia, no seu ritmo. Não tem prazo fixo pra terminar. Quanto mais você pratica, mais longe a sua mente vai.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">É seguro? Vou ter que dar os meus dados?<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">Pode ficar tranquilo. O diagnóstico é gratuito e os seus dados são usados só pra te enviar o resultado. A sua informação não é vendida nem compartilhada com ninguém.</div></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">Tenho medo de fazer e confirmar o que eu temo.<span class="faq-icon" aria-hidden="true">+</span></button>
+        <div class="faq-a"><div class="faq-a-in">Esse medo é normal, e é por causa dele que muita gente vai empurrando com a barriga. Mas o diagnóstico não é uma sentença. Ele te mostra o que está acontecendo e, principalmente, o que dá pra fazer a respeito. Saber é o que tira o peso das costas, não o contrário.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="idx-sticky-cta" id="sticky-cta">
+  <a href="quiz.html" class="btn-gold btn-cta js-quiz-cta" role="button">
+    <span class="sticky-label" id="sticky-cta-label">Descubra a causa dos seus esquecimentos, clique aqui</span>
+    <span class="btn-arrow" aria-hidden="true">→</span>
+  </a>
+  <div class="idx-sticky-hint">
+    <span>2 minutos</span><span class="sep">·</span><span>Gratuito</span><span class="sep">·</span><span>Resolva seu esquecimento agora</span>
+  </div>
+</div>
+
+<script type="module">
+  import { initScrollReveal } from './js/animations.js';
+  import { captureUTMs, initPageTransition, getSessionId } from './js/utils.js';
+  import { trackPageView, trackQuizStart } from './js/tracking.js';
+  import { claritySetPage, claritySetSession } from './js/clarity-init.js';
+
+  captureUTMs();
+  initPageTransition();
+  claritySetPage('landing-vintage');
+  claritySetSession(getSessionId());
+
+
+  // Data do "jornal" — sempre a edição de hoje
+  (function () {
+    const dias  = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+    const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+    const hoje  = new Date();
+    const texto = `${dias[hoje.getDay()]}, ${hoje.getDate()} de ${meses[hoje.getMonth()]} de ${hoje.getFullYear()}`;
+    const elDate = document.getElementById('vn-date');
+    const elLine = document.getElementById('vn-dateline');
+    if (elDate) elDate.textContent = texto;
+    if (elLine) elLine.textContent = texto;
+  })();
+
+
+  // Cartas de leitores — grade estática (sem marquee, sem loop de animação)
+  // Renderiza ANTES do initScrollReveal para os .reveal serem observados
+  const PROOFS = [
+    { texto: 'Eu abria a geladeira e esquecia o que tinha ido pegar. Achei que era da idade e fui deixando pra lá. O que mudou foi entender a causa e ter o que fazer com ela. Hoje isso quase não acontece mais.', nome: 'Vera Campos', meta: '64 anos · gestora aposentada · BH', chip: 'Entendeu a causa', ini: 'VC' },
+    { texto: 'Vivia perdendo o nome dos clientes bem na hora de atender. Depois de umas semanas seguindo direitinho, me peguei lembrando sem precisar olhar o caderno.', nome: 'Rosa Meireles', meta: '60 anos · comerciante · Salvador', chip: 'Memória de nomes', ini: 'RM' },
+    { texto: 'Eu era refém da agenda do celular pra tudo. O meu marido foi o primeiro a reparar, disse que eu tinha parado de pedir pra ele lembrar as coisas por mim.', nome: 'Sônia Pereira', meta: '63 anos · nutricionista · Porto Alegre', chip: 'Menos dependência', ini: 'SP' },
+    { texto: 'Lia um livro de manhã e à noite não lembrava de quase nada, e isso me desanimava demais. Aos poucos voltei a reter, e hoje comento a leitura no meu grupo sem travar.', nome: 'Ana Lúcia Ferreira', meta: '58 anos · aposentada · Recife', chip: 'Leitura que fica', ini: 'AF' },
+    { texto: 'Fui com pouca fé. Uma amiga me ligou pra dizer que eu tinha passado dez minutos numa conversa sem pegar o celular. Eu nem tinha percebido.', nome: 'Maria Regina Silveira', meta: '61 anos · professora aposentada · SP', chip: 'Foco de volta', ini: 'MR' },
+    { texto: 'Na reunião o nome do cliente sumia bem na hora e eu passava vergonha. Voltei a lembrar na hora, e as minhas ideias pararam de vir pela metade.', nome: 'Roberto Fonseca', meta: '58 anos · advogado · Brasília', chip: 'Sem mais branco', ini: 'RF' }
+  ];
+  const proofTrack = document.getElementById('idx-proof-track');
+  if (proofTrack) {
+    const card = (t) => (
+      '<div class="mq-card reveal">' +
+        '<div class="mq-card-top"><span class="mq-stars">★★★★★</span><span class="mq-resultado">' + t.chip + '</span></div>' +
+        '<p class="mq-texto">' + t.texto + '</p>' +
+        '<div class="mq-autor"><span class="mq-avatar">' + t.ini + '</span><span class="mq-info"><span class="mq-nome">' + t.nome + '</span><span class="mq-meta">' + t.meta + '</span></span></div>' +
+      '</div>'
+    );
+    proofTrack.innerHTML = PROOFS.map(card).join('');
+  }
+
+
+  initScrollReveal();
+
+
+  trackPageView();
+
+
+  document.querySelectorAll('.entry-hero-img').forEach((heroImg) => {
+    const hideMedia = () => heroImg.closest('.entry-hero-media')?.classList.add('is-empty');
+    heroImg.addEventListener('error', hideMedia);
+    if (heroImg.complete && heroImg.naturalWidth === 0) hideMedia();
+  });
+
+
+  let quizStartFired = false;
+  const fireQuizStartOnce = () => {
+    if (quizStartFired) return;
+    quizStartFired = true;
+    trackQuizStart();
+  };
+
+  const btnStart = document.getElementById('btn-start');
+  if (btnStart) {
+    btnStart.addEventListener('click', () => {
+      fireQuizStartOnce();
+      btnStart.classList.add('pulse');
+      btnStart.addEventListener('animationend', () => btnStart.classList.remove('pulse'), { once: true });
+    });
+  }
+
+  document.querySelectorAll('.js-quiz-cta').forEach((cta) => {
+    cta.addEventListener('click', fireQuizStartOnce);
+  });
+
+
+  const stickyCta = document.getElementById('sticky-cta');
+  if (stickyCta && window.matchMedia('(max-width: 899px)').matches) {
+    const stickyLabel = document.getElementById('sticky-cta-label');
+    const frases = [
+      'Descubra a causa dos seus esquecimentos, clique aqui',
+      'Veja a causa e a solução, clique aqui',
+      'Comece agora, clique aqui'
+    ];
+    let fraseAtual = 0;
+    setInterval(() => {
+      fraseAtual = (fraseAtual + 1) % frases.length;
+      stickyLabel.style.opacity = '0';
+      setTimeout(() => {
+        stickyLabel.textContent = frases[fraseAtual];
+        stickyLabel.style.opacity = '1';
+      }, 300);
+    }, 4500);
+  }
+
+
+  document.querySelectorAll('.idx-faq .faq-q').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.idx-faq .faq-item.open').forEach((i) => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    });
+  });
+</script>
+
+</body>
+</html>

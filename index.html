@@ -49,9 +49,6 @@
 </script>
 
 <script>
-// Preview vintage: links internos do funil apontam pras variantes *old.
-// Inline e sem módulo de propósito: funciona mesmo com js/utils.js em cache.
-// Nas páginas com nome canônico (pós-promoção) o guard é falso e nada muda.
 (function(){
   if(!/old\.html$/i.test(location.pathname)) return;
   document.addEventListener('click', function(e){

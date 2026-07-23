@@ -26,9 +26,6 @@ export function formatPhone(val) {
   return val;
 }
 
-// Preview do funil vintage: quando a página atual é uma *old.html, os links
-// internos do funil apontam para as variantes *old. Nas páginas canônicas
-// (vivas ou promovidas) o guard é falso e nada muda.
 const IS_OLD_PREVIEW = /old\.html$/i.test(window.location.pathname);
 
 function toPreviewPage(page) {

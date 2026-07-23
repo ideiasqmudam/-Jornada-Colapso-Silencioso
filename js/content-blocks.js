@@ -873,10 +873,6 @@ const SILENCIADORES_POR_DIM = {
   I: ['recompensa-imediata', 'imaginacao-atrofiada', 'nostalgia-cognitiva', 'isolamento-intelectual']
 };
 
-// Resposta C/D em cada pergunta do quiz aponta para o hábito mais provável por trás dela.
-// Ids reais do quiz-engine: 6 nome some · 2 cômodo · 9 leitura sem reter · 4 conversa dispersa ·
-// 8 não lê longo · 1 TV/celular pra inquietude · 3 corre pesquisar · 7 escrever/história ·
-// 10 não aprende novo · 5 imaginação sem nitidez · 11 saudade da fase boa
 const RESPOSTA_HABITO = {
   6:  'memoria-episodica',
   2:  'rotina-automatica',
@@ -891,7 +887,6 @@ const RESPOSTA_HABITO = {
   11: 'nostalgia-cognitiva'
 };
 
-// Q14 (o que já tentou) aponta hábitos específicos por resposta, não por severidade
 const TENTATIVA_HABITO = {
   B: 'passatempo-raso',
   C: 'mao-parada'
@@ -909,8 +904,6 @@ export function selecionarSilenciadores(fingerprintKey, respostas) {
   const r = {};
   (respostas || []).forEach(item => { r[item.perguntaId] = item.opcaoKey; });
 
-  // 1. Hábitos apontados pelas próprias respostas do lead (D antes de C: dor mais forte primeiro).
-  //    A tentativa que falhou (Q14) entra logo depois: é hábito confessado, não inferido.
   const lista = [];
   const add = (id) => { if (id && !lista.includes(id)) lista.push(id); };
   ORDEM_PERGUNTAS.forEach(q => { if (r[q] === 'D') add(RESPOSTA_HABITO[q]); });
@@ -918,11 +911,9 @@ export function selecionarSilenciadores(fingerprintKey, respostas) {
   ORDEM_PERGUNTAS.forEach(q => { if (r[q] === 'C') add(RESPOSTA_HABITO[q]); });
   add(TENTATIVA_HABITO[r[14]]);
 
-  // 2. Completa com o pool da dimensão mais fraca do mapeamento
   SILENCIADORES_POR_DIM[dimMaisBaixa].forEach(add);
   SILENCIADORES_POR_DIM.M.forEach(add);
 
-  // 3. Mostra 5 quando o lead relatou muita dor, senão 4; sempre com ao menos um hábito de memória
   const alvo = gatilhos >= 3 ? 5 : 4;
   let final = lista.slice(0, alvo);
   if (!final.some(id => HABITOS_MEMORIA.includes(id))) {

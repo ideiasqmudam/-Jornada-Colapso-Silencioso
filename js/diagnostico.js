@@ -118,7 +118,6 @@ const CIENCIA_POOL = {
   }
 };
 
-// Cada hábito exibido tem um estudo que o confirma na tela seguinte (hábito -> ciência)
 const HABITO_CIENCIA = {
   'delegacao-cognitiva': 'google',
   'mao-parada':          'escrita',
@@ -139,7 +138,6 @@ function selecionarCiencia(perfil, silenciadores) {
   const anchor = CIENCIA_POOL.mem;
   const usados = new Set([anchor]);
 
-  // 2º e 3º cards ecoam os hábitos que o lead acabou de ver (hábito -> estudo que o confirma)
   const cardsHabito = [];
   (silenciadores || []).forEach(s => {
     const chave = s && s.id && HABITO_CIENCIA[s.id];
@@ -193,21 +191,18 @@ function respByIdLocal(respostas) {
   return r;
 }
 
-// Q13: o que mais pesa no esquecimento (custo emocional confessado)
 const CUSTO_EMOCIONAL = {
   A: 'a vergonha na hora, com todo mundo esperando você lembrar',
   B: 'o medo de que seja o começo de algo mais sério',
   C: 'a sensação de estar ficando dependente dos outros'
 };
 
-// Q15: o que o lead menos quer que aconteça (usado no horizonte e no CTA)
 const MEDO_PROJECAO = {
   A: { sem: 'perder a sua independência',            com: 'a sua independência',              cta: 'perder a independência' },
   B: { sem: 'virar preocupação para os seus filhos', com: 'a tranquilidade dos seus filhos',   cta: 'virar preocupação para quem você ama' },
   C: { sem: 'deixar de ser quem você é',             com: 'quem você sempre foi',              cta: 'deixar de ser quem você é' }
 };
 
-// Q14: o que já tentou -> por que não segurou (tentativas desqualificadas)
 const TENTATIVA_FALHA = {
   B: {
     titulo: 'Por que os joguinhos não seguraram',
@@ -394,7 +389,6 @@ export function renderDiagnostico() {
       </div>
     `).join('');
 
-    // A sacada do diagnóstico: os hábitos visíveis são só a superfície, os ocultos ficam pro método
     let sacadaEl = document.getElementById('silenciadores-sacada');
     if (!sacadaEl) {
       sacadaEl = document.createElement('p');
@@ -461,7 +455,6 @@ export function renderDiagnostico() {
 }
 
 
-// Espelho: as cenas que o próprio lead confirmou (C/D), na voz dele, antes dos números
 const CENA_POR_PERGUNTA = {
   6:  'O nome ou a palavra some bem na hora de falar',
   2:  'Você entra num cômodo e esquece o que foi fazer ali',
